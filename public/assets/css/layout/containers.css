@@ -1,0 +1,9 @@
+.container {
+  width: min(calc(100% - 2rem), var(--container));
+  margin: 0 auto;
+}
+
+.narrow {
+  width: min(calc(100% - 2rem), var(--container-narrow));
+  margin: 0 auto;
+}

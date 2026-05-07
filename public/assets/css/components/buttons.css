@@ -1,0 +1,34 @@
+/* Buttons component: reusable button styles. */
+
+.button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  padding: 0.76rem 1.16rem;
+  cursor: pointer;
+  transition:
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--bg-elevated) 90%, white 2%);
+  color: var(--text);
+  box-shadow: var(--shadow-soft);
+}
+
+.button > * {
+  position: relative;
+  z-index: 1;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+  border-color: color-mix(in srgb, var(--accent-2) 35%, var(--border));
+}

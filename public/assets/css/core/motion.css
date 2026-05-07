@@ -1,0 +1,14 @@
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .interactive-wordmark,
+  .interactive-surface {
+    transform: none !important;
+  }
+}

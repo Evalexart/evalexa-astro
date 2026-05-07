@@ -1,0 +1,55 @@
+:root {
+  --bg: #0c1220;
+  --bg-elevated: rgba(18, 29, 46, 0.82);
+  --bg-soft: rgba(24, 38, 58, 0.9);
+  --text: #f7f8fc;
+  --text-soft: #c3cbe0;
+  --title-color: #ffffff;
+  --border: rgba(214, 225, 255, 0.14);
+  --accent: #e14f9a;
+  --accent-2: #8c6ae8;
+  --accent-3: #41b9ee;
+  --accent-strong: #f5f8ff;
+  --shadow: 0 24px 60px rgba(4, 8, 18, 0.42);
+  --shadow-soft: 0 16px 38px rgba(4, 8, 18, 0.28);
+  --radius: 24px;
+  --container: 1120px;
+  --container-narrow: 760px;
+  --header-height: 84px;
+  --wash-left: #ef5aa1;
+  --wash-mid: #9b7be8;
+  --wash-right: #4cbdf0;
+  --page-overlay: linear-gradient(
+    180deg,
+    rgba(10, 16, 28, 0.74),
+    rgba(10, 16, 28, 0.8)
+  );
+  --page-image: url("../../images/background.png");
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --bg: #f7f8fb;
+  --bg-elevated: rgba(255, 255, 255, 0.82);
+  --bg-soft: rgba(255, 255, 255, 0.9);
+  --text: #1b2432;
+  --text-soft: #5f6d84;
+  --title-color: #ffffff;
+  --border: rgba(69, 96, 138, 0.14);
+  --accent: #e75ca2;
+  --accent-2: #9b7be8;
+  --accent-3: #56c2ef;
+  --accent-strong: #27334a;
+  --shadow: 0 18px 48px rgba(79, 98, 129, 0.14);
+  --shadow-soft: 0 12px 30px rgba(79, 98, 129, 0.1);
+  --wash-left: #f08ab8;
+  --wash-mid: #c3a9f4;
+  --wash-right: #7cd2f4;
+  --page-overlay: linear-gradient(
+    180deg,
+    rgba(247, 248, 251, 0.42),
+    rgba(247, 248, 251, 0.52)
+  );
+  --page-image: url("../../images/background.png");
+  color-scheme: light;
+}

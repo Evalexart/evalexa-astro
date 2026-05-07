@@ -1,0 +1,22 @@
+/* Shared panel blocks. */
+
+.panel,
+.intro-block,
+.approach-block,
+.legal-block {
+  background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.55rem;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+}
+
+.panel h2,
+.intro-block h2,
+.approach-block h2,
+.legal-block h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}

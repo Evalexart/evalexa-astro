@@ -1,0 +1,12 @@
+.center {
+  text-align: center;
+}
+
+.flow > * + * {
+  margin-top: 1rem;
+}
+
+.soft-note {
+  color: var(--text-soft);
+  font-size: 0.98rem;
+}

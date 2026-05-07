@@ -1,0 +1,139 @@
+/* Cards component: reusable card styles for grids and individual cards. */
+
+.cards {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.card {
+  --mx: 50%;
+  --my: 50%;
+  --rx: 0deg;
+  --ry: 0deg;
+  --dx: 0px;
+  --dy: 0px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 24px;
+  padding: 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
+    color-mix(in srgb, var(--bg-elevated) 96%, white 2%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  min-height: 250px;
+  transform: none;
+  transition:
+    transform 0.18s ease-out,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+  backdrop-filter: blur(12px);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1.5%;
+  background: linear-gradient(
+    90deg,
+    var(--wash-left) 0%,
+    var(--wash-mid) 50%,
+    var(--wash-right) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 92%,
+    rgba(0, 0, 0, 0.12) 98%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 92%,
+    rgba(0, 0, 0, 0.12) 98%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 1;
+  pointer-events: none;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 36%, var(--border));
+  box-shadow: var(--shadow);
+}
+
+.card:hover::before {
+  transform: translate(calc(var(--dx) * 0.8), calc(var(--dy) * 0.8)) scale(1.08)
+    rotate(calc(var(--ry) * 0.2));
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card-kicker {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  padding: 0.22rem 0.58rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.card h2 {
+  margin: 0 0 0.22rem;
+  font-size: clamp(1.35rem, 1.2rem + 0.45vw, 1.7rem);
+  letter-spacing: -0.02em;
+}
+
+.card p {
+  margin: 0;
+}
+
+.card.flow > h2 + .card-kicker {
+  margin-top: 0.2rem;
+}
+
+.card.flow > .card-kicker + p {
+  margin-top: 0.45rem;
+}
+
+.card-painting {
+  --pigment-a: rgba(235, 128, 159, 0.34);
+  --pigment-b: rgba(209, 147, 245, 0.26);
+  --pigment-c: rgba(252, 207, 140, 0.18);
+}
+
+.card-voice {
+  --pigment-a: rgba(252, 173, 198, 0.26);
+  --pigment-b: rgba(111, 195, 209, 0.24);
+  --pigment-c: rgba(116, 110, 255, 0.24);
+}
+
+.card-digital {
+  --pigment-a: rgba(105, 184, 193, 0.22);
+  --pigment-b: rgba(143, 112, 255, 0.28);
+  --pigment-c: rgba(242, 168, 189, 0.18);
+}
+
+.interactive-surface {
+  transform: none !important;
+}
+
+/* Mobile adjustments for cards */
+@media (max-width: 860px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}

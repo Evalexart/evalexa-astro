@@ -1,0 +1,51 @@
+/* Hub page: imports shared CSS first, then only hub-specific layout helpers. */
+@import url("../main.css");
+@import url("../components/hero.css");
+@import url("../layout/panels.css");
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+
+.hub-card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 0.85rem;
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+}
+
+.hub-card p {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.hub-card .soft-note {
+  margin-top: auto;
+}
+
+.hub-card:hover,
+.hub-card:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--border));
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.hub-status {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.4rem;
+}
+
+.hub-status .panel {
+  text-align: left;
+}
+
+body[data-area="hub"] .social-section {
+  padding-top: 0;
+}
