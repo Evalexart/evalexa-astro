@@ -37,6 +37,8 @@ const { Content } = await render(page);
 
           {page.data.heading && <h1>{page.data.heading}</h1>}
 
+          {page.data.intro && <p class="hero-text">{page.data.intro}</p>}
+
           <div class="content-page">
             <Content />
           </div>

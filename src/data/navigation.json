@@ -197,6 +197,20 @@
       "showInFooter": true
     },
     {
+      "id": "cookies",
+      "label": {
+        "fr": "Cookies",
+        "en": "Cookies"
+      },
+      "routes": {
+        "fr": "/fr/legal/cookies/",
+        "en": "/en/legal/cookies/"
+      },
+      "enabled": false,
+      "showInHeader": false,
+      "showInFooter": false
+    },
+    {
       "id": "network-nodes",
       "label": {
         "fr": "Connexion aux nœuds",

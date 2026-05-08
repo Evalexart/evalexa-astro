@@ -11,6 +11,7 @@ const pages = defineCollection({
     description: z.string(),
     eyebrow: z.string().optional(),
     heading: z.string().optional(),
+    intro: z.string().optional(),
   }),
 });
 
