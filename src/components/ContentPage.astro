@@ -1,0 +1,47 @@
+---
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const {
+  lang = "fr",
+  area = "main",
+  pageId,
+  contentId,
+  frHref = "/fr/",
+  enHref = "/en/",
+} = Astro.props;
+
+const page = await getEntry("pages", contentId);
+
+if (!page) {
+  throw new Error(`Content page not found: ${contentId}`);
+}
+
+const { Content } = await render(page);
+---
+
+<BaseLayout
+  lang={lang}
+  area={area}
+  pageId={pageId}
+  title={page.data.title}
+  description={page.data.description}
+  frHref={frHref}
+  enHref={enHref}
+>
+  <section class="hero">
+    <div class="container hero-inner narrow">
+      <section class="section">
+        <div class="container narrow center">
+          {page.data.eyebrow && <p class="eyebrow">{page.data.eyebrow}</p>}
+
+          {page.data.heading && <h1>{page.data.heading}</h1>}
+
+          <div class="content-page">
+            <Content />
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

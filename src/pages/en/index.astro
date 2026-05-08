@@ -1,29 +1,12 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContentPage from "../../components/ContentPage.astro";
 ---
 
-<BaseLayout
+<ContentPage
   lang="en"
   area="home"
   pageId="home"
-  title="Evalexa — Home"
-  description="Main website of the Evalexa project."
+  contentId="home/en"
   frHref="/fr/"
   enHref="/en/"
->
-  <section class="hero">
-    <div class="container hero-inner narrow">
-      <section class="section">
-        <div class="container narrow center">
-          <p class="eyebrow">Evalexa</p>
-
-          <h1>Creation, technology, and digital autonomy.</h1>
-
-          <p>
-            First English Astro page using the shared Evalexa layout and styles.
-          </p>
-        </div>
-      </section>
-    </div>
-  </section>
-</BaseLayout>
+/>
