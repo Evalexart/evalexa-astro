@@ -1,4 +1,6 @@
 ---
+import ui from "../data/ui.json";
+
 const {
   lang = "fr",
   frHref = "/fr/",
@@ -6,21 +8,7 @@ const {
 } = Astro.props;
 
 const isFr = lang === "fr";
-
-const labels = {
-  fr: {
-    brandAria: "Evalexa — accueil général",
-    languageLabel: "Langue",
-    themeToggle: "Changer de thème",
-  },
-  en: {
-    brandAria: "Evalexa — main home",
-    languageLabel: "Language",
-    themeToggle: "Change theme",
-  },
-};
-
-const t = labels[lang] ?? labels.fr;
+const t = ui[lang]?.header ?? ui.fr.header;
 ---
 
 <header class="site-header">
@@ -59,6 +47,9 @@ const t = labels[lang] ?? labels.fr;
         id="theme-toggle"
         aria-label={t.themeToggle}
         title={t.themeToggle}
+        data-theme-toggle={t.themeToggle}
+        data-theme-to-dark={t.themeToDark}
+        data-theme-to-light={t.themeToLight}
       >
         <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
         <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>

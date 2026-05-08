@@ -1,0 +1,53 @@
+---
+import navigation from "../data/navigation.json";
+import ui from "../data/ui.json";
+
+const { lang = "fr" } = Astro.props;
+
+const t = ui[lang]?.footer ?? ui.fr.footer;
+const year = new Date().getFullYear();
+
+const footerIds = [
+  "legal",
+  "legal-notice",
+  "privacy",
+  "cgv",
+  "cgu",
+  "network",
+  "network-nodes",
+];
+
+const footerItems = footerIds
+  .map((id) => navigation.items.find((item) => item.id === id))
+  .filter(Boolean)
+  .filter((item) => item.enabled !== false);
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand-block">
+      <img
+        class="footer-logo footer-logo-watercolor"
+        src="/assets/img/logo/logo-partiel-watercolor.png"
+        alt="Evalexa"
+      />
+
+      <div>
+        <span>© {year} Evalexa</span>
+        <span class="soft-note">
+          {t.scope}
+        </span>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      {
+        footerItems.map((item) => (
+          <a href={item.routes[lang]} data-visible="true">
+            {item.label[lang]}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</footer>

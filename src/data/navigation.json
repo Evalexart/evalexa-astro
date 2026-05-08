@@ -139,6 +139,76 @@
       "enabled": true,
       "showInHeader": false,
       "showInFooter": true
+    },
+    {
+      "id": "legal-notice",
+      "label": {
+        "fr": "Mentions légales",
+        "en": "Legal notice"
+      },
+      "routes": {
+        "fr": "/fr/legal/mentions-legales/",
+        "en": "/en/legal/legal-notice/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "privacy",
+      "label": {
+        "fr": "Confidentialité",
+        "en": "Privacy"
+      },
+      "routes": {
+        "fr": "/fr/legal/confidentialite/",
+        "en": "/en/legal/privacy/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "cgv",
+      "label": {
+        "fr": "CGV",
+        "en": "Terms of sale"
+      },
+      "routes": {
+        "fr": "/fr/legal/cgv/",
+        "en": "/en/legal/terms-of-sale/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "cgu",
+      "label": {
+        "fr": "CGU",
+        "en": "Terms of use"
+      },
+      "routes": {
+        "fr": "/fr/legal/cgu/",
+        "en": "/en/legal/terms-of-use/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "network-nodes",
+      "label": {
+        "fr": "Connexion aux nœuds",
+        "en": "Node connections"
+      },
+      "routes": {
+        "fr": "/fr/reseau/noeuds/",
+        "en": "/en/network/nodes/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
     }
   ]
 }

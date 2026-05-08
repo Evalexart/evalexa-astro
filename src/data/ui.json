@@ -1,0 +1,28 @@
+{
+  "fr": {
+    "skipToContent": "Aller au contenu",
+    "footer": {
+      "scope": "— Site officiel"
+    },
+    "header": {
+      "brandAria": "Evalexa — accueil général",
+      "languageLabel": "Langue",
+      "themeToggle": "Changer de thème",
+      "themeToDark": "Passer au thème sombre",
+      "themeToLight": "Passer au thème clair"
+    }
+  },
+  "en": {
+    "skipToContent": "Skip to content",
+    "footer": {
+      "scope": "— Official website"
+    },
+    "header": {
+      "brandAria": "Evalexa — main home",
+      "languageLabel": "Language",
+      "themeToggle": "Change theme",
+      "themeToDark": "Switch to dark theme",
+      "themeToLight": "Switch to light theme"
+    }
+  }
+}

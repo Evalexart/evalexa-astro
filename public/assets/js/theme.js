@@ -23,8 +23,8 @@
     if (themeToggle) {
       const label =
         theme === "light"
-          ? "Passer au thème sombre"
-          : "Passer au thème clair";
+          ? themeToggle.dataset.themeToDark || themeToggle.dataset.themeToggle
+          : themeToggle.dataset.themeToLight || themeToggle.dataset.themeToggle;
 
       themeToggle.setAttribute("aria-label", label);
       themeToggle.setAttribute("title", label);

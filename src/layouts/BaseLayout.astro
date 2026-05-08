@@ -1,5 +1,7 @@
 ---
 import Header from "../components/Header.astro";
+import ui from "../data/ui.json";
+import Footer from "../components/Footer.astro";
 
 const {
   lang = "fr",
@@ -10,6 +12,8 @@ const {
   frHref = "/fr/",
   enHref = "/en/",
 } = Astro.props;
+
+const t = ui[lang] ?? ui.fr;
 ---
 
 <!doctype html>
@@ -36,14 +40,16 @@ const {
   </head>
 
   <body data-area={area} data-page={pageId}>
-    <a class="skip-link" href="#main">Aller au contenu</a>
+    <a class="skip-link" href="#main">
+      {t.skipToContent}
+    </a>
 
     <Header lang={lang} frHref={frHref} enHref={enHref} />
 
     <main id="main">
       <slot />
     </main>
-
+    <Footer lang={lang} />
     <script src="/assets/js/theme.js" defer></script>
     <script src="/assets/js/language-switch.js" defer></script>
 
