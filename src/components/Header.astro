@@ -1,0 +1,68 @@
+---
+const {
+  lang = "fr",
+  frHref = "/fr/",
+  enHref = "/en/",
+} = Astro.props;
+
+const isFr = lang === "fr";
+
+const labels = {
+  fr: {
+    brandAria: "Evalexa — accueil général",
+    languageLabel: "Langue",
+    themeToggle: "Changer de thème",
+  },
+  en: {
+    brandAria: "Evalexa — main home",
+    languageLabel: "Language",
+    themeToggle: "Change theme",
+  },
+};
+
+const t = labels[lang] ?? labels.fr;
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a
+      class="brand brand-logo-link"
+      href={isFr ? "/fr/" : "/en/"}
+      aria-label={t.brandAria}
+    >
+      <img
+        class="brand-logo brand-logo-full"
+        src="/assets/img/logo/logo-full-white.svg"
+        alt="Evalexa"
+      />
+    </a>
+
+    <div class="header-actions">
+      <label class="visually-hidden" for="lang-select">
+        {t.languageLabel}
+      </label>
+
+      <select
+        id="lang-select"
+        class="lang-select"
+        aria-label={t.languageLabel}
+        data-fr-href={frHref}
+        data-en-href={enHref}
+      >
+        <option value="fr" selected={isFr}>FR</option>
+        <option value="en" selected={!isFr}>EN</option>
+      </select>
+
+      <button
+        type="button"
+        class="icon-btn"
+        id="theme-toggle"
+        aria-label={t.themeToggle}
+        title={t.themeToggle}
+      >
+        <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
+        <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
+      </button>
+    </div>
+  </div>
+</header>

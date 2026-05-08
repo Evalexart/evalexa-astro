@@ -1,10 +1,14 @@
 ---
+import Header from "../components/Header.astro";
+
 const {
   lang = "fr",
   area = "main",
   pageId = "home",
   title = "Evalexa",
   description = "Site principal du projet Evalexa.",
+  frHref = "/fr/",
+  enHref = "/en/",
 } = Astro.props;
 ---
 
@@ -34,10 +38,22 @@ const {
   <body data-area={area} data-page={pageId}>
     <a class="skip-link" href="#main">Aller au contenu</a>
 
+    <Header lang={lang} frHref={frHref} enHref={enHref} />
+
     <main id="main">
       <slot />
     </main>
 
     <script src="/assets/js/theme.js" defer></script>
+    <script src="/assets/js/language-switch.js" defer></script>
+
+    <script is:inline>
+      window.addEventListener("DOMContentLoaded", () => {
+        if (window.EvalexaTheme) {
+          window.EvalexaTheme.applyTheme(window.EvalexaTheme.getPreferredTheme());
+          window.EvalexaTheme.initThemeControls();
+        }
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,144 @@
+{
+  "items": [
+    {
+      "id": "home",
+      "label": {
+        "fr": "Accueil",
+        "en": "Home"
+      },
+      "routes": {
+        "fr": "/fr/",
+        "en": "/en/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "about",
+      "label": {
+        "fr": "À propos",
+        "en": "About"
+      },
+      "routes": {
+        "fr": "/fr/a-propos/",
+        "en": "/en/about/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "faq",
+      "label": {
+        "fr": "FAQ",
+        "en": "FAQ"
+      },
+      "routes": {
+        "fr": "/fr/faq/",
+        "en": "/en/faq/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "contact",
+      "label": {
+        "fr": "Contact",
+        "en": "Contact"
+      },
+      "routes": {
+        "fr": "/fr/contact/",
+        "en": "/en/contact/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "creative",
+      "label": {
+        "fr": "Créatif",
+        "en": "Creative"
+      },
+      "routes": {
+        "fr": "/fr/creatif/",
+        "en": "/en/creative/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "network",
+      "label": {
+        "fr": "Réseau",
+        "en": "Network"
+      },
+      "routes": {
+        "fr": "/fr/reseau/",
+        "en": "/en/network/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "journal",
+      "label": {
+        "fr": "Journal",
+        "en": "Journal"
+      },
+      "routes": {
+        "fr": "/fr/journal/",
+        "en": "/en/journal/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "resources",
+      "label": {
+        "fr": "Ressources",
+        "en": "Resources"
+      },
+      "routes": {
+        "fr": "/fr/ressources/",
+        "en": "/en/resources/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "support",
+      "label": {
+        "fr": "Soutenir",
+        "en": "Support"
+      },
+      "routes": {
+        "fr": "/fr/soutenir/",
+        "en": "/en/support/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    },
+    {
+      "id": "legal",
+      "label": {
+        "fr": "Légal",
+        "en": "Legal"
+      },
+      "routes": {
+        "fr": "/fr/legal/",
+        "en": "/en/legal/"
+      },
+      "enabled": true,
+      "showInHeader": false,
+      "showInFooter": true
+    }
+  ]
+}
