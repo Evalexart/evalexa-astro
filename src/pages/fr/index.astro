@@ -4,15 +4,25 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout
   lang="fr"
+  area="home"
   pageId="home"
   title="Evalexa — Accueil"
   description="Site principal du projet Evalexa."
 >
   <section class="hero">
-    <p class="eyebrow">Evalexa</p>
-    <h1>Création, technologie et autonomie numérique.</h1>
-    <p>
-      Première page Astro avec le layout commun et le CSS Evalexa.
-    </p>
+    <div class="container hero-inner narrow">
+      <section class="section">
+        <div class="container narrow center">
+          <p class="eyebrow">Evalexa</p>
+
+          <h1>Création, technologie et autonomie numérique.</h1>
+
+          <p>
+            Première page Astro construite avec la structure HTML attendue par
+            le CSS Evalexa.
+          </p>
+        </div>
+      </section>
+    </div>
   </section>
 </BaseLayout>

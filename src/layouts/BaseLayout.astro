@@ -1,6 +1,7 @@
 ---
 const {
   lang = "fr",
+  area = "main",
   pageId = "home",
   title = "Evalexa",
   description = "Site principal du projet Evalexa.",
@@ -10,8 +11,8 @@ const {
 <!doctype html>
 <html lang={lang}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -30,12 +31,10 @@ const {
     </script>
   </head>
 
-  <body data-page={pageId}>
-    <a class="skip-link" href="#main-content">
-      Aller au contenu
-    </a>
+  <body data-area={area} data-page={pageId}>
+    <a class="skip-link" href="#main">Aller au contenu</a>
 
-    <main id="main-content">
+    <main id="main">
       <slot />
     </main>
 
