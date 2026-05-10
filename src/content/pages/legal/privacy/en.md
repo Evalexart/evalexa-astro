@@ -7,7 +7,7 @@ intro: "This page describes the site’s handling of personal data."
 ---
 
 <section class="section">
-<div class="container legal-layout flow">
+<div class="container legal-layout">
 
 <article class="legal-block flow">
   <h2>Voluntary collection</h2>

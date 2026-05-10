@@ -7,7 +7,7 @@ intro: "This page covers the current use of the website and prepares the future 
 ---
 
 <section class="section">
-<div class="container legal-layout flow">
+<div class="container legal-layout">
 
 <article class="legal-block flow">
   <h2>1. Purpose</h2>

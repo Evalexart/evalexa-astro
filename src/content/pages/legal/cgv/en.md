@@ -7,7 +7,7 @@ intro: "At this stage, Evalexa does not sell any products or services."
 ---
 
 <section class="section">
-<div class="container legal-layout flow">
+<div class="container legal-layout">
 
 <article class="legal-block flow">
   <h2>1. Current situation</h2>

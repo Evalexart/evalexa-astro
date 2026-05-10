@@ -9,7 +9,7 @@ intro: "Informations applicables au domaine evalexa.fr et à ses sous-domaines."
 <section class="section">
 <div class="container legal-layout ">
 
-<article class="legal-block flow center">
+<article class="legal-block flow">
   <h2>Édition</h2>
   <p>
     Le site <strong>evalexa.fr</strong> est édité par Eva Lain, nom d’artiste,
@@ -17,7 +17,7 @@ intro: "Informations applicables au domaine evalexa.fr et à ses sous-domaines."
   </p>
 </article>
 
-<article class="legal-block flow center">
+<article class="legal-block flow">
   <h2>Périmètre</h2>
   <p>
     Le présent document s’applique au domaine <strong>evalexa.fr</strong> et à
@@ -25,7 +25,7 @@ intro: "Informations applicables au domaine evalexa.fr et à ses sous-domaines."
   </p>
 </article>
 
-<article class="legal-block flow center">
+<article class="legal-block flow">
   <h2>Contact</h2>
   <p>
     Pour toute demande relative au site ou au projet :
@@ -33,7 +33,7 @@ intro: "Informations applicables au domaine evalexa.fr et à ses sous-domaines."
   </p>
 </article>
 
-<article class="legal-block flow center">
+<article class="legal-block flow">
   <h2>Hébergement et distribution</h2>
   <p>
     Le domaine <strong>evalexa.fr</strong> et ses sous-domaines sont hébergés
@@ -42,7 +42,7 @@ intro: "Informations applicables au domaine evalexa.fr et à ses sous-domaines."
   </p>
 </article>
 
-<article class="legal-block flow center">
+<article class="legal-block flow">
   <h2>Identification</h2>
   <p>
     Les informations d’identification non publiées directement sur cette page

@@ -7,7 +7,7 @@ intro: "This page explains the use of cookies and locally stored preferences on 
 ---
 
 <section class="section">
-<div class="container legal-layout flow">
+<div class="container legal-layout">
 
 <article class="legal-block flow">
   <h2>1. Advertising and tracking cookies</h2>

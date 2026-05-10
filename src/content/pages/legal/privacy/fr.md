@@ -7,7 +7,7 @@ intro: "Cette page précise le fonctionnement du site concernant les données pe
 ---
 
 <section class="section">
-<div class="container legal-layout flow">
+<div class="container legal-layout">
 
 <article class="legal-block flow">
   <h2>Collecte volontaire</h2>

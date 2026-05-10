@@ -7,7 +7,7 @@ intro: "Cette page précise l’usage des cookies et des préférences enregistr
 ---
 
 <section class="section">
-<div class="container legal-layout flow">
+<div class="container legal-layout">
 
 <article class="legal-block flow">
   <h2>1. Cookies publicitaires et de suivi</h2>
