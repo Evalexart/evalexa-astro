@@ -3,7 +3,18 @@
   margin: 0 auto;
 }
 
+.container-wide {
+  max-width: min(1280px, calc(100% - 2rem));
+}
+
 .narrow {
   width: min(calc(100% - 2rem), var(--container-narrow));
   margin: 0 auto;
+}
+
+.legal-layout {
+  width: min(calc(100% - 2rem), 760px);
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
 }

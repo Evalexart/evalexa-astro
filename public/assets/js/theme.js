@@ -14,35 +14,42 @@
       : "dark";
   }
 
-  function applyTheme(theme) {
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem(STORAGE_THEME, theme);
+  function updateThemeToggleLabels(theme) {
+    const themeToggles = document.querySelectorAll("[data-theme-toggle]");
 
-    const themeToggle = document.getElementById("theme-toggle");
+    themeToggles.forEach((themeToggle) => {
+      const fallback = themeToggle.dataset.themeToggleLabel || "Change theme";
 
-    if (themeToggle) {
       const label =
         theme === "light"
-          ? themeToggle.dataset.themeToDark || themeToggle.dataset.themeToggle
-          : themeToggle.dataset.themeToLight || themeToggle.dataset.themeToggle;
+          ? themeToggle.dataset.themeToDark || fallback
+          : themeToggle.dataset.themeToLight || fallback;
 
       themeToggle.setAttribute("aria-label", label);
       themeToggle.setAttribute("title", label);
-    }
+    });
+  }
+
+  function applyTheme(theme) {
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem(STORAGE_THEME, theme);
+    updateThemeToggleLabels(theme);
   }
 
   function initThemeControls() {
-    const themeToggle = document.getElementById("theme-toggle");
+    const themeToggles = document.querySelectorAll("[data-theme-toggle]");
 
-    if (!themeToggle) {
+    if (!themeToggles.length) {
       return;
     }
 
-    themeToggle.addEventListener("click", () => {
-      const next =
-        html.getAttribute("data-theme") === "light" ? "dark" : "light";
+    themeToggles.forEach((themeToggle) => {
+      themeToggle.addEventListener("click", () => {
+        const next =
+          html.getAttribute("data-theme") === "light" ? "dark" : "light";
 
-      applyTheme(next);
+        applyTheme(next);
+      });
     });
   }
 

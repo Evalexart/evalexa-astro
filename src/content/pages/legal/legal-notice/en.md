@@ -7,7 +7,7 @@ intro: "Information applicable to the evalexa.fr domain and its subdomains."
 ---
 
 <section class="section">
-<div class="container legal-layout flow">
+<div class="container legal-layout">
 
 <article class="legal-block flow">
   <h2>Publishing</h2>

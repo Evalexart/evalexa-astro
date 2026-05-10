@@ -1,4 +1,5 @@
 ---
+import navigation from "../data/navigation.json";
 import ui from "../data/ui.json";
 
 const {
@@ -9,9 +10,21 @@ const {
 
 const isFr = lang === "fr";
 const t = ui[lang]?.header ?? ui.fr.header;
+
+const headerItems = navigation.items
+  .filter((item) => item.enabled !== false)
+  .filter((item) => item.showInHeader === true);
+
+const menuOpen = t.menuOpen ?? (isFr ? "Ouvrir le menu" : "Open menu");
+const menuClose = t.menuClose ?? (isFr ? "Fermer le menu" : "Close menu");
 ---
 
-<header class="site-header">
+<header
+  class="site-header"
+  data-site-header
+  data-menu-open-label={menuOpen}
+  data-menu-close-label={menuClose}
+>
   <div class="header-inner">
     <a
       class="brand brand-logo-link"
@@ -25,15 +38,29 @@ const t = ui[lang]?.header ?? ui.fr.header;
       />
     </a>
 
-    <div class="header-actions">
-      <label class="visually-hidden" for="lang-select">
+    <nav
+      class="main-nav header-main-nav"
+      aria-label={isFr ? "Navigation principale" : "Main navigation"}
+    >
+      {
+        headerItems.map((item) => (
+          <a class="nav-link" href={item.routes[lang]}>
+            {item.label[lang]}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="header-actions header-desktop-actions">
+      <label class="visually-hidden" for="lang-select-header">
         {t.languageLabel}
       </label>
 
       <select
-        id="lang-select"
+        id="lang-select-header"
         class="lang-select"
         aria-label={t.languageLabel}
+        data-lang-select
         data-fr-href={frHref}
         data-en-href={enHref}
       >
@@ -44,16 +71,163 @@ const t = ui[lang]?.header ?? ui.fr.header;
       <button
         type="button"
         class="icon-btn"
-        id="theme-toggle"
         aria-label={t.themeToggle}
         title={t.themeToggle}
-        data-theme-toggle={t.themeToggle}
+        data-theme-toggle
+        data-theme-toggle-label={t.themeToggle}
         data-theme-to-dark={t.themeToDark}
         data-theme-to-light={t.themeToLight}
       >
         <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
         <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
       </button>
+
+      <button
+        type="button"
+        class="icon-btn burger-btn"
+        aria-label={menuOpen}
+        title={menuOpen}
+        aria-expanded="false"
+        aria-controls="header-drawer"
+        data-burger-button
+      >
+        <span class="burger-lines" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
+
+  <aside
+    id="header-drawer"
+    class="header-drawer"
+    aria-label={isFr ? "Menu de navigation" : "Navigation menu"}
+    data-header-drawer
+    hidden
+  >
+    <div class="drawer-inner">
+      <div class="drawer-top">
+        <div class="drawer-switches">
+          <label class="visually-hidden" for="lang-select-drawer">
+            {t.languageLabel}
+          </label>
+
+          <select
+            id="lang-select-drawer"
+            class="lang-select"
+            aria-label={t.languageLabel}
+            data-lang-select
+            data-fr-href={frHref}
+            data-en-href={enHref}
+          >
+            <option value="fr" selected={isFr}>FR</option>
+            <option value="en" selected={!isFr}>EN</option>
+          </select>
+
+          <button
+            type="button"
+            class="icon-btn"
+            aria-label={t.themeToggle}
+            title={t.themeToggle}
+            data-theme-toggle
+            data-theme-toggle-label={t.themeToggle}
+            data-theme-to-dark={t.themeToDark}
+            data-theme-to-light={t.themeToLight}
+          >
+            <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
+            <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn drawer-close"
+          aria-label={menuClose}
+          title={menuClose}
+          data-drawer-close
+        >
+          ×
+        </button>
+      </div>
+
+      <nav
+        class="drawer-nav"
+        aria-label={isFr ? "Navigation principale" : "Main navigation"}
+      >
+        {
+          headerItems.map((item) => (
+            <a class="nav-link drawer-link" href={item.routes[lang]}>
+              {item.label[lang]}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </aside>
 </header>
+
+<script is:inline>
+  (() => {
+    function initCompactHeader() {
+      const header = document.querySelector("[data-site-header]");
+      const burger = document.querySelector("[data-burger-button]");
+      const drawer = document.querySelector("[data-header-drawer]");
+      const closeButton = document.querySelector("[data-drawer-close]");
+
+      if (!header || !burger || !drawer) {
+        return;
+      }
+
+      const openLabel = header.dataset.menuOpenLabel || "Open menu";
+
+      function setCompactState() {
+        header.classList.toggle("is-scrolled", window.scrollY > 80);
+      }
+
+      function openDrawer() {
+        drawer.hidden = false;
+        header.classList.add("is-drawer-open");
+        burger.hidden = true;
+        burger.setAttribute("aria-expanded", "true");
+      }
+
+      function closeDrawer() {
+        drawer.hidden = true;
+        header.classList.remove("is-drawer-open");
+        burger.hidden = false;
+        burger.setAttribute("aria-expanded", "false");
+        burger.setAttribute("aria-label", openLabel);
+        burger.setAttribute("title", openLabel);
+      }
+
+      burger.addEventListener("click", () => {
+        const isOpen = burger.getAttribute("aria-expanded") === "true";
+
+        if (isOpen) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+
+      closeButton?.addEventListener("click", closeDrawer);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeDrawer();
+        }
+      });
+
+      drawer.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeDrawer);
+      });
+
+      setCompactState();
+      window.addEventListener("scroll", setCompactState, { passive: true });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initCompactHeader);
+    } else {
+      initCompactHeader();
+    }
+  })();
+</script>

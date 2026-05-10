@@ -35,15 +35,19 @@ const { Content } = await render(page);
         <div class="container narrow center">
           {page.data.eyebrow && <p class="eyebrow">{page.data.eyebrow}</p>}
 
-          {page.data.heading && <h1>{page.data.heading}</h1>}
+          {page.data.heading && (
+            <h1 class="hero-wordmark interactive-wordmark">
+              {page.data.heading}
+            </h1>
+          )}
 
           {page.data.intro && <p class="hero-text">{page.data.intro}</p>}
-
-          <div class="content-page">
-            <Content />
-          </div>
         </div>
       </section>
     </div>
   </section>
+
+  <div class="content-page">
+    <Content />
+  </div>
 </BaseLayout>

@@ -9,7 +9,9 @@
       "languageLabel": "Langue",
       "themeToggle": "Changer de thème",
       "themeToDark": "Passer au thème sombre",
-      "themeToLight": "Passer au thème clair"
+      "themeToLight": "Passer au thème clair",
+      "menuOpen": "Ouvrir le menu",
+      "menuClose": "Fermer le menu"
     }
   },
   "en": {
@@ -22,7 +24,9 @@
       "languageLabel": "Language",
       "themeToggle": "Change theme",
       "themeToDark": "Switch to dark theme",
-      "themeToLight": "Switch to light theme"
+      "themeToLight": "Switch to light theme",
+      "menuOpen": "Open menu",
+      "menuClose": "Close menu"
     }
   }
 }

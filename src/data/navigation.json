@@ -67,7 +67,7 @@
         "en": "/en/creative/"
       },
       "enabled": true,
-      "showInHeader": false,
+      "showInHeader": true,
       "showInFooter": true
     },
     {
@@ -81,7 +81,7 @@
         "en": "/en/network/"
       },
       "enabled": true,
-      "showInHeader": false,
+      "showInHeader": true,
       "showInFooter": true
     },
     {
@@ -137,7 +137,7 @@
         "en": "/en/legal/"
       },
       "enabled": true,
-      "showInHeader": false,
+      "showInHeader": true,
       "showInFooter": true
     },
     {

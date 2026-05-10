@@ -1,8 +1,0 @@
-/* Legal document layout. */
-
-.legal-layout {
-  width: min(calc(100% - 2rem), 920px);
-  margin: 0 auto;
-  display: grid;
-  gap: 1rem;
-}
