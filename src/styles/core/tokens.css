@@ -24,7 +24,7 @@
     rgba(10, 16, 28, 0.74),
     rgba(10, 16, 28, 0.8)
   );
-  --page-image: url("../../img/backgrounds/background.png");
+  --page-image: url("../../assets/images/backgrounds/background.png");
   color-scheme: dark;
 }
 
@@ -50,6 +50,6 @@ html[data-theme="light"] {
     rgba(247, 248, 251, 0.42),
     rgba(247, 248, 251, 0.52)
   );
-  --page-image: url("../../img/backgrounds/background.png");
+  --page-image: url("../../assets/images/backgrounds/background.png");
   color-scheme: light;
 }

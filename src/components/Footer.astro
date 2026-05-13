@@ -1,6 +1,7 @@
 ---
 import navigation from "../data/navigation.json";
 import ui from "../data/ui.json";
+import logoPartialWatercolor from "../assets/images/logo/logo-partiel-watercolor.png";
 
 const { lang = "fr" } = Astro.props;
 
@@ -28,7 +29,7 @@ const footerItems = footerIds
     <div class="footer-brand-block">
       <img
         class="footer-logo footer-logo-watercolor"
-        src="/assets/img/logo/logo-partiel-watercolor.png"
+        src={logoPartialWatercolor.src}
         alt="Evalexa"
       />
 

@@ -1,6 +1,7 @@
 ---
 import navigation from "../data/navigation.json";
 import ui from "../data/ui.json";
+import logoFullWhiteUrl from "../assets/images/logo/logo-full-white.svg?url";
 
 const {
   lang = "fr",
@@ -33,7 +34,7 @@ const menuClose = t.menuClose ?? (isFr ? "Fermer le menu" : "Close menu");
     >
       <img
         class="brand-logo brand-logo-full"
-        src="/assets/img/logo/logo-full-white.svg"
+        src={logoFullWhiteUrl}
         alt="Evalexa"
       />
     </a>

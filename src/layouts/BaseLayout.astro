@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import ui from "../data/ui.json";
 import Footer from "../components/Footer.astro";
+import "../styles/main.css";
 
 const {
   lang = "fr",
@@ -26,7 +27,6 @@ const t = ui[lang] ?? ui.fr;
     <meta name="description" content={description} />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/assets/css/main.css" />
 
     <script is:inline>
       (() => {
@@ -50,8 +50,8 @@ const t = ui[lang] ?? ui.fr;
       <slot />
     </main>
     <Footer lang={lang} />
-    <script src="/assets/js/theme.js" defer></script>
-    <script src="/assets/js/language-switch.js" defer></script>
+    <script src="../scripts/theme.js"></script>
+    <script src="../scripts/language-switch.js"></script>
 
     <script is:inline>
       window.addEventListener("DOMContentLoaded", () => {

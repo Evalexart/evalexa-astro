@@ -1,0 +1,60 @@
+---
+const {
+  title,
+  description,
+  cards = [],
+  previousLabel = "Précédent",
+  nextLabel = "Suivant",
+} = Astro.props;
+
+const railId = `card-rail-${Math.random().toString(36).slice(2)}`;
+---
+
+<section class="card-rail-section">
+  <div class="card-rail-heading">
+    <div>
+      <h2>{title}</h2>
+      {description && <p>{description}</p>}
+    </div>
+
+    <div class="card-rail-controls" aria-label="Navigation des cartes">
+      <button type="button" data-rail-prev={railId} aria-label={previousLabel}>
+        ←
+      </button>
+      <button type="button" data-rail-next={railId} aria-label={nextLabel}>
+        →
+      </button>
+    </div>
+  </div>
+
+  <div class="card-rail" id={railId} data-card-rail>
+    {cards.map((card) => (
+      <a class="rail-card" href={card.href}>
+        <span class="rail-card-kicker">{card.kicker}</span>
+        <strong>{card.title}</strong>
+        <span>{card.description}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll("[data-card-rail]").forEach((rail) => {
+    const id = rail.id;
+    const previousButton = document.querySelector(`[data-rail-prev="${id}"]`);
+    const nextButton = document.querySelector(`[data-rail-next="${id}"]`);
+
+    const scrollRail = (direction) => {
+      const card = rail.querySelector(".rail-card");
+      const step = card ? card.getBoundingClientRect().width + 16 : 320;
+
+      rail.scrollBy({
+        left: direction * step,
+        behavior: "smooth",
+      });
+    };
+
+    previousButton?.addEventListener("click", () => scrollRail(-1));
+    nextButton?.addEventListener("click", () => scrollRail(1));
+  });
+</script>
