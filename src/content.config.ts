@@ -12,6 +12,24 @@ const pages = defineCollection({
     eyebrow: z.string().optional(),
     heading: z.string().optional(),
     intro: z.string().optional(),
+
+    sections: z
+      .array(
+        z.object({
+          id: z.string().optional(),
+          title: z.string(),
+          description: z.string().optional(),
+          cards: z.array(
+            z.object({
+              kicker: z.string().optional(),
+              title: z.string(),
+              description: z.string().optional(),
+              href: z.string(),
+            }),
+          ),
+        }),
+      )
+      .optional(),
   }),
 });
 

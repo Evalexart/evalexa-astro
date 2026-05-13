@@ -6,55 +6,107 @@ const {
   previousLabel = "Précédent",
   nextLabel = "Suivant",
 } = Astro.props;
-
-const railId = `card-rail-${Math.random().toString(36).slice(2)}`;
 ---
 
-<section class="card-rail-section">
+<section class="card-rail-section" data-card-rail-section>
   <div class="card-rail-heading">
-    <div>
-      <h2>{title}</h2>
-      {description && <p>{description}</p>}
-    </div>
-
-    <div class="card-rail-controls" aria-label="Navigation des cartes">
-      <button type="button" data-rail-prev={railId} aria-label={previousLabel}>
-        ←
-      </button>
-      <button type="button" data-rail-next={railId} aria-label={nextLabel}>
-        →
-      </button>
-    </div>
+    <h2>{title}</h2>
+    {description && <p>{description}</p>}
   </div>
 
-  <div class="card-rail" id={railId} data-card-rail>
-    {cards.map((card) => (
-      <a class="rail-card" href={card.href}>
-        <span class="rail-card-kicker">{card.kicker}</span>
-        <strong>{card.title}</strong>
-        <span>{card.description}</span>
-      </a>
-    ))}
+  <div class="card-rail-frame">
+    <button
+      type="button"
+      class="card-rail-arrow card-rail-arrow-prev"
+      data-card-rail-prev
+      aria-label={previousLabel}
+    >
+      <span aria-hidden="true">‹</span>
+    </button>
+
+    <div class="card-rail-track" data-card-rail-track>
+      {
+        cards.map((card) => (
+          <a class="card-rail-card" href={card.href}>
+            {card.kicker && (
+              <span class="card-rail-kicker">{card.kicker}</span>
+            )}
+
+            <strong class="card-rail-title">{card.title}</strong>
+
+            {card.description && (
+              <span class="card-rail-description">{card.description}</span>
+            )}
+          </a>
+        ))
+      }
+    </div>
+
+    <button
+      type="button"
+      class="card-rail-arrow card-rail-arrow-next"
+      data-card-rail-next
+      aria-label={nextLabel}
+    >
+      <span aria-hidden="true">›</span>
+    </button>
   </div>
 </section>
 
 <script>
-  document.querySelectorAll("[data-card-rail]").forEach((rail) => {
-    const id = rail.id;
-    const previousButton = document.querySelector(`[data-rail-prev="${id}"]`);
-    const nextButton = document.querySelector(`[data-rail-next="${id}"]`);
+  const railSections = document.querySelectorAll("[data-card-rail-section]");
 
-    const scrollRail = (direction) => {
-      const card = rail.querySelector(".rail-card");
-      const step = card ? card.getBoundingClientRect().width + 16 : 320;
+  railSections.forEach((section) => {
+    const track = section.querySelector("[data-card-rail-track]");
+    const previousButton = section.querySelector("[data-card-rail-prev]");
+    const nextButton = section.querySelector("[data-card-rail-next]");
 
-      rail.scrollBy({
-        left: direction * step,
-        behavior: "smooth",
-      });
+    if (!track || !previousButton || !nextButton) return;
+
+    const getScrollStep = () => {
+      const firstCard = track.querySelector(".card-rail-card");
+
+      if (!firstCard) return 320;
+
+      const cardWidth = firstCard.getBoundingClientRect().width;
+      const trackStyle = window.getComputedStyle(track);
+      const gap = parseFloat(trackStyle.columnGap || trackStyle.gap || "0");
+
+      return cardWidth + gap;
     };
 
-    previousButton?.addEventListener("click", () => scrollRail(-1));
-    nextButton?.addEventListener("click", () => scrollRail(1));
+    const updateArrowState = () => {
+      const maxScrollLeft = track.scrollWidth - track.clientWidth;
+      const currentScrollLeft = track.scrollLeft;
+      const threshold = 4;
+
+      const isAtStart = currentScrollLeft <= threshold;
+      const isAtEnd = currentScrollLeft >= maxScrollLeft - threshold;
+
+      previousButton.classList.toggle("is-muted", isAtStart);
+      nextButton.classList.toggle("is-muted", isAtEnd);
+
+      previousButton.setAttribute("aria-disabled", String(isAtStart));
+      nextButton.setAttribute("aria-disabled", String(isAtEnd));
+    };
+
+    previousButton.addEventListener("click", () => {
+      track.scrollBy({
+        left: -getScrollStep(),
+        behavior: "smooth",
+      });
+    });
+
+    nextButton.addEventListener("click", () => {
+      track.scrollBy({
+        left: getScrollStep(),
+        behavior: "smooth",
+      });
+    });
+
+    track.addEventListener("scroll", updateArrowState, { passive: true });
+    window.addEventListener("resize", updateArrowState);
+
+    updateArrowState();
   });
 </script>

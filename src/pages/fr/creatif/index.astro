@@ -1,4 +1,51 @@
 ---
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import CardRail from "../../../components/CardRail.astro";
+import ui from "../../../data/ui.json";
+
+const lang = "fr";
+const page = await getEntry("pages", "creative/index/fr");
+
+if (!page) {
+  throw new Error("Content page not found: creative/index/fr");
+}
+
+const { Content } = await render(page);
+const cardRail = ui.fr.cardRail;
+const sections = page.data.sections ?? [];
 ---
 
-<p>Page en construction.</p>
+<BaseLayout
+  lang={lang}
+  pageId="creative"
+  title={page.data.title}
+  description={page.data.description}
+  frHref="/fr/creatif/"
+  enHref="/en/creative/"
+>
+  <div class="container creative-page">
+    <section class="hero hero-compact">
+      <div class="hero-inner">
+        {page.data.eyebrow && <p class="eyebrow">{page.data.eyebrow}</p>}
+        <h1 class="hero-wordmark">{page.data.heading}</h1>
+        {page.data.intro && <p class="hero-text">{page.data.intro}</p>}
+        <Content />
+      </div>
+    </section>
+
+    <div class="creative-hub">
+      {
+        sections.map((section) => (
+          <CardRail
+            title={section.title}
+            description={section.description}
+            cards={section.cards}
+            previousLabel={cardRail.previous}
+            nextLabel={cardRail.next}
+          />
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

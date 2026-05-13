@@ -12,6 +12,10 @@
       "themeToLight": "Passer au thème clair",
       "menuOpen": "Ouvrir le menu",
       "menuClose": "Fermer le menu"
+    },
+    "cardRail": {
+      "previous": "Faire défiler les cartes vers la gauche",
+      "next": "Faire défiler les cartes vers la droite"
     }
   },
   "en": {
@@ -27,6 +31,10 @@
       "themeToLight": "Switch to light theme",
       "menuOpen": "Open menu",
       "menuClose": "Close menu"
+    },
+    "cardRail": {
+      "previous": "Scroll cards to the left",
+      "next": "Scroll cards to the right"
     }
   }
 }
