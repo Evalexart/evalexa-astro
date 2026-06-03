@@ -1,0 +1,88 @@
+{
+  "updatedAt": "2026-05-19T12:00:00+02:00",
+  "groups": [
+    {
+      "id": "web",
+      "title": "Web",
+      "status": "ok",
+      "fresh": "2 min",
+      "href": "/fr/atelier-numerique/web/",
+      "order": 10,
+      "counts": {
+        "ok": 2,
+        "warning": 0,
+        "maintenance": 0,
+        "down": 0,
+        "unknown": 1
+      },
+      "services": [
+        {
+          "id": "evalexa-fr",
+          "name": "evalexa.fr",
+          "status": "ok",
+          "fresh": "2 min",
+          "order": 10
+        },
+        {
+          "id": "status-evalexa-fr",
+          "name": "status.evalexa.fr",
+          "status": "ok",
+          "fresh": "2 min",
+          "order": 20
+        },
+        {
+          "id": "nostr-nip05",
+          "name": "NIP-05 / nostr.json",
+          "status": "unknown",
+          "fresh": "—",
+          "order": 30
+        }
+      ]
+    },
+    {
+      "id": "infrastructure",
+      "title": "Infrastructure",
+      "status": "ok",
+      "fresh": "1 min",
+      "href": "/fr/atelier-numerique/infrastructure/",
+      "order": 20,
+      "counts": {
+        "ok": 5,
+        "warning": 0,
+        "maintenance": 0,
+        "down": 0,
+        "unknown": 1
+      },
+      "services": [
+        {
+          "id": "vm-oracle-production",
+          "name": "VM Oracle Production",
+          "status": "ok",
+          "fresh": "1 min",
+          "order": 10
+        },
+        {
+          "id": "vm-oracle-test",
+          "name": "VM Oracle Test",
+          "status": "ok",
+          "fresh": "1 min",
+          "order": 20
+        },
+        {
+          "id": "lightning",
+          "name": "Lightning",
+          "status": "ok",
+          "fresh": "1 min",
+          "order": 30
+        },
+        {
+          "id": "bot-discord",
+          "name": "Discord Bot",
+          "status": "à venir",
+          "fresh": "—",
+          "order": 40
+        }
+      ]
+    }
+  ]
+}

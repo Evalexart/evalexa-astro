@@ -98,8 +98,8 @@
 }
 
 .card-rail-card {
-  flex: 0 0 calc((100% - 2rem) / 3);
-  scroll-snap-align: start;
+  flex: 0 0 clamp(18rem, 38%, 24rem);
+  scroll-snap-align: center;
   display: grid;
   align-content: start;
   gap: 0.75rem;
@@ -119,7 +119,13 @@
     box-shadow 180ms ease,
     border-color 180ms ease;
 }
+.card-rail-card:first-child {
+  scroll-snap-align: start;
+}
 
+.card-rail-card:last-child {
+  scroll-snap-align: end;
+}
 .card-rail-card:hover,
 .card-rail-card:focus-visible {
   transform: translateY(-2px);
@@ -151,7 +157,7 @@
 
 @media (max-width: 980px) {
   .card-rail-card {
-    flex-basis: calc((100% - 1rem) / 2);
+    flex-basis: clamp(17rem, 58%, 22rem);
   }
 }
 
@@ -165,6 +171,6 @@
   }
 
   .card-rail-card {
-    flex-basis: min(19rem, 82vw);
+    flex-basis: 82%;
   }
 }

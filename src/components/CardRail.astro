@@ -60,28 +60,69 @@ const {
     const track = section.querySelector("[data-card-rail-track]");
     const previousButton = section.querySelector("[data-card-rail-prev]");
     const nextButton = section.querySelector("[data-card-rail-next]");
+    const cards = Array.from(track?.querySelectorAll(".card-rail-card") ?? []);
 
-    if (!track || !previousButton || !nextButton) return;
+    if (!track || !previousButton || !nextButton || cards.length === 0) return;
 
-    const getScrollStep = () => {
-      const firstCard = track.querySelector(".card-rail-card");
+    let activeIndex = 0;
 
-      if (!firstCard) return 320;
+    const getMaxScrollLeft = () => track.scrollWidth - track.clientWidth;
 
-      const cardWidth = firstCard.getBoundingClientRect().width;
-      const trackStyle = window.getComputedStyle(track);
-      const gap = parseFloat(trackStyle.columnGap || trackStyle.gap || "0");
+    const getCenteredScrollLeft = (card) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const trackCenter = track.clientWidth / 2;
 
-      return cardWidth + gap;
+      return cardCenter - trackCenter;
+    };
+
+    const scrollToIndex = (index) => {
+      activeIndex = Math.max(0, Math.min(index, cards.length - 1));
+
+      const targetCard = cards[activeIndex];
+      const maxScrollLeft = getMaxScrollLeft();
+
+      let targetScrollLeft;
+
+      if (activeIndex === 0) {
+        targetScrollLeft = 0;
+      } else if (activeIndex === cards.length - 1) {
+        targetScrollLeft = maxScrollLeft;
+      } else {
+        targetScrollLeft = getCenteredScrollLeft(targetCard);
+      }
+
+      track.scrollTo({
+        left: Math.max(0, Math.min(targetScrollLeft, maxScrollLeft)),
+        behavior: "smooth",
+      });
+    };
+
+    const updateActiveIndexFromScroll = () => {
+      const trackCenter = track.scrollLeft + track.clientWidth / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      cards.forEach((card, index) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const distance = Math.abs(cardCenter - trackCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      activeIndex = closestIndex;
+      updateArrowState();
     };
 
     const updateArrowState = () => {
-      const maxScrollLeft = track.scrollWidth - track.clientWidth;
-      const currentScrollLeft = track.scrollLeft;
       const threshold = 4;
+      const maxScrollLeft = getMaxScrollLeft();
 
-      const isAtStart = currentScrollLeft <= threshold;
-      const isAtEnd = currentScrollLeft >= maxScrollLeft - threshold;
+      const isAtStart = track.scrollLeft <= threshold;
+      const isAtEnd = track.scrollLeft >= maxScrollLeft - threshold;
 
       previousButton.classList.toggle("is-muted", isAtStart);
       nextButton.classList.toggle("is-muted", isAtEnd);
@@ -91,22 +132,23 @@ const {
     };
 
     previousButton.addEventListener("click", () => {
-      track.scrollBy({
-        left: -getScrollStep(),
-        behavior: "smooth",
-      });
+      scrollToIndex(activeIndex - 1);
     });
 
     nextButton.addEventListener("click", () => {
-      track.scrollBy({
-        left: getScrollStep(),
-        behavior: "smooth",
-      });
+      scrollToIndex(activeIndex + 1);
     });
 
-    track.addEventListener("scroll", updateArrowState, { passive: true });
-    window.addEventListener("resize", updateArrowState);
+    track.addEventListener("scroll", () => {
+      window.requestAnimationFrame(updateActiveIndexFromScroll);
+    }, { passive: true });
 
+    window.addEventListener("resize", () => {
+      scrollToIndex(activeIndex);
+      updateArrowState();
+    });
+
+    scrollToIndex(0);
     updateArrowState();
   });
 </script>
