@@ -24,7 +24,7 @@
         "fr": "/fr/a-propos/",
         "en": "/en/about/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -38,7 +38,7 @@
         "fr": "/fr/faq/",
         "en": "/en/faq/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -52,7 +52,7 @@
         "fr": "/fr/contact/",
         "en": "/en/contact/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -66,7 +66,7 @@
         "fr": "/fr/creatif/",
         "en": "/en/creative/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": true,
       "showInFooter": true
     },
@@ -80,7 +80,7 @@
         "fr": "/fr/reseau/",
         "en": "/en/network/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": true,
       "showInFooter": true
     },
@@ -94,7 +94,7 @@
         "fr": "/fr/journal/",
         "en": "/en/journal/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -108,7 +108,7 @@
         "fr": "/fr/ressources/",
         "en": "/en/resources/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -122,7 +122,7 @@
         "fr": "/fr/soutenir/",
         "en": "/en/support/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -136,8 +136,8 @@
         "fr": "/fr/legal/",
         "en": "/en/legal/"
       },
-      "enabled": true,
-      "showInHeader": true,
+      "enabled": false,
+      "showInHeader": false,
       "showInFooter": true
     },
     {
@@ -150,7 +150,7 @@
         "fr": "/fr/legal/mentions-legales/",
         "en": "/en/legal/legal-notice/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -164,7 +164,7 @@
         "fr": "/fr/legal/confidentialite/",
         "en": "/en/legal/privacy/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -178,7 +178,7 @@
         "fr": "/fr/legal/cgv/",
         "en": "/en/legal/terms-of-sale/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -192,7 +192,7 @@
         "fr": "/fr/legal/cgu/",
         "en": "/en/legal/terms-of-use/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -220,7 +220,7 @@
         "fr": "/fr/reseau/noeuds/",
         "en": "/en/network/nodes/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     }
