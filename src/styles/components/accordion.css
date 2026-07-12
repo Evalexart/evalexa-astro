@@ -1,0 +1,68 @@
+/* Accordion component: reusable disclosure blocks (details/summary).
+   Minimal left-border style, no rounded box/background container. */
+
+.accordion-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 2.3rem 0 0.65rem;
+}
+
+.accordion {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.accordion-item {
+  background: color-mix(in srgb, var(--bg-elevated) 32%, transparent);
+  backdrop-filter: blur(12px);
+  border-left: 3px solid var(--border);
+  overflow: hidden;
+}
+
+.accordion-item[open] {
+  border-left-color: var(--accent);
+}
+
+.accordion-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.85rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.93rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  user-select: none;
+}
+
+.accordion-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-item summary::after {
+  content: "+";
+  color: var(--accent-2);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.accordion-item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.accordion-body {
+  padding: 0 1.1rem 1rem;
+  color: var(--text-soft);
+  line-height: 1.75;
+  font-size: 0.9rem;
+}
+
+.accordion-body p + p {
+  margin-top: 0.75rem;
+}

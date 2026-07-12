@@ -1,0 +1,98 @@
+/* Skill-icons component: tool icon grid with a single shared detail panel
+   below. Clicking an icon highlights it and updates the shared panel —
+   icons never resize or expand individually. */
+
+.skill-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+
+.skill-icon-item {
+  width: 88px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  padding: 1rem 0.4rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  font: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.skill-icon-item svg {
+  width: 30px;
+  height: 30px;
+  fill: var(--text);
+  transition: fill 0.2s ease, filter 0.2s ease;
+}
+
+.skill-icon-item .skill-tool-name {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.skill-icon-item.is-active {
+  border-color: var(--accent);
+}
+
+.skill-icon-item.is-active svg {
+  fill: var(--accent);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 65%, transparent));
+}
+
+.skill-icon-item.is-active .skill-tool-name {
+  color: var(--accent);
+}
+
+/* Shared detail panel below the grid */
+
+.skill-detail-panel {
+  max-width: 480px;
+  min-height: 6.5rem;
+  margin: 1.3rem auto 0;
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.skill-detail-panel strong {
+  display: block;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+/* Generic hand-drawn glyph used when no brand icon applies (e.g. SQL). */
+.skill-glyph-db {
+  stroke: var(--text);
+  fill: none;
+  stroke-width: 1.4;
+}
+
+.skill-icon-item.is-active .skill-glyph-db {
+  stroke: var(--accent);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 65%, transparent));
+}
+
+/* Generic hand-drawn cloud/server glyph (e.g. Oracle Cloud VMs — no brand
+   mark available). */
+.skill-glyph-cloud {
+  stroke: var(--text);
+  fill: none;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.skill-icon-item.is-active .skill-glyph-cloud {
+  stroke: var(--accent);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent) 65%, transparent));
+}

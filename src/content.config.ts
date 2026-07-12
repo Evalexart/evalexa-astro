@@ -3,7 +3,7 @@ import { glob } from "astro/loaders";
 
 const pages = defineCollection({
   loader: glob({
-    pattern: "**/*.{md,mdx}",
+    pattern: ["**/*.{md,mdx}", "!profil-pro/**"],
     base: "./src/content/pages",
   }),
   schema: z.object({
@@ -29,6 +29,72 @@ const pages = defineCollection({
           ),
         }),
       )
+      .optional(),
+  }),
+});
+
+const profilPro = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/pages/profil-pro",
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    eyebrow: z.string().optional(),
+    heading: z.string().optional(),
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+    intro: z.string().optional(),
+    quote: z.string().optional(),
+    cvHref: z.string().optional(),
+
+    photo: z.string().optional(),
+
+    skills: z
+      .array(
+        z.object({
+          tool: z.string(),
+          icon: z.string(),
+          detail: z.string(),
+        }),
+      )
+      .optional(),
+
+    alternanceProject: z.string().optional(),
+
+    formation: z
+      .array(
+        z.object({
+          name: z.string(),
+          schedule: z.string().optional(),
+          links: z
+            .array(z.object({ label: z.string(), href: z.string() }))
+            .optional(),
+        }),
+      )
+      .optional(),
+
+    accordion: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        }),
+      )
+      .optional(),
+
+    contact: z
+      .object({
+        name: z.string().optional(),
+        items: z.array(
+          z.object({
+            icon: z.string().optional(),
+            label: z.string(),
+            href: z.string().optional(),
+          }),
+        ),
+      })
       .optional(),
   }),
 });
@@ -60,6 +126,7 @@ const oeuvres = defineCollection({
 
 export const collections = {
   pages,
+  profilPro,
   journal,
   oeuvres,
 };

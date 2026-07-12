@@ -16,6 +16,13 @@
     "cardRail": {
       "previous": "Faire défiler les cartes vers la gauche",
       "next": "Faire défiler les cartes vers la droite"
+    },
+    "profilePro": {
+      "skillsTitle": "Compétences",
+      "formationTitle": "Formation",
+      "experienceLabel": "Parcours & expériences",
+      "cvLabel": "Télécharger mon CV",
+      "skillsDefaultText": "J'apprends en autodidacte, par projet : chaque outil ci-dessus a été appris pour répondre à un besoin concret rencontré en construisant quelque chose. Cliquez sur une icône pour voir ce que j'en ai fait."
     }
   },
   "en": {
@@ -35,6 +42,13 @@
     "cardRail": {
       "previous": "Scroll cards to the left",
       "next": "Scroll cards to the right"
+    },
+    "profilePro": {
+      "skillsTitle": "Skills",
+      "formationTitle": "Education",
+      "experienceLabel": "Background & experience",
+      "cvLabel": "Download my CV",
+      "skillsDefaultText": "I learn by teaching myself, one project at a time: every tool above was picked up to solve a real need I ran into while building something. Click an icon to see what I built with it."
     }
   }
 }

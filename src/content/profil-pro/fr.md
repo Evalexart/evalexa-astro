@@ -1,0 +1,91 @@
+---
+title: "Anaïs Mattle — Profil professionnel"
+description: "Profil professionnel d'Anaïs Mattle — développeuse autodidacte en formation BTS SIO SLAM, recherche d'alternance."
+eyebrow: "Profil professionnel"
+heading: "Anaïs Mattle"
+firstName: "ANAÏS"
+lastName: "MATTLE"
+intro: "Test - QA - Développement - Support Niveau 2 / BTS SIO SLAM en alternance"
+quote: "« Ce qui m'intéresse le plus, c'est transformer un besoin concret en solution utilisable. »"
+cvHref: "/assets/cv.pdf"
+
+photo: "/assets/photo.webp"
+
+skills:
+  - tool: "Python"
+    icon: "python"
+    detail: "Bots Discord (gestion de commandes, modération), scripts d'automatisation, programmation orientée objet et gestion d'erreurs sur des projets personnels."
+  - tool: "SQL"
+    icon: "sql"
+    detail: "Requêtes et gestion de données pour mes bots Discord et projets d'automatisation."
+  - tool: "HTML"
+    icon: "html5"
+    detail: "Pages de candidature personnalisées, structure sémantique, site personnel en Astro."
+  - tool: "CSS"
+    icon: "css"
+    detail: "Mise en page, thèmes clair/sombre, animations sur mes pages de candidature et mon site personnel."
+  - tool: "JavaScript"
+    icon: "javascript"
+    detail: "Interactions et logique côté client sur mes pages de candidature et mon site."
+  - tool: "TypeScript"
+    icon: "typescript"
+    detail: "Utilisé sur mon projet Astro personnel pour typer les données de contenu."
+  - tool: "Astro"
+    icon: "astro"
+    detail: "Site personnel bilingue (FR/EN) : routage, layouts et composants réutilisables."
+  - tool: "Apps Script"
+    icon: "googleappsscript"
+    detail: "Automatisations sur Google Sheets."
+  - tool: "Discord"
+    icon: "discord"
+    detail: "Développement de deux bots Discord pour usage communautaire."
+  - tool: "Linux"
+    icon: "linux"
+    detail: "Administration de VM cloud (Oracle Cloud), hébergement de services personnels."
+  - tool: "Tailscale"
+    icon: "tailscale"
+    detail: "Mise en place d'un réseau privé maillé entre mes machines et VM cloud."
+
+alternanceProject: "Je recherche une alternance en développement (BTS SIO SLAM) pour la rentrée de septembre 2026, sur un rythme compatible avec l'une des deux écoles ci-dessous — idéalement dans l'Audomarois ou ses environs, Lille restant possible à raison d'1 à 2 jours par semaine."
+
+formation:
+  - name: "My Digital School — Lille"
+    schedule: "3 jours entreprise / 2 jours école"
+    links:
+      - label: "Site de l'école"
+        href: "https://www.mydigitalschool.com/ecole-multimedia-lille"
+      - label: "Voir le planning d'alternance"
+        href: "/assets/planning-mds.pdf"
+  - name: "Lycée Gaston Berger — Lille"
+    schedule: "1 semaine entreprise / 1 semaine école"
+    links:
+      - label: "Site de l'école"
+        href: "https://www.gastonberger.fr/"
+      - label: "Voir le planning d'alternance"
+        href: "/assets/planning-gb.pdf"
+
+accordion:
+  - question: "Pourquoi le numérique — et pourquoi maintenant ?"
+    answer: "Je ne suis pas arrivée dans l'informatique par un parcours scolaire classique. J'y suis arrivée en cherchant à construire des outils utiles : bots Discord en Python et SQL, automatisations Google Sheets avec Apps Script, hébergement de services sous Linux, puis développement web avec Astro, HTML, CSS et JavaScript. Chaque nouveau projet m'a conduite à apprendre les compétences dont j'avais besoin pour répondre à une problématique concrète."
+  - question: "Ma manière de travailler"
+    answer: "Je n'avance jamais sur ce que je ne maîtrise pas sans le dire clairement : quand une compétence me manque, je le signale et je me mets à l'apprendre. C'est une façon de travailler qui demande de la rigueur, mais qui évite les mauvaises surprises côté équipe."
+
+contact:
+  name: "Anaïs Mattle"
+  items:
+    - icon: "✉"
+      label: "a.mattle@outlook.com"
+      href: "mailto:a.mattle@outlook.com"
+    - icon: "☎"
+      label: "06 09 56 29 33"
+    - icon: "📍"
+      label: "62500 Saint-Omer"
+    - icon: "🚆"
+      label: "Ligne SNCF Lille / Calais"
+    - icon: "🚗"
+      label: "Permis B — véhicule personnel"
+    - icon: "💻"
+      label: "Distanciel possible"
+---
+
+Cette page est destinée à être partagée directement (CV, candidatures) et n'est pas référencée dans le menu du site.

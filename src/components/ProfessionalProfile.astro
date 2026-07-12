@@ -1,0 +1,227 @@
+---
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ui from "../data/ui.json";
+import { toolIcons } from "../lib/tool-icons";
+import "../styles/pages/profil-pro.css";
+
+interface Props {
+  lang: "fr" | "en";
+}
+
+const { lang } = Astro.props;
+
+const page = await getEntry("profilPro", lang);
+
+if (!page) {
+  throw new Error(`Content page not found: profil-pro/${lang}`);
+}
+
+const { Content } = await render(page);
+const {
+  firstName,
+  lastName,
+  heading,
+  eyebrow,
+  intro,
+  quote,
+  cvHref,
+  photo,
+  skills = [],
+  alternanceProject,
+  formation = [],
+  accordion = [],
+  contact,
+} = page.data;
+const t = ui[lang].profilePro;
+---
+
+<BaseLayout
+  lang={lang}
+  pageId="profil-pro"
+  title={page.data.title}
+  description={page.data.description}
+  frHref="/fr/profil-pro/"
+  enHref="/en/professional-profile/"
+>
+  <header class="profil-header">
+    <div class="profil-header-inner">
+      <div class="profil-name">
+        <h1>
+          {firstName && lastName ? (
+            <>
+              <span class="prenom">{firstName}</span>
+              <span class="nom">{lastName}</span>
+            </>
+          ) : (
+            <span class="nom">{heading}</span>
+          )}
+        </h1>
+      </div>
+
+      {photo && (
+        <div class="profil-photo">
+          <img src={photo} alt={heading} />
+        </div>
+      )}
+
+      <div class="profil-tag">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        {intro && <div class="profil-tag-detail">{intro}</div>}
+        {cvHref && (
+          <a class="profil-cv-link" href={cvHref} target="_blank" rel="noopener">
+            {t.cvLabel}
+          </a>
+        )}
+      </div>
+    </div>
+  </header>
+
+  {quote && <p class="profil-quote">{quote}</p>}
+
+  {skills.length > 0 && (
+    <div class="profil-page profil-skills">
+      <h2 class="profil-section-title">{t.skillsTitle}</h2>
+      <div class="skill-icons" data-skill-grid>
+        {skills.map((skill) => {
+          const icon = toolIcons[skill.icon];
+          return (
+            <button
+              type="button"
+              class="skill-icon-item"
+              data-skill-tool={skill.tool}
+              data-skill-detail={skill.detail}
+            >
+              {icon?.glyph === "db" && (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <ellipse class="skill-glyph-db" cx="12" cy="6" rx="7" ry="2.6" />
+                  <path
+                    class="skill-glyph-db"
+                    d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6"
+                  />
+                  <path
+                    class="skill-glyph-db"
+                    d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6"
+                  />
+                </svg>
+              )}
+              {icon?.glyph === "cloud" && (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    class="skill-glyph-cloud"
+                    d="M7 18a4 4 0 0 1-.5-7.97A5 5 0 0 1 16.2 8.1 4.5 4.5 0 0 1 16.5 17H7Z"
+                  />
+                  <path
+                    class="skill-glyph-cloud"
+                    d="M9.5 21v-2M12 21v-2M14.5 21v-2"
+                  />
+                </svg>
+              )}
+              {!icon?.custom && (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d={icon?.path} />
+                </svg>
+              )}
+              <span class="skill-tool-name">{skill.tool}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div class="skill-detail-panel" data-skill-panel data-skill-default={t.skillsDefaultText}>
+        {t.skillsDefaultText}
+      </div>
+    </div>
+  )}
+
+  <script>
+    document.querySelectorAll("[data-skill-grid]").forEach((grid) => {
+      const panel = grid.parentElement?.querySelector("[data-skill-panel]");
+      if (!panel) return;
+
+      const defaultText = panel.getAttribute("data-skill-default") ?? "";
+
+      grid.querySelectorAll("[data-skill-tool]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const isAlreadyActive = button.classList.contains("is-active");
+
+          grid.querySelectorAll(".skill-icon-item").forEach((el) =>
+            el.classList.remove("is-active"),
+          );
+
+          if (isAlreadyActive) {
+            panel.textContent = defaultText;
+            return;
+          }
+
+          button.classList.add("is-active");
+          const tool = button.getAttribute("data-skill-tool") ?? "";
+          const detail = button.getAttribute("data-skill-detail") ?? "";
+          panel.innerHTML = `<strong>${tool}</strong>${detail}`;
+        });
+      });
+    });
+  </script>
+
+
+  {accordion.length > 0 && (
+    <div class="profil-page">
+      <p class="accordion-label">{t.experienceLabel}</p>
+      <div class="accordion">
+        {accordion.map((entry) => (
+          <details class="accordion-item">
+            <summary>{entry.question}</summary>
+            <div class="accordion-body">
+              <p>{entry.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {formation.length > 0 && (
+    <div class="profil-page profil-formation">
+      <h2 class="profil-section-title">{t.formationTitle}</h2>
+      {alternanceProject && (
+        <p class="profil-formation-project">{alternanceProject}</p>
+      )}
+      <div class="profil-schools">
+        {formation.map((school) => (
+          <div class="profil-school">
+            <span class="profil-school-name">🎓 {school.name}</span>
+            {school.schedule && <div>🕔 {school.schedule}</div>}
+            {school.links?.map((link) => (
+              <a href={link.href} target="_blank" rel="noopener">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {contact && (
+    <div class="profil-contact">
+      <div class="profil-contact-inner">
+        <div class="profil-contact-sign">{contact.name}</div>
+        <div class="profil-contact-grid">
+          {contact.items.map((item) => (
+            <div class="profil-contact-item">
+              <span class="profil-contact-icon">{item.icon}</span>
+              {item.href ? (
+                <a href={item.href}>{item.label}</a>
+              ) : (
+                <span>{item.label}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )}
+
+  <div class="content-page profil-page">
+    <Content />
+  </div>
+</BaseLayout>

@@ -26,7 +26,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "faq",
@@ -40,7 +40,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "contact",
@@ -54,7 +54,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "creative",
@@ -68,7 +68,7 @@
       },
       "enabled": false,
       "showInHeader": true,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "network",
@@ -81,8 +81,8 @@
         "en": "/en/network/"
       },
       "enabled": false,
-      "showInHeader": true,
-      "showInFooter": true
+      "showInHeader": false,
+      "showInFooter": false
     },
     {
       "id": "journal",
@@ -96,7 +96,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "resources",
@@ -110,7 +110,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "support",
@@ -124,7 +124,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "legal",
@@ -138,7 +138,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "legal-notice",
@@ -150,7 +150,7 @@
         "fr": "/fr/legal/mentions-legales/",
         "en": "/en/legal/legal-notice/"
       },
-      "enabled": false,
+      "enabled": true,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -164,7 +164,7 @@
         "fr": "/fr/legal/confidentialite/",
         "en": "/en/legal/privacy/"
       },
-      "enabled": false,
+      "enabled": true,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -180,7 +180,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "cgu",
@@ -192,7 +192,7 @@
         "fr": "/fr/legal/cgu/",
         "en": "/en/legal/terms-of-use/"
       },
-      "enabled": false,
+      "enabled": true,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -206,9 +206,9 @@
         "fr": "/fr/legal/cookies/",
         "en": "/en/legal/cookies/"
       },
-      "enabled": false,
+      "enabled": true,
       "showInHeader": false,
-      "showInFooter": false
+      "showInFooter": true
     },
     {
       "id": "network-nodes",
@@ -222,7 +222,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     }
   ]
 }

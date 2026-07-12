@@ -1,0 +1,302 @@
+@import url("../components/skill-icons.css");
+
+/* Page-specific styles for /profil-pro/. No .section/.section-alt bands —
+   content flows on the base background, separated by spacing and thin
+   accent borders instead of full-width color blocks.
+
+   The page sits on the site's colored watercolor-wash background image on
+   every page, in both themes. Text that lives directly on that background
+   (no card/panel behind it) uses --profil-on-wash / --profil-accent-on-wash
+   instead of the regular --text / --accent tokens, which assume a plain
+   light or dark surface. Text inside a bordered card (contact panel,
+   school cards, skill icons, accordion items) keeps the regular tokens,
+   since those containers have their own background providing contrast. */
+
+body[data-page="profil-pro"] {
+  --profil-on-wash: #f7f8fc;
+  --profil-accent-on-wash: var(--accent);
+}
+
+html[data-theme="light"] body[data-page="profil-pro"] {
+  --profil-accent-on-wash: #9c2f66;
+}
+
+.profil-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 1.4rem;
+}
+
+/* ---- Header: name / photo / candidature-style tag block ---- */
+
+.profil-header {
+  padding: 2.6rem 1.4rem 2.1rem;
+}
+
+.profil-header-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.4rem;
+}
+
+@media (max-width: 640px) {
+  .profil-header-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+}
+
+.profil-name h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.profil-name .prenom {
+  color: var(--profil-accent-on-wash);
+  display: block;
+}
+
+.profil-name .nom {
+  color: var(--profil-on-wash);
+  display: block;
+}
+
+.profil-photo {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  align-self: center;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border);
+}
+
+.profil-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.profil-tag {
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .profil-tag {
+    text-align: center;
+  }
+}
+
+.profil-tag .eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  color: var(--profil-accent-on-wash);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.profil-tag-detail {
+  font-size: 0.88rem;
+  color: var(--profil-on-wash);
+  line-height: 1.75;
+}
+
+.profil-cv-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--profil-accent-on-wash);
+  text-decoration: none;
+  border: 1px solid var(--profil-accent-on-wash);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+}
+
+.profil-cv-link:hover {
+  background: color-mix(in srgb, var(--profil-accent-on-wash) 14%, transparent);
+}
+
+/* ---- Pull quote ---- */
+
+.profil-quote {
+  max-width: 560px;
+  margin: 2rem auto;
+  padding: 0 1.4rem;
+  text-align: center;
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--profil-on-wash);
+  line-height: 1.65;
+}
+
+/* ---- Skills (icon grid) ---- */
+
+.profil-skills .skill-detail-panel {
+  color: var(--profil-on-wash);
+}
+
+.profil-skills .skill-detail-panel strong {
+  color: var(--profil-on-wash);
+}
+
+/* ---- Section titles: Compétences / Formation / Parcours & expériences
+   share one consistent style — size, font, color, alignment. ---- */
+
+.profil-section-title,
+.profil-page .accordion-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  color: var(--profil-accent-on-wash);
+  margin: 2.3rem 0 1rem;
+}
+
+.profil-skills {
+  margin-top: 2.4rem;
+  margin-bottom: 2.4rem;
+}
+
+/* ---- Formation (standalone section, separate from contact) ---- */
+
+.profil-formation {
+  margin-top: 2.6rem;
+  margin-bottom: 2.6rem;
+}
+
+.profil-formation-project {
+  color: var(--profil-on-wash);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.profil-page.content-page {
+  color: var(--profil-on-wash);
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+
+/* ---- Contact panel (standalone, schools moved to their own section) ---- */
+
+.profil-contact {
+  max-width: 700px;
+  margin: 2.6rem auto 0;
+  padding: 0 1.4rem;
+}
+
+.profil-contact-inner {
+  background: color-mix(in srgb, var(--bg-elevated) 32%, transparent);
+  backdrop-filter: blur(12px);
+  border-top: 2px solid var(--accent);
+  padding: 1.4rem 1.5rem;
+}
+
+.profil-contact-sign {
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.profil-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 560px) {
+  .profil-contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profil-contact-item {
+  font-size: 0.84rem;
+  color: var(--text-soft);
+  line-height: 1.6;
+  display: grid;
+  grid-template-columns: 1.8rem 1fr;
+  align-items: center;
+  column-gap: 0.35rem;
+}
+
+.profil-contact-item a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.profil-contact-item a:hover {
+  text-decoration: underline;
+}
+
+.profil-contact-icon {
+  width: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.profil-schools {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 560px) {
+  .profil-schools {
+    flex-direction: column;
+  }
+}
+
+.profil-school {
+  flex: 1 1 220px;
+  background: color-mix(in srgb, var(--bg-elevated) 45%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.84rem;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+@media (max-width: 560px) {
+  .profil-school {
+    flex-basis: auto;
+  }
+}
+
+.profil-school-name {
+  display: block;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.profil-school a {
+  display: block;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.profil-school a:hover {
+  text-decoration: underline;
+}
