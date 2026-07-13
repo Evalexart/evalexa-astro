@@ -46,14 +46,6 @@
   padding: 0;
 }
 
-.brand-logo {
-  width: clamp(52px, 6.5vw, 67px);
-  height: clamp(52px, 6.5vw, 67px);
-  object-fit: contain;
-  border-radius: 0;
-  box-shadow: none;
-}
-
 .brand-logo-full {
   width: clamp(150px, 17vw, 215px);
   height: auto;
@@ -61,6 +53,28 @@
   object-fit: contain;
   border-radius: 0;
   box-shadow: none;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.4));
+  transition: opacity 0.18s ease;
+}
+
+.brand-logo-partial {
+  display: none;
+  width: clamp(150px, 17vw, 215px);
+  height: auto;
+  max-height: 3.2rem;
+  object-fit: contain;
+  border-radius: 0;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.4));
+}
+
+.site-header.is-scrolled .brand-logo-full,
+.site-header.is-drawer-open .brand-logo-full {
+  display: none;
+}
+
+.site-header.is-scrolled .brand-logo-partial,
+.site-header.is-drawer-open .brand-logo-partial {
+  display: inline-flex;
 }
 
 .header-main-nav {
@@ -85,7 +99,8 @@
 .site-header.is-drawer-open .header-main-nav,
 .site-header.is-drawer-open .header-desktop-actions .lang-select,
 .site-header.is-drawer-open .header-desktop-actions [data-theme-toggle] {
-  display: none;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .nav-link {
@@ -164,6 +179,7 @@
 .burger-btn {
   display: inline-flex;
   margin-left: 0.25rem;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.4));
 }
 
 .burger-lines,

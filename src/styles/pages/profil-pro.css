@@ -1,4 +1,5 @@
 @import url("../components/skill-icons.css");
+@import url("../components/carousel.css");
 
 /* Page-specific styles for /profil-pro/. No .section/.section-alt bands —
    content flows on the base background, separated by spacing and thin
@@ -168,6 +169,14 @@ html[data-theme="light"] body[data-page="profil-pro"] {
 .profil-skills {
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
+}
+
+/* ---- Carousel section ---- */
+
+.profil-carousel {
+  max-width: 700px;
+  margin: 2.6rem auto;
+  padding: 0 1.4rem;
 }
 
 /* ---- Formation (standalone section, separate from contact) ---- */

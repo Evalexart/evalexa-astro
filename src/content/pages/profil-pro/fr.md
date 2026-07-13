@@ -9,7 +9,7 @@ intro: "Développeuse autodidacte en formation BTS SIO SLAM (alternance), à la 
 quote: "« Ce qui m'intéresse le plus, c'est transformer un besoin concret en solution utilisable. »"
 cvHref: "/assets/cv.pdf"
 
-photo: "/assets/photo.webp"
+photo: "./photo.webp"
 
 skills:
   - tool: "Python"
@@ -89,6 +89,20 @@ contact:
       label: "Permis B — véhicule personnel"
     - icon: "💻"
       label: "Distanciel possible"
+
+carouselSize: "large"
+carouselOrientation: "portrait"
+carousel:
+  - title: "SNCF"
+    image: "../../../assets/images/logo/logo-full-watercolor.webp"
+    description: "Candidature SNCF"
+  - title: "Page de candidature — DYB"
+    description: "Scène animée en SVG, header à trois colonnes. À remplacer par une vraie capture."
+  - title: "Bot Discord"
+    description: "Gestion de commandes et modération. À illustrer avec une capture d'un embed."
+  - title: "Aquarelles"
+    description: "Sélection de peintures, ou lien vers Instagram."
+    href: "https://www.instagram.com/"
 ---
 
 Cette page est destinée à être partagée directement (CV, candidatures).

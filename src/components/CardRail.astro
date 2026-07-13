@@ -1,4 +1,6 @@
 ---
+import MarkdownText from "./MarkdownText.astro";
+
 const {
   title,
   description,
@@ -10,8 +12,8 @@ const {
 
 <section class="card-rail-section" data-card-rail-section>
   <div class="card-rail-heading">
-    <h2>{title}</h2>
-    {description && <p>{description}</p>}
+    <h2><MarkdownText tag="span" value={title} inline /></h2>
+    {description && <MarkdownText value={description} />}
   </div>
 
   <div class="card-rail-frame">
@@ -29,13 +31,13 @@ const {
         cards.map((card) => (
           <a class="card-rail-card" href={card.href}>
             {card.kicker && (
-              <span class="card-rail-kicker">{card.kicker}</span>
+              <span class="card-rail-kicker"><MarkdownText tag="span" value={card.kicker} inline /></span>
             )}
 
-            <strong class="card-rail-title">{card.title}</strong>
+            <strong class="card-rail-title"><MarkdownText tag="span" value={card.title} inline /></strong>
 
             {card.description && (
-              <span class="card-rail-description">{card.description}</span>
+              <MarkdownText tag="span" class="card-rail-description" value={card.description} />
             )}
           </a>
         ))

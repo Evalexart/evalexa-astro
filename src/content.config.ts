@@ -38,7 +38,7 @@ const profilPro = defineCollection({
     pattern: "**/*.{md,mdx}",
     base: "./src/content/pages/profil-pro",
   }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     eyebrow: z.string().optional(),
@@ -49,7 +49,7 @@ const profilPro = defineCollection({
     quote: z.string().optional(),
     cvHref: z.string().optional(),
 
-    photo: z.string().optional(),
+    photo: image().optional(),
 
     skills: z
       .array(
@@ -96,6 +96,27 @@ const profilPro = defineCollection({
         ),
       })
       .optional(),
+
+    carousel: z
+      .array(
+        z
+          .object({
+            image: image().optional(),
+            title: z.string().optional(),
+            description: z.string().optional(),
+            href: z.string().optional(),
+          })
+          .refine(
+            (card) => card.image || card.title || card.description,
+            {
+              message:
+                "A carousel card needs at least one of: image, title, description.",
+            },
+          ),
+      )
+      .optional(),
+    carouselSize: z.enum(["small", "medium", "large"]).optional(),
+    carouselOrientation: z.enum(["portrait", "square", "landscape"]).optional(),
   }),
 });
 

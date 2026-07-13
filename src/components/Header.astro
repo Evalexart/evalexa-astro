@@ -2,6 +2,7 @@
 import navigation from "../data/navigation.json";
 import ui from "../data/ui.json";
 import logoFullWhiteUrl from "../assets/images/logo/logo-full-white.svg?url";
+import logoPartialWhiteUrl from "../assets/images/logo/logo-partiel-white-bande.svg?url";
 
 const {
   lang = "fr",
@@ -33,9 +34,15 @@ const menuClose = t.menuClose ?? (isFr ? "Fermer le menu" : "Close menu");
       aria-label={t.brandAria}
     >
       <img
-        class="brand-logo brand-logo-full"
+        class="brand-logo-full"
         src={logoFullWhiteUrl}
         alt="Evalexa"
+      />
+      <img
+        class="brand-logo-partial"
+        src={logoPartialWhiteUrl}
+        alt="Evalexa"
+        aria-hidden="true"
       />
     </a>
 

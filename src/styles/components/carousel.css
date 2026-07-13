@@ -1,0 +1,226 @@
+/* Carousel component: infinite loop, centered active card, arrows +
+   keyboard + touch/drag. Reusable across any page/collection.
+
+   Widths use clamp() so a card never exceeds the viewport on small
+   screens — a fixed px width was clipping the right edge on mobile. */
+
+.carousel {
+  /* portrait (default) */
+  --carousel-card-width: clamp(200px, 62vw, 280px);
+  --carousel-card-gap: 1.25rem;
+  --carousel-card-ratio: 3 / 4;
+
+  /* The middle column keeps exactly the parent content width. The two
+     control columns are added outside it, so arrows never steal space from
+     the cards and never overlap them. */
+  --carousel-control-space: 3.15rem;
+  --carousel-arrow-size: 2.4rem;
+
+  display: grid;
+  grid-template-columns:
+    var(--carousel-control-space)
+    minmax(0, 1fr)
+    var(--carousel-control-space);
+  align-items: center;
+  width: calc(100% + 6.3rem);
+  margin-inline: -3.15rem;
+}
+
+.carousel-viewport {
+  grid-column: 2;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  outline: none;
+}
+
+.carousel[data-carousel-size="small"] {
+  --carousel-card-width: clamp(130px, 42vw, 170px);
+}
+
+.carousel[data-carousel-size="large"] {
+  --carousel-card-width: clamp(260px, 78vw, 400px);
+}
+
+.carousel[data-carousel-orientation="square"] {
+  --carousel-card-width: clamp(210px, 65vw, 300px);
+  --carousel-card-ratio: 1 / 1;
+}
+
+.carousel[data-carousel-orientation="square"][data-carousel-size="small"] {
+  --carousel-card-width: clamp(140px, 44vw, 190px);
+}
+
+.carousel[data-carousel-orientation="square"][data-carousel-size="large"] {
+  --carousel-card-width: clamp(280px, 80vw, 420px);
+}
+
+.carousel[data-carousel-orientation="landscape"] {
+  --carousel-card-width: clamp(260px, 76vw, 380px);
+  --carousel-card-ratio: 4 / 3;
+}
+
+.carousel[data-carousel-orientation="landscape"][data-carousel-size="small"] {
+  --carousel-card-width: clamp(170px, 56vw, 230px);
+}
+
+.carousel[data-carousel-orientation="landscape"][data-carousel-size="large"] {
+  --carousel-card-width: clamp(320px, 88vw, 500px);
+}
+
+.carousel-viewport:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: var(--carousel-card-gap);
+  touch-action: pan-y;
+  cursor: grab;
+  will-change: transform;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
+}
+
+.carousel-card {
+  flex: 0 0 var(--carousel-card-width);
+  width: var(--carousel-card-width);
+  aspect-ratio: var(--carousel-card-ratio);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background: color-mix(in srgb, var(--bg-elevated) 45%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  opacity: 0.45;
+  transform: scale(0.92);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  user-select: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+.carousel-card.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* The track is teleported from a cloned edge slide to its matching real
+   slide after the movement finishes. Disabling the card transitions during
+   that single paint prevents the active scale/opacity state from flashing. */
+.carousel.is-resetting .carousel-card {
+  transition: none;
+}
+
+.carousel-card-image {
+  flex: 1;
+  min-height: 0;
+  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
+  overflow: hidden;
+}
+
+.carousel-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
+
+.carousel-card-body {
+  padding: 0.9rem 1.1rem 1.05rem;
+  flex-shrink: 0;
+}
+
+.carousel-card:has(.carousel-card-image) .carousel-card-body {
+  border-top: 1px solid var(--border);
+}
+
+.carousel-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.3rem;
+}
+
+.carousel-card-description {
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+.carousel-arrow {
+  width: var(--carousel-arrow-size);
+  height: 100%;
+  min-height: 6rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 200;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  opacity: 0.82;
+  transition: opacity 160ms ease, transform 160ms ease, color 160ms ease;
+}
+
+.carousel-arrow-prev {
+  grid-column: 1;
+  justify-self: center;
+}
+
+.carousel-arrow-next {
+  grid-column: 3;
+  justify-self: center;
+}
+
+.carousel-arrow:hover,
+.carousel-arrow:focus-visible {
+  opacity: 1;
+  color: var(--accent);
+  transform: scale(1.04);
+}
+
+.carousel-arrow:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .carousel {
+    /* .profil-carousel and the other page boxes use 1.4rem side padding.
+       Reusing that gutter for each control keeps the viewport exactly as wide
+       as the other content boxes while leaving the arrows outside it. */
+    --carousel-control-space: 1.4rem;
+    --carousel-arrow-size: 1.1rem;
+    width: calc(100% + 2.8rem);
+    margin-inline: -1.4rem;
+  }
+
+  .carousel-arrow {
+    min-height: 4.5rem;
+    font-size: 2.35rem;
+  }
+
+  /* No fixed minimum may force a card beyond the viewport on narrow phones. */
+  .carousel[data-carousel-size="large"] {
+    --carousel-card-width: min(78vw, 400px);
+  }
+
+  .carousel[data-carousel-orientation="landscape"]:not([data-carousel-size="small"]) {
+    --carousel-card-width: min(76vw, 380px);
+  }
+
+  .carousel[data-carousel-orientation="landscape"][data-carousel-size="large"] {
+    --carousel-card-width: min(88vw, 500px);
+  }
+}

@@ -1,6 +1,7 @@
 ---
 import { getEntry, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import MarkdownText from "./MarkdownText.astro";
 
 const {
   lang = "fr",
@@ -33,15 +34,15 @@ const { Content } = await render(page);
     <div class="container hero-inner narrow">
       <section class="section">
         <div class="container narrow center">
-          {page.data.eyebrow && <p class="eyebrow">{page.data.eyebrow}</p>}
+          {page.data.eyebrow && <MarkdownText tag="p" class="eyebrow" value={page.data.eyebrow} inline />}
 
           {page.data.heading && (
             <h1 class="hero-wordmark interactive-wordmark">
-              {page.data.heading}
+              <MarkdownText tag="span" value={page.data.heading} inline />
             </h1>
           )}
 
-          {page.data.intro && <p class="hero-text">{page.data.intro}</p>}
+          {page.data.intro && <MarkdownText class="hero-text" value={page.data.intro} />}
         </div>
       </section>
     </div>

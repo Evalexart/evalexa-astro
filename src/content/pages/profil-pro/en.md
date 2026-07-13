@@ -9,7 +9,7 @@ intro: "Self-taught developer training for a BTS SIO SLAM degree (apprenticeship
 quote: "« What interests me most is turning a real need into a usable solution. »"
 cvHref: "/assets/cv.pdf"
 
-photo: "/assets/photo.webp"
+photo: "./photo.webp"
 
 skills:
   - tool: "Python"
@@ -89,6 +89,17 @@ contact:
       label: "Driving licence — personal vehicle"
     - icon: "💻"
       label: "Remote possible"
+
+carouselSize: "medium"
+carousel:
+  - title: "Application page — SNCF"
+    description: "CSS animation, custom layout. Placeholder — swap for a real screenshot."
+  - title: "Application page — DYB"
+    description: "Animated SVG scene, three-column header. Placeholder — swap for a real screenshot."
+  - title: "Discord bot"
+    description: "Command handling and moderation. Placeholder — illustrate with an embed screenshot."
+  - title: "Watercolor paintings"
+    description: "A small selection, or a link to Instagram."
 ---
 
 This page is meant to be shared directly (CV, applications).
