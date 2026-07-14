@@ -216,13 +216,15 @@ const skillColumns = skillRows > 0 ? Math.ceil(skills.length / skillRows) : 1;
       <div class="profil-schools">
         {formation.map((school) => (
           <div class="profil-school">
-            <span class="profil-school-name">🎓 <MarkdownText tag="span" value={school.name} inline /></span>
-            {school.schedule && <div>🕔 <MarkdownText tag="span" value={school.schedule} inline /></div>}
-            {school.links?.map((link) => (
-              <a href={link.href} target="_blank" rel="noopener">
-                <MarkdownText tag="span" value={link.label} inline />
-              </a>
-            ))}
+            <div class="profil-school-inner">
+              <span class="profil-school-name">🎓 <MarkdownText tag="span" value={school.name} inline /></span>
+              {school.schedule && <div>🕔 <MarkdownText tag="span" value={school.schedule} inline /></div>}
+              {school.links?.map((link) => (
+                <a href={link.href} target="_blank" rel="noopener">
+                  <MarkdownText tag="span" value={link.label} inline />
+                </a>
+              ))}
+            </div>
           </div>
         ))}
       </div>

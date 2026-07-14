@@ -1,11 +1,11 @@
 ---
 title: "Anaïs Mattle — Profil professionnel"
 description: "Profil professionnel d'Anaïs Mattle — développeuse autodidacte en formation BTS SIO SLAM, recherche d'alternance."
-eyebrow: "Profil professionnel"
+eyebrow: "Recherche Alternance BTS SIO"
 heading: "Anaïs Mattle"
 firstName: "ANAÏS"
 lastName: "MATTLE"
-intro: "Développeuse autodidacte en formation BTS SIO SLAM (alternance), à la recherche d'une entreprise d'accueil dans l'Audomarois et ses environs."
+intro: "Test fonctionnel - QA - Developpement - Support N2"
 quote: "« Ce qui m'intéresse le plus, c'est transformer un besoin concret en solution utilisable. »"
 cvHref: "/assets/cv.pdf"
 
@@ -49,7 +49,8 @@ skills:
     icon: "tailscale"
     detail: "Mise en place d'un réseau privé maillé entre mes machines et VM cloud."
 
-alternanceProject: "Je recherche une alternance en développement (BTS SIO SLAM) pour la rentrée de septembre 2026, sur un rythme compatible avec l'une des deux écoles ci-dessous — idéalement dans l'Audomarois ou ses environs, Lille restant possible à raison d'1 à 2 jours par semaine."
+alternanceProject: |
+  Je recherche une alternance en développement (BTS SIO SLAM) pour la rentrée de septembre 2026, sur un rythme compatible avec l'une des deux écoles ci-dessous — idéalement dans l'Audomarois ou ses environs, Lille restant possible à raison d'1 à 2 jours par semaine."
 
 formation:
   - name: "My Digital School — Lille"
