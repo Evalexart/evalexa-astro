@@ -1,56 +1,37 @@
 ---
-title: "Evalexa — Terms of sale"
-description: "Terms of sale for the Evalexa project."
-eyebrow: "Legal documents"
-heading: "Terms of sale"
-intro: "At this stage, Evalexa does not sell any products or services."
----
+title: Evalexa — Terms of sale
+description: Terms of sale for the Evalexa project.
+eyebrow: Legal documents
+heading: Terms of sale
+intro: At this stage, Evalexa does not sell any products or services.
+legalSections:
+- title: 1. Current situation
+  content: 'The **evalexa.fr** website and its subdomains do not
 
-<section class="section">
-<div class="container legal-layout">
-
-<article class="legal-block flow">
-  <h2>1. Current situation</h2>
-  <p>
-    The <strong>evalexa.fr</strong> website and its subdomains do not
     currently offer any products or services for sale.
-  </p>
-  <p>
-    No commercial transaction is currently carried out through these pages.
-  </p>
-</article>
 
-<article class="legal-block flow">
-  <h2>2. Voluntary contributions</h2>
-  <p>
-    Some sections of the project may allow users to support Evalexa through
+
+    No commercial transaction is currently carried out through these pages.'
+- title: 2. Voluntary contributions
+  content: 'Some sections of the project may allow users to support Evalexa through
+
     voluntary financial contributions, including donations or zaps.
-  </p>
-  <p>
+
+
     These contributions are purely voluntary, optional, and made without any
+
     consideration in return.
-  </p>
-  <p>
+
+
     They do not constitute the purchase of a product, service, access,
-    benefit, performance, or specific right.
-  </p>
-</article>
 
-<article class="legal-block flow">
-  <h2>3. Future changes to the Terms of Sale</h2>
-  <p>
-    These Terms of Sale may be modified at any time. The applicable version
-    is the one published on this page at the time of consultation.
-  </p>
-</article>
+    benefit, performance, or specific right.'
+- title: 3. Future changes to the Terms of Sale
+  content: 'These Terms of Sale may be modified at any time. The applicable version
 
-<article class="legal-block flow">
-  <h2>4. Contact</h2>
-  <p>
-    For any question:
-    <a href="mailto:contact@evalexa.fr">contact@evalexa.fr</a>
-  </p>
-</article>
+    is the one published on this page at the time of consultation.'
+- title: 4. Contact
+  content: 'For any question:
 
-</div>
-</section>
+    [contact@evalexa.fr](mailto:contact@evalexa.fr)'
+---

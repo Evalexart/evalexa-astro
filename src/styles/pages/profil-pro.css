@@ -1,5 +1,4 @@
 @import url("../components/skill-icons.css");
-@import url("../components/carousel.css");
 
 /* Page-specific styles for /profil-pro/. No .section/.section-alt bands —
    content flows on the base background, separated by spacing and thin
@@ -23,19 +22,19 @@ html[data-theme="light"] body[data-page="profil-pro"] {
 }
 
 .profil-page {
-  max-width: 700px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 0 1.4rem;
+  padding: 0 2rem;
 }
 
 /* ---- Header: name / photo / candidature-style tag block ---- */
 
 .profil-header {
-  padding: 2.6rem 1.4rem 2.1rem;
+  padding: 2.6rem 2rem 2.1rem;
 }
 
 .profil-header-inner {
-  max-width: 700px;
+  max-width: 920px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -50,6 +49,10 @@ html[data-theme="light"] body[data-page="profil-pro"] {
     text-align: center;
     gap: 1rem;
   }
+}
+
+.profil-name {
+  flex: 1;
 }
 
 .profil-name h1 {
@@ -71,6 +74,7 @@ html[data-theme="light"] body[data-page="profil-pro"] {
 }
 
 .profil-photo {
+  flex: 0 0 90px;
   width: 90px;
   height: 90px;
   flex-shrink: 0;
@@ -88,6 +92,7 @@ html[data-theme="light"] body[data-page="profil-pro"] {
 }
 
 .profil-tag {
+  flex: 1;
   text-align: right;
 }
 
@@ -131,7 +136,7 @@ html[data-theme="light"] body[data-page="profil-pro"] {
 /* ---- Pull quote ---- */
 
 .profil-quote {
-  max-width: 560px;
+  max-width: 760px;
   margin: 2rem auto;
   padding: 0 1.4rem;
   text-align: center;
@@ -174,9 +179,9 @@ html[data-theme="light"] body[data-page="profil-pro"] {
 /* ---- Carousel section ---- */
 
 .profil-carousel {
-  max-width: 700px;
+  max-width: 920px;
   margin: 2.6rem auto;
-  padding: 0 1.4rem;
+  padding: 0 2rem;
 }
 
 /* ---- Formation (standalone section, separate from contact) ---- */
@@ -201,9 +206,9 @@ html[data-theme="light"] body[data-page="profil-pro"] {
 /* ---- Contact panel (standalone, schools moved to their own section) ---- */
 
 .profil-contact {
-  max-width: 700px;
+  max-width: 920px;
   margin: 2.6rem auto 0;
-  padding: 0 1.4rem;
+  padding: 0 2rem;
 }
 
 .profil-contact-inner {
@@ -308,4 +313,16 @@ html[data-theme="light"] body[data-page="profil-pro"] {
 
 .profil-school a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 720px) {
+  .profil-page,
+  .profil-carousel,
+  .profil-contact {
+    padding-inline: 1rem;
+  }
+
+  .profil-header {
+    padding-inline: 1rem;
+  }
 }

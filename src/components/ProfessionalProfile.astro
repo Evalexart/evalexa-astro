@@ -41,7 +41,10 @@ const {
   carouselOrientation,
 } = page.data;
 const t = ui[lang].profilePro;
+const carouselLabels = ui[lang].carousel;
 const skillDetails = await Promise.all(skills.map(async (skill) => ({ ...skill, detailHtml: await renderMarkdown(skill.detail), toolHtml: await renderInlineMarkdown(skill.tool) })));
+const skillRows = Math.ceil(skills.length / 6);
+const skillColumns = skillRows > 0 ? Math.ceil(skills.length / skillRows) : 1;
 ---
 
 <BaseLayout
@@ -90,7 +93,11 @@ const skillDetails = await Promise.all(skills.map(async (skill) => ({ ...skill, 
   {skills.length > 0 && (
     <div class="profil-page profil-skills">
       <h2 class="profil-section-title">{t.skillsTitle}</h2>
-      <div class="skill-icons" data-skill-grid>
+      <div
+        class="skill-icons"
+        data-skill-grid
+        style={`--skill-columns: ${skillColumns};`}
+      >
         {skillDetails.map((skill) => {
           const icon = toolIcons[skill.icon];
           return (
@@ -190,7 +197,13 @@ const skillDetails = await Promise.all(skills.map(async (skill) => ({ ...skill, 
   {carousel.length > 0 && (
     <div class="profil-carousel">
       <h2 class="profil-section-title">{t.carouselTitle}</h2>
-      <Carousel items={carousel} size={carouselSize} orientation={carouselOrientation} />
+      <Carousel
+        items={carousel}
+        size={carouselSize}
+        orientation={carouselOrientation}
+        prevLabel={carouselLabels.previous}
+        nextLabel={carouselLabels.next}
+      />
     </div>
   )}
 

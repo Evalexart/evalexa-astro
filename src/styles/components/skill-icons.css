@@ -3,10 +3,18 @@
    icons never resize or expand individually. */
 
 .skill-icons {
-  display: flex;
-  flex-wrap: wrap;
+  --skill-columns: 6;
+
+  display: grid;
+  grid-template-columns: repeat(var(--skill-columns), 88px);
   gap: 0.7rem;
   justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .skill-icons {
+    grid-template-columns: repeat(3, 88px);
+  }
 }
 
 .skill-icon-item {
@@ -55,7 +63,7 @@
 /* Shared detail panel below the grid */
 
 .skill-detail-panel {
-  max-width: 480px;
+  max-width: 760px;
   min-height: 6.5rem;
   margin: 1.3rem auto 0;
   color: var(--text);

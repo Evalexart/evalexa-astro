@@ -1,12 +1,38 @@
 ---
-import ContentPage from "../../../components/ContentPage.astro";
+import { getEntry } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import MarkdownText from "../../../components/MarkdownText.astro";
+
+const page = await getEntry("pages", "legal/index/en");
+if (!page) throw new Error("Content page not found: legal/index/en");
+const documents = page.data.documents ?? [];
 ---
 
-<ContentPage
+<BaseLayout
   lang="en"
   area="legal"
   pageId="index"
-  contentId="legal/index/en"
+  title={page.data.title}
+  description={page.data.description}
   frHref="/fr/legal/"
   enHref="/en/legal/"
-/>
+>
+  <section class="hero hero-compact">
+    <div class="container hero-inner narrow center">
+      {page.data.eyebrow && <MarkdownText tag="p" class="eyebrow" value={page.data.eyebrow} inline />}
+      {page.data.heading && <h1 class="hero-wordmark"><MarkdownText tag="span" value={page.data.heading} inline /></h1>}
+      {page.data.intro && <MarkdownText class="hero-text" value={page.data.intro} />}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="legal-hub-container cards">
+      {documents.map((document) => (
+        <a class="card flow" href={document.href}>
+          <h2>{document.title}</h2>
+          {document.description && <p>{document.description}</p>}
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

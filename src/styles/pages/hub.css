@@ -49,3 +49,18 @@
 body[data-area="hub"] .social-section {
   padding-top: 0;
 }
+
+.creative-carousel-section {
+  margin-block: 2.75rem;
+}
+
+.creative-carousel-section > h2,
+.creative-carousel-section > p {
+  text-align: center;
+}
+
+.creative-carousel-section > p {
+  max-width: 680px;
+  margin: 0.6rem auto 1.4rem;
+  color: var(--text-soft);
+}

@@ -2,9 +2,11 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import MarkdownText from "./MarkdownText.astro";
+import "../styles/components/carousel.css";
 
 interface CarouselCard {
   image?: ImageMetadata;
+  kicker?: string;
   title?: string;
   description?: string;
   href?: string;
@@ -25,58 +27,45 @@ const {
   prevLabel = "Previous",
   nextLabel = "Next",
 } = Astro.props;
-
-const count = items.length;
-// Slides: [clone of last, ...real items, clone of first] — enables the
-// seamless infinite-loop illusion (see script below).
-const slides = count > 1 ? [items[count - 1], ...items, items[0]] : items;
 ---
 
-{count > 0 && (
+{items.length > 0 && (
   <div
     class="carousel"
     data-carousel
     data-carousel-size={size}
     data-carousel-orientation={orientation}
-    data-carousel-count={count}
+    data-carousel-count={items.length}
   >
-    {count > 1 && (
-      <button
-        type="button"
-        class="carousel-arrow carousel-arrow-prev"
-        data-carousel-prev
-        aria-label={prevLabel}
-      >
-        ‹
-      </button>
+    {items.length > 1 && (
+      <button type="button" class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label={prevLabel}>‹</button>
     )}
 
     <div class="carousel-viewport" tabindex="0" role="region" aria-roledescription="carousel">
       <div class="carousel-track" data-carousel-track>
-        {slides.map((card, i) => {
+        {items.map((card, i) => {
           const Tag = card.href ? "a" : "div";
           const isExternal = card.href?.startsWith("http://") || card.href?.startsWith("https://");
           return (
             <Tag
               class="carousel-card"
               data-carousel-card
+              data-carousel-real-index={i}
               href={card.href}
               target={isExternal ? "_blank" : undefined}
               rel={isExternal ? "noopener noreferrer" : undefined}
               draggable="false"
-              aria-hidden={count > 1 && (i === 0 || i === slides.length - 1) ? "true" : undefined}
             >
               {card.image && (
                 <div class="carousel-card-image">
                   <Image src={card.image} alt={card.title ?? ""} width={640} />
                 </div>
               )}
-              {(card.title || card.description) && (
+              {(card.kicker || card.title || card.description) && (
                 <div class="carousel-card-body">
+                  {card.kicker && <p class="carousel-card-kicker"><MarkdownText tag="span" value={card.kicker} inline /></p>}
                   {card.title && <h3 class="carousel-card-title"><MarkdownText tag="span" value={card.title} inline /></h3>}
-                  {card.description && (
-                    <MarkdownText class="carousel-card-description" value={card.description} />
-                  )}
+                  {card.description && <MarkdownText class="carousel-card-description" value={card.description} />}
                 </div>
               )}
             </Tag>
@@ -85,15 +74,8 @@ const slides = count > 1 ? [items[count - 1], ...items, items[0]] : items;
       </div>
     </div>
 
-    {count > 1 && (
-      <button
-        type="button"
-        class="carousel-arrow carousel-arrow-next"
-        data-carousel-next
-        aria-label={nextLabel}
-      >
-        ›
-      </button>
+    {items.length > 1 && (
+      <button type="button" class="carousel-arrow carousel-arrow-next" data-carousel-next aria-label={nextLabel}>›</button>
     )}
   </div>
 )}
@@ -104,189 +86,188 @@ const slides = count > 1 ? [items[count - 1], ...items, items[0]] : items;
     const viewport = root.querySelector<HTMLElement>(".carousel-viewport");
     const prevBtn = root.querySelector<HTMLElement>("[data-carousel-prev]");
     const nextBtn = root.querySelector<HTMLElement>("[data-carousel-next]");
-    const cards = Array.from(root.querySelectorAll<HTMLElement>("[data-carousel-card]"));
-    const realCount = Number(root.dataset.carouselCount ?? cards.length);
+    const realCount = Number(root.dataset.carouselCount ?? 0);
 
-    if (!track || !viewport || cards.length === 0) return;
+    if (!track || !viewport || realCount === 0) return;
 
-    // Single real card, nothing to loop — leave it centered and static.
-    if (realCount <= 1) return;
+    const sourceCards = Array.from(track.querySelectorAll<HTMLElement>("[data-carousel-card]"));
+    if (realCount <= 1) {
+      sourceCards[0]?.classList.add("is-active");
+      return;
+    }
 
-    let current = 1; // index 0 is the clone-of-last, real items start at 1
+    let cards: HTMLElement[] = [];
+    let cloneCount = 0;
+    let current = 0;
+    let activeRealIndex = 0;
     let isAnimating = false;
+    let animationTimer: ReturnType<typeof setTimeout>;
+    let resizeTimer: ReturnType<typeof setTimeout>;
 
-    function cardStep() {
+    const focusableSelector = "a, button, input, select, textarea, [tabindex]";
+
+    function makeClone(sourceIndex: number) {
+      const clone = sourceCards[sourceIndex].cloneNode(true) as HTMLElement;
+      clone.removeAttribute("data-carousel-real-index");
+      clone.dataset.carouselClone = "true";
+      clone.setAttribute("aria-hidden", "true");
+      if (clone.matches(focusableSelector)) clone.setAttribute("tabindex", "-1");
+      clone.querySelectorAll<HTMLElement>(focusableSelector).forEach((el) => el.setAttribute("tabindex", "-1"));
+      return clone;
+    }
+
+    function getGap() {
       const style = getComputedStyle(track!);
-      const gap = parseFloat(style.columnGap || style.gap || "0");
+      return parseFloat(style.columnGap || style.gap || "0");
+    }
 
-      // offsetWidth is the layout width before scale(), unlike
-      // getBoundingClientRect(), whose value changes with the active card.
-      return cards[0].offsetWidth + gap;
+    function getStep() {
+      return cards[0].offsetWidth + getGap();
+    }
+
+    function requiredCloneCount() {
+      const cardWidth = sourceCards[0].offsetWidth || 1;
+      const step = cardWidth + getGap();
+      return Math.max(realCount, Math.ceil(viewport!.clientWidth / step) + 2);
+    }
+
+    function refreshCards() {
+      cards = Array.from(track!.querySelectorAll<HTMLElement>("[data-carousel-card]"));
     }
 
     function moveTo(index: number, animate: boolean) {
-      const step = cardStep();
-      const viewportWidth = viewport!.clientWidth;
+      const step = getStep();
       const cardWidth = cards[index].offsetWidth;
-      const offset = index * step;
-      const translateX = viewportWidth / 2 - cardWidth / 2 - offset;
-
-      track!.style.transition = animate
-        ? "transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1)"
-        : "none";
+      const translateX = viewport!.clientWidth / 2 - cardWidth / 2 - index * step;
+      track!.style.transition = animate ? "transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1)" : "none";
       track!.style.transform = `translateX(${translateX}px)`;
-
-      cards.forEach((c, i) => c.classList.toggle("is-active", i === index));
+      cards.forEach((card, i) => card.classList.toggle("is-active", i === index));
     }
 
-    function resetTo(index: number) {
-      root.classList.add("is-resetting");
-      current = index;
-      moveTo(current, false);
+    function buildLoop(realIndex = activeRealIndex) {
+      cloneCount = requiredCloneCount();
+      sourceCards.forEach((card) => card.remove());
+      track!.replaceChildren();
 
-      // Keep card transitions disabled long enough for the browser to paint
-      // the clone-to-real-slide reset, then restore them before interaction.
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          root.classList.remove("is-resetting");
-        });
+      const fragment = document.createDocumentFragment();
+      for (let i = cloneCount; i > 0; i--) {
+        const sourceIndex = ((realCount - (i % realCount)) % realCount);
+        fragment.append(makeClone(sourceIndex));
+      }
+      sourceCards.forEach((card, index) => {
+        card.dataset.carouselRealIndex = String(index);
+        card.removeAttribute("aria-hidden");
+        card.removeAttribute("tabindex");
+        fragment.append(card);
       });
-    }
+      for (let i = 0; i < cloneCount; i++) fragment.append(makeClone(i % realCount));
 
-    let animationTimer: ReturnType<typeof setTimeout>;
+      track!.append(fragment);
+      refreshCards();
+      activeRealIndex = ((realIndex % realCount) + realCount) % realCount;
+      current = cloneCount + activeRealIndex;
+      moveTo(current, false);
+    }
 
     function clearAnimationLock() {
       isAnimating = false;
       clearTimeout(animationTimer);
     }
 
+    function resetTo(index: number) {
+      root.classList.add("is-resetting");
+      current = index;
+      moveTo(current, false);
+      requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove("is-resetting")));
+    }
+
     function goTo(index: number) {
       if (isAnimating) return;
       isAnimating = true;
       current = index;
+      activeRealIndex = ((current - cloneCount) % realCount + realCount) % realCount;
       moveTo(current, true);
-      // Safety net: if transitionend never fires (e.g. the target position
-      // turns out identical, so no property actually changes value), don't
-      // leave the carousel permanently locked.
       clearTimeout(animationTimer);
       animationTimer = setTimeout(clearAnimationLock, 450);
     }
 
-    function next() {
-      goTo(current + 1);
-    }
+    const next = () => goTo(current + 1);
+    const prev = () => goTo(current - 1);
 
-    function prev() {
-      goTo(current - 1);
-    }
+    buildLoop(0);
 
-    track.addEventListener("transitionend", (e) => {
-      // Cards each transition their own opacity/transform (active state)
-      // and those events bubble up here too — react only to the track's
-      // own transform finishing, not a child card's.
-      if (e.target !== track || e.propertyName !== "transform") return;
-
+    track.addEventListener("transitionend", (event) => {
+      if (event.target !== track || event.propertyName !== "transform") return;
       clearAnimationLock();
-      // Landed on a clone — snap invisibly to the matching real slide.
-      if (current === realCount + 1) {
-        resetTo(1);
-      } else if (current === 0) {
-        resetTo(realCount);
-      }
+      if (current >= cloneCount + realCount) resetTo(current - realCount);
+      else if (current < cloneCount) resetTo(current + realCount);
     });
 
     prevBtn?.addEventListener("click", prev);
     nextBtn?.addEventListener("click", next);
-
-    viewport.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        prev();
-      } else if (e.key === "ArrowRight") {
-        e.preventDefault();
-        next();
-      }
+    viewport.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") { event.preventDefault(); prev(); }
+      if (event.key === "ArrowRight") { event.preventDefault(); next(); }
     });
 
-    // Touch / pointer drag
     let dragging = false;
     let dragMoved = false;
     let startX = 0;
     let baseTranslate = 0;
 
     function currentTranslateX() {
-      const matrix = new DOMMatrixReadOnly(getComputedStyle(track!).transform);
-      return matrix.m41;
+      return new DOMMatrixReadOnly(getComputedStyle(track!).transform).m41;
     }
 
-    viewport.addEventListener("pointerdown", (e) => {
+    viewport.addEventListener("pointerdown", (event) => {
       if (isAnimating) return;
-
-      // Always reset the click/drag state, including when the pointer starts
-      // on a linked card. Pointer capture is delayed until a real horizontal
-      // drag is detected, so an ordinary click keeps its native navigation.
       dragging = true;
       dragMoved = false;
-      startX = e.clientX;
+      startX = event.clientX;
       baseTranslate = currentTranslateX();
     });
 
-    viewport.addEventListener("pointermove", (e) => {
+    viewport.addEventListener("pointermove", (event) => {
       if (!dragging) return;
-      const delta = e.clientX - startX;
-
+      const delta = event.clientX - startX;
       if (!dragMoved && Math.abs(delta) > 6) {
         dragMoved = true;
         track!.style.transition = "none";
-        viewport.setPointerCapture(e.pointerId);
+        viewport.setPointerCapture(event.pointerId);
       }
-
-      if (dragMoved) {
-        track!.style.transform = `translateX(${baseTranslate + delta}px)`;
-      }
+      if (dragMoved) track!.style.transform = `translateX(${baseTranslate + delta}px)`;
     });
 
-    function endDrag(e: PointerEvent) {
+    function endDrag(event: PointerEvent) {
       if (!dragging) return;
       dragging = false;
-
       if (!dragMoved) return;
-
-      const delta = e.clientX - startX;
+      const delta = event.clientX - startX;
       const threshold = cards[current].offsetWidth * 0.18;
-
-      if (delta > threshold) {
-        prev();
-      } else if (delta < -threshold) {
-        next();
-      } else {
+      if (delta > threshold) prev();
+      else if (delta < -threshold) next();
+      else {
+        isAnimating = true;
         moveTo(current, true);
+        clearTimeout(animationTimer);
+        animationTimer = setTimeout(clearAnimationLock, 450);
       }
     }
 
     viewport.addEventListener("pointerup", endDrag);
     viewport.addEventListener("pointercancel", endDrag);
 
-    // A card wrapped in <a> shouldn't navigate if the pointer actually
-    // dragged the track — only treat it as a real click otherwise.
-    cards.forEach((card) => {
-      if (card.tagName !== "A") return;
-      card.addEventListener("click", (e) => {
-        if (dragMoved) {
-          e.preventDefault();
-          dragMoved = false;
-        }
-      });
+    track.addEventListener("click", (event) => {
+      if (!dragMoved) return;
+      const link = (event.target as HTMLElement).closest("a");
+      if (link) event.preventDefault();
+      dragMoved = false;
     });
 
-    let resizeTimer: ReturnType<typeof setTimeout>;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => moveTo(current, false), 100);
+      resizeTimer = setTimeout(() => buildLoop(activeRealIndex), 120);
     });
-
-    // Initial position (no animation on load).
-    moveTo(current, false);
   }
 
   document.querySelectorAll<HTMLElement>("[data-carousel]").forEach(initCarousel);

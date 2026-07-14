@@ -12,9 +12,27 @@
   margin: 0 auto;
 }
 
+/* Hubs and presentation pages need more lateral breathing room than the
+   generic site container. */
+.showcase-container,
+.legal-hub-container {
+  width: min(calc(100% - 4rem), 920px);
+  margin-inline: auto;
+}
+
+/* Legal documents use a wider reading column than before, while keeping
+   the same responsive gutter rhythm. */
 .legal-layout {
-  width: min(calc(100% - 2rem), 760px);
+  width: min(calc(100% - 4rem), 960px);
   margin: 0 auto;
   display: grid;
   gap: 1rem;
+}
+
+@media (max-width: 720px) {
+  .showcase-container,
+  .legal-hub-container,
+  .legal-layout {
+    width: min(calc(100% - 2rem), 100%);
+  }
 }

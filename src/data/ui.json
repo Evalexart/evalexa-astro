@@ -24,6 +24,10 @@
       "cvLabel": "Télécharger mon CV",
       "carouselTitle": "Réalisations",
       "skillsDefaultText": "J'apprends en autodidacte, par projet : chaque outil ci-dessus a été appris pour répondre à un besoin concret rencontré en construisant quelque chose. Cliquez sur une icône pour voir ce que j'en ai fait."
+    },
+    "carousel": {
+      "previous": "Précédent",
+      "next": "Suivant"
     }
   },
   "en": {
@@ -51,6 +55,10 @@
       "cvLabel": "Download my CV",
       "carouselTitle": "Highlights",
       "skillsDefaultText": "I learn by teaching myself, one project at a time: every tool above was picked up to solve a real need I ran into while building something. Click an icon to see what I built with it."
+    },
+    "carousel": {
+      "previous": "Previous",
+      "next": "Next"
     }
   }
 }

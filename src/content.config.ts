@@ -6,7 +6,7 @@ const pages = defineCollection({
     pattern: ["**/*.{md,mdx}", "!profil-pro/**"],
     base: "./src/content/pages",
   }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     eyebrow: z.string().optional(),
@@ -22,11 +22,31 @@ const pages = defineCollection({
           cards: z.array(
             z.object({
               kicker: z.string().optional(),
+              image: image().optional(),
               title: z.string(),
               description: z.string().optional(),
-              href: z.string(),
+              href: z.string().optional(),
             }),
           ),
+        }),
+      )
+      .optional(),
+
+    documents: z
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string().optional(),
+          href: z.string(),
+        }),
+      )
+      .optional(),
+
+    legalSections: z
+      .array(
+        z.object({
+          title: z.string(),
+          content: z.string(),
         }),
       )
       .optional(),

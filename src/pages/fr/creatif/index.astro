@@ -1,7 +1,7 @@
 ---
 import { getEntry, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import CardRail from "../../../components/CardRail.astro";
+import Carousel from "../../../components/Carousel.astro";
 import ui from "../../../data/ui.json";
 
 const lang = "fr";
@@ -12,7 +12,7 @@ if (!page) {
 }
 
 const { Content } = await render(page);
-const cardRail = ui.fr.cardRail;
+const carouselLabels = ui.fr.carousel;
 const sections = page.data.sections ?? [];
 ---
 
@@ -24,7 +24,7 @@ const sections = page.data.sections ?? [];
   frHref="/fr/creatif/"
   enHref="/en/creative/"
 >
-  <div class="container creative-page">
+  <div class="showcase-container creative-page">
     <section class="hero hero-compact">
       <div class="hero-inner">
         {page.data.eyebrow && <p class="eyebrow">{page.data.eyebrow}</p>}
@@ -37,13 +37,17 @@ const sections = page.data.sections ?? [];
     <div class="creative-hub">
       {
         sections.map((section) => (
-          <CardRail
-            title={section.title}
-            description={section.description}
-            cards={section.cards}
-            previousLabel={cardRail.previous}
-            nextLabel={cardRail.next}
-          />
+          <section class="creative-carousel-section">
+            <h2>{section.title}</h2>
+            {section.description && <p>{section.description}</p>}
+            <Carousel
+              items={section.cards}
+              size="medium"
+              orientation="portrait"
+              prevLabel={carouselLabels.previous}
+              nextLabel={carouselLabels.next}
+            />
+          </section>
         ))
       }
     </div>

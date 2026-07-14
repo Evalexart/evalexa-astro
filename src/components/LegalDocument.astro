@@ -1,0 +1,47 @@
+---
+import { getEntry } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MarkdownText from "./MarkdownText.astro";
+
+interface Props {
+  lang: "fr" | "en";
+  pageId: string;
+  contentId: string;
+  frHref: string;
+  enHref: string;
+}
+
+const { lang, pageId, contentId, frHref, enHref } = Astro.props;
+const page = await getEntry("pages", contentId);
+if (!page) throw new Error(`Content page not found: ${contentId}`);
+const sections = page.data.legalSections ?? [];
+---
+
+<BaseLayout
+  lang={lang}
+  area="legal"
+  pageId={pageId}
+  title={page.data.title}
+  description={page.data.description}
+  frHref={frHref}
+  enHref={enHref}
+>
+  <section class="hero hero-compact">
+    <div class="container hero-inner narrow center">
+      {page.data.eyebrow && <MarkdownText tag="p" class="eyebrow" value={page.data.eyebrow} inline />}
+      {page.data.heading && <h1 class="hero-wordmark"><MarkdownText tag="span" value={page.data.heading} inline /></h1>}
+      {page.data.intro && <MarkdownText class="hero-text" value={page.data.intro} />}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="legal-layout">
+      {sections.map((section) => (
+        <article class="legal-block flow">
+          <h2>{section.title}</h2>
+          <MarkdownText value={section.content} />
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

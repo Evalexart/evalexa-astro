@@ -42,7 +42,7 @@ skills:
   - tool: "Linux"
     icon: "linux"
     detail: "Administration système en ligne de commande, hébergement de services personnels."
-  - tool: "Oracle Cloud"
+  - tool: "Cloud"
     icon: "oraclecloud"
     detail: "Deux VM Oracle Cloud (Always Free) : nœuds LND en Signet et Mainnet, séparation stricte des environnements."
   - tool: "Tailscale"
@@ -90,7 +90,7 @@ contact:
     - icon: "💻"
       label: "Distanciel possible"
 
-carouselSize: "large"
+carouselSize: "medium"
 carouselOrientation: "portrait"
 carousel:
   - title: "SNCF"

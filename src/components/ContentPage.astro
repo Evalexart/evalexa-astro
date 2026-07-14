@@ -2,6 +2,7 @@
 import { getEntry, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import MarkdownText from "./MarkdownText.astro";
+import LegalDocument from "./LegalDocument.astro";
 
 const {
   lang = "fr",
@@ -49,6 +50,10 @@ const { Content } = await render(page);
   </section>
 
   <div class="content-page">
-    <Content />
+    {page.data.legalSections?.length ? (
+      <LegalDocument sections={page.data.legalSections} />
+    ) : (
+      <Content />
+    )}
   </div>
 </BaseLayout>

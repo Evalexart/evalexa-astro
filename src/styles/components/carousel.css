@@ -22,8 +22,8 @@
     minmax(0, 1fr)
     var(--carousel-control-space);
   align-items: center;
-  width: calc(100% + 6.3rem);
-  margin-inline: -3.15rem;
+  width: 100%;
+  margin-inline: 0;
 }
 
 .carousel-viewport {
@@ -141,6 +141,16 @@
   border-top: 1px solid var(--border);
 }
 
+
+.carousel-card-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .carousel-card-title {
   font-size: 0.95rem;
   font-weight: 700;
@@ -202,8 +212,8 @@
        as the other content boxes while leaving the arrows outside it. */
     --carousel-control-space: 1.4rem;
     --carousel-arrow-size: 1.1rem;
-    width: calc(100% + 2.8rem);
-    margin-inline: -1.4rem;
+    width: 100%;
+    margin-inline: 0;
   }
 
   .carousel-arrow {
