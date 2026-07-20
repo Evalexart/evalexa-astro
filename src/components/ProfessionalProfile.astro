@@ -39,6 +39,7 @@ const {
   carousel = [],
   carouselSize,
   carouselOrientation,
+  carouselImageRatio,
 } = page.data;
 const t = ui[lang].profilePro;
 const carouselLabels = ui[lang].carousel;
@@ -201,6 +202,7 @@ const skillColumns = skillRows > 0 ? Math.ceil(skills.length / skillRows) : 1;
         items={carousel}
         size={carouselSize}
         orientation={carouselOrientation}
+        imageRatio={carouselImageRatio}
         prevLabel={carouselLabels.previous}
         nextLabel={carouselLabels.next}
       />

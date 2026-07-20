@@ -86,6 +86,8 @@
 }
 
 .carousel-card {
+  /* Every card — with or without an image — keeps this same fixed ratio,
+     so all cards in a rail stay exactly the same size. */
   flex: 0 0 var(--carousel-card-width);
   width: var(--carousel-card-width);
   aspect-ratio: var(--carousel-card-ratio);
@@ -117,8 +119,15 @@
 }
 
 .carousel-card-image {
-  flex: 1;
-  min-height: 0;
+  /* Fixed, content-independent framing: this height comes only from the
+     image's own aspect-ratio and the (fixed) card width — never from how
+     much text sits in the body below. Defaults to the carousel's card
+     ratio, but can be overridden per-carousel via the `carouselImageRatio`
+     frontmatter field, or per-card via `imageRatio` on that card — both are
+     forwarded here as the --carousel-image-ratio custom property. */
+  flex: none;
+  width: 100%;
+  aspect-ratio: var(--carousel-image-ratio, var(--carousel-card-ratio));
   background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
   overflow: hidden;
 }
@@ -133,8 +142,14 @@
 }
 
 .carousel-card-body {
+  /* Takes whatever space is left in the fixed-height card once the image
+     has claimed its own fixed height. If a description is unusually long
+     for the space left, it scrolls internally instead of pushing on — or
+     recropping — the image above it. */
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   padding: 0.9rem 1.1rem 1.05rem;
-  flex-shrink: 0;
 }
 
 .carousel-card:has(.carousel-card-image) .carousel-card-body {

@@ -122,6 +122,11 @@ const profilPro = defineCollection({
         z
           .object({
             image: image().optional(),
+            // CSS aspect-ratio value for this card's image only, e.g.
+            // "4/5", "1/1", "16/9". Overrides carouselImageRatio below for
+            // this one card. Keeps the image framing stable no matter how
+            // much text sits underneath it.
+            imageRatio: z.string().optional(),
             title: z.string().optional(),
             description: z.string().optional(),
             href: z.string().optional(),
@@ -137,6 +142,11 @@ const profilPro = defineCollection({
       .optional(),
     carouselSize: z.enum(["small", "medium", "large"]).optional(),
     carouselOrientation: z.enum(["portrait", "square", "landscape"]).optional(),
+    // Default CSS aspect-ratio value for every image in this carousel, e.g.
+    // "4/5", "1/1", "16/9". Falls back to the ratio implied by
+    // carouselOrientation when omitted. Can be overridden per-card via
+    // imageRatio above.
+    carouselImageRatio: z.string().optional(),
   }),
 });
 

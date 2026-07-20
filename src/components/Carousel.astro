@@ -10,12 +10,14 @@ interface CarouselCard {
   title?: string;
   description?: string;
   href?: string;
+  imageRatio?: string;
 }
 
 interface Props {
   items: CarouselCard[];
   size?: "small" | "medium" | "large";
   orientation?: "portrait" | "square" | "landscape";
+  imageRatio?: string;
   prevLabel?: string;
   nextLabel?: string;
 }
@@ -24,6 +26,7 @@ const {
   items,
   size = "medium",
   orientation = "portrait",
+  imageRatio,
   prevLabel = "Previous",
   nextLabel = "Next",
 } = Astro.props;
@@ -36,6 +39,7 @@ const {
     data-carousel-size={size}
     data-carousel-orientation={orientation}
     data-carousel-count={items.length}
+    style={imageRatio ? `--carousel-image-ratio: ${imageRatio};` : undefined}
   >
     {items.length > 1 && (
       <button type="button" class="carousel-arrow carousel-arrow-prev" data-carousel-prev aria-label={prevLabel}>‹</button>
@@ -57,7 +61,10 @@ const {
               draggable="false"
             >
               {card.image && (
-                <div class="carousel-card-image">
+                <div
+                  class="carousel-card-image"
+                  style={card.imageRatio ? `--carousel-image-ratio: ${card.imageRatio};` : undefined}
+                >
                   <Image src={card.image} alt={card.title ?? ""} width={640} />
                 </div>
               )}
