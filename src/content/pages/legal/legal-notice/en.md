@@ -18,11 +18,9 @@ legalSections:
 
     [contact@evalexa.fr](mailto:contact@evalexa.fr)'
 - title: Hosting and distribution
-  content: 'The **evalexa.fr** domain and its subdomains are hosted and
+  content: 'The **evalexa.fr** domain and its subdomains are hosted by
 
-    distributed via Cloudflare, Inc. — 101 Townsend St, San Francisco,
-
-    CA 94107, United States — cloudflare.com.'
+    OVH SAS — 2 rue Kellermann, 59100 Roubaix, France — ovh.com.'
 - title: Identification
   content: 'The publisher’s identifying information that is not published directly on
 

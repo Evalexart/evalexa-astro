@@ -303,6 +303,7 @@ html[data-theme="light"] body[data-page="profil-pro"] {
 @media (max-width: 560px) {
   .profil-school {
     flex-basis: auto;
+    justify-content: flex-start;
   }
 }
 

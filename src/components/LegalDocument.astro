@@ -28,20 +28,30 @@ const sections = page.data.legalSections ?? [];
 >
   <section class="hero hero-compact">
     <div class="container hero-inner narrow center">
-      {page.data.eyebrow && <MarkdownText tag="p" class="eyebrow" value={page.data.eyebrow} inline />}
-      {page.data.heading && <h1 class="hero-wordmark"><MarkdownText tag="span" value={page.data.heading} inline /></h1>}
+      {page.data.eyebrow && (
+        <h1 class="legal-hero-title">
+          <MarkdownText tag="span" value={page.data.eyebrow} inline />
+        </h1>
+      )}
       {page.data.intro && <MarkdownText class="hero-text" value={page.data.intro} />}
     </div>
   </section>
 
   <section class="section">
     <div class="legal-layout">
-      {sections.map((section) => (
-        <article class="legal-block flow">
-          <h2>{section.title}</h2>
-          <MarkdownText value={section.content} />
-        </article>
-      ))}
+      <div class="legal-document">
+        {page.data.heading && (
+          <h2 class="legal-document-title">
+            <MarkdownText tag="span" value={page.data.heading} inline />
+          </h2>
+        )}
+        {sections.map((section) => (
+          <article class="legal-section">
+            <h3>{section.title}</h3>
+            <MarkdownText value={section.content} />
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -14,9 +14,6 @@ documents:
 - title: Terms of use
   description: Conditions for accessing and using the Evalexa website.
   href: /en/legal/terms-of-use/
-- title: Terms of sale
-  description: Current absence of sales and framework for voluntary contributions.
-  href: /en/legal/terms-of-sale/
 - title: Cookies
   description: Cookies, local preferences, language, theme, and data deletion.
   href: /en/legal/cookies/

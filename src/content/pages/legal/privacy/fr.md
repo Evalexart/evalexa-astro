@@ -12,13 +12,13 @@ legalSections:
 - title: Données techniques
   content: 'Des données techniques, comme les requêtes HTTP ou les journaux serveur,
 
-    peuvent être traitées par les hébergeurs dans le cadre du
+    peuvent être traitées par l’hébergeur dans le cadre du
 
     fonctionnement, de la sécurité et de la maintenance des services.'
 - title: Prestataires techniques
-  content: 'Les services associés au domaine evalexa.fr peuvent s’appuyer sur
+  content: 'Le site **evalexa.fr** et ses sous-domaines sont actuellement
 
-    OVHcloud et Cloudflare selon les sous-domaines concernés.'
+    hébergés chez OVH.'
 - title: Contact
   content: 'Pour toute question relative aux données personnelles :
 

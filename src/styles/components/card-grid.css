@@ -1,0 +1,78 @@
+/* Reusable card grid (see src/components/CardGrid.astro). The column
+   count is computed per instance so a leftover last row is never a single
+   card sitting at a different width than the rest — it always balances
+   into full rows, falling back to one column per row when it can't. */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--card-grid-columns, 3), minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-height: 100%;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.card-grid-item:hover,
+.card-grid-item:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent-2) 36%, var(--border));
+  box-shadow: var(--shadow);
+}
+
+.card-grid-item h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.card-grid-item p {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.card-grid-arrow {
+  margin-top: auto;
+  align-self: flex-end;
+  color: var(--accent);
+  font-size: 1.2rem;
+  line-height: 1;
+  opacity: 0.8;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.card-grid-item:hover .card-grid-arrow,
+.card-grid-item:focus-visible .card-grid-arrow {
+  transform: translateX(3px);
+  opacity: 1;
+}
+
+@media (max-width: 980px) {
+  .card-grid {
+    grid-template-columns: repeat(var(--card-grid-columns-tablet, 2), minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}

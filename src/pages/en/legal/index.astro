@@ -2,6 +2,8 @@
 import { getEntry } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import MarkdownText from "../../../components/MarkdownText.astro";
+import CardGrid from "../../../components/CardGrid.astro";
+import "../../../styles/components/card-grid.css";
 
 const page = await getEntry("pages", "legal/index/en");
 if (!page) throw new Error("Content page not found: legal/index/en");
@@ -26,13 +28,8 @@ const documents = page.data.documents ?? [];
   </section>
 
   <section class="section">
-    <div class="legal-hub-container cards">
-      {documents.map((document) => (
-        <a class="card flow" href={document.href}>
-          <h2>{document.title}</h2>
-          {document.description && <p>{document.description}</p>}
-        </a>
-      ))}
+    <div class="legal-hub-container">
+      <CardGrid items={documents} maxColumns={3} />
     </div>
   </section>
 </BaseLayout>

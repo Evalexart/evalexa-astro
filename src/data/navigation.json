@@ -150,7 +150,7 @@
         "fr": "/fr/legal/mentions-legales/",
         "en": "/en/legal/legal-notice/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -164,7 +164,7 @@
         "fr": "/fr/legal/confidentialite/",
         "en": "/en/legal/privacy/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -192,7 +192,7 @@
         "fr": "/fr/legal/cgu/",
         "en": "/en/legal/terms-of-use/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },
@@ -206,7 +206,7 @@
         "fr": "/fr/legal/cookies/",
         "en": "/en/legal/cookies/"
       },
-      "enabled": true,
+      "enabled": false,
       "showInHeader": false,
       "showInFooter": true
     },

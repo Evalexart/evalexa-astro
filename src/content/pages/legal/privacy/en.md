@@ -12,11 +12,11 @@ legalSections:
 - title: Technical data
   content: 'Technical data, such as HTTP requests or server logs, may be processed
 
-    by hosting providers for service operation, security and maintenance.'
+    by the hosting provider for service operation, security and maintenance.'
 - title: Technical providers
-  content: 'Services associated with the evalexa.fr domain may rely on OVHcloud and
+  content: 'The **evalexa.fr** website and its subdomains are currently
 
-    Cloudflare depending on the subdomains concerned.'
+    hosted with OVH.'
 - title: Contact
   content: 'For any question relating to personal data:
 

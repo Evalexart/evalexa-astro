@@ -2,8 +2,7 @@
 
 .panel,
 .intro-block,
-.approach-block,
-.legal-block {
+.approach-block {
   background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -14,9 +13,51 @@
 
 .panel h2,
 .intro-block h2,
-.approach-block h2,
-.legal-block h2 {
+.approach-block h2 {
   margin: 0;
   font-size: 1.1rem;
   letter-spacing: -0.02em;
+}
+
+/* Legal documents: sober flat reading surface. No rounded corners, no
+   dividing lines between sections. A colored top rule ("liseré") and a
+   title band at the top echo the .profil-contact-inner /
+   .profil-contact-sign pattern used on the professional profile page. */
+
+.legal-document {
+  background: color-mix(in srgb, var(--bg-elevated) 34%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--accent);
+}
+
+.legal-document-title {
+  margin: 0;
+  padding: 1.4rem clamp(1.25rem, 4vw, 2.25rem) 1.1rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+.legal-section {
+  padding: 1.85rem clamp(1.25rem, 4vw, 2.25rem);
+}
+
+.legal-section h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.legal-section p {
+  color: var(--text-soft);
+  margin: 0;
+}
+
+.legal-section p + p {
+  margin-top: 0.75rem;
 }

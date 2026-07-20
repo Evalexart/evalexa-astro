@@ -14,9 +14,6 @@ documents:
 - title: CGU
   description: Conditions d’accès et d’utilisation du site Evalexa.
   href: /fr/legal/cgu/
-- title: CGV
-  description: Absence actuelle de vente et cadre des contributions volontaires.
-  href: /fr/legal/cgv/
 - title: Cookies
   description: Cookies, préférences locales, langue, thème et suppression des données.
   href: /fr/legal/cookies/

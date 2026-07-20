@@ -1,0 +1,50 @@
+---
+// Generic reusable card grid: renders a set of {title, description, href}
+// cards and picks a column count at build time so a row is never left with
+// a single, differently-shaped orphan card. Works for any item count.
+
+interface CardGridItem {
+  title: string;
+  description?: string;
+  href: string;
+}
+
+interface Props {
+  items: CardGridItem[];
+  maxColumns?: number;
+}
+
+const { items, maxColumns = 3 } = Astro.props;
+
+// Picks the largest column count (up to `max`) that divides `count` into
+// full rows. If none divides evenly without leaving exactly one orphan
+// card, it falls back to a single column so every "row" matches.
+function computeColumns(count: number, max: number): number {
+  if (count <= 0) return 1;
+  if (count <= max) return count;
+
+  for (let cols = max; cols >= 2; cols--) {
+    if (count % cols !== 1) return cols;
+  }
+
+  return 1;
+}
+
+const columnsWide = computeColumns(items.length, maxColumns);
+const columnsNarrow = computeColumns(items.length, Math.min(maxColumns, 2));
+---
+
+<div
+  class="card-grid"
+  style={`--card-grid-columns: ${columnsWide}; --card-grid-columns-tablet: ${columnsNarrow};`}
+>
+  {
+    items.map((item) => (
+      <a class="card-grid-item" href={item.href}>
+        <h2>{item.title}</h2>
+        {item.description && <p>{item.description}</p>}
+        <span class="card-grid-arrow" aria-hidden="true">→</span>
+      </a>
+    ))
+  }
+</div>

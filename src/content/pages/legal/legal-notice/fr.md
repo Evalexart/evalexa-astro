@@ -20,9 +20,7 @@ legalSections:
 - title: Hébergement et distribution
   content: 'Le domaine **evalexa.fr** et ses sous-domaines sont hébergés
 
-    et distribués via Cloudflare, Inc. — 101 Townsend St, San Francisco,
-
-    CA 94107, États-Unis — cloudflare.com.'
+    par OVH SAS — 2 rue Kellermann, 59100 Roubaix, France — ovh.com.'
 - title: Identification
   content: 'Les informations d’identification non publiées directement sur cette page
 

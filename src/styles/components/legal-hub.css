@@ -1,0 +1,79 @@
+/* Legal hub component: sober card layout for the legal documents index.
+   Static navigation list (no carousel/rail) — every link stays visible at
+   once, panel-style look reused from tokens for consistency with the rest
+   of the site, no mouse-tracking tilt effect.
+
+   Flexbox + centered wrap instead of grid auto-fit: with a low, changing
+   number of items, a leftover last-row card would otherwise sit alone on
+   the left; centering it keeps every row count looking intentional. */
+
+.legal-hub-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.legal-hub-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1 1 15rem;
+  max-width: 22rem;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.legal-hub-card:hover,
+.legal-hub-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent-2) 36%, var(--border));
+  box-shadow: var(--shadow);
+}
+
+.legal-hub-card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.legal-hub-card p {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.legal-hub-arrow {
+  margin-top: auto;
+  align-self: flex-end;
+  color: var(--accent);
+  font-size: 1.2rem;
+  line-height: 1;
+  opacity: 0.8;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.legal-hub-card:hover .legal-hub-arrow,
+.legal-hub-card:focus-visible .legal-hub-arrow {
+  transform: translateX(3px);
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .legal-hub-card {
+    flex-basis: 100%;
+    max-width: none;
+  }
+}

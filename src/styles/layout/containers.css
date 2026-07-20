@@ -20,13 +20,12 @@
   margin-inline: auto;
 }
 
-/* Legal documents use a wider reading column than before, while keeping
-   the same responsive gutter rhythm. */
+/* Legal documents now render as a single continuous reading column
+   (see .legal-document / .legal-section in panels.css), so this only
+   needs to control the reading width, not a grid gap between cards. */
 .legal-layout {
-  width: min(calc(100% - 4rem), 960px);
+  width: min(calc(100% - 4rem), 760px);
   margin: 0 auto;
-  display: grid;
-  gap: 1rem;
 }
 
 @media (max-width: 720px) {
