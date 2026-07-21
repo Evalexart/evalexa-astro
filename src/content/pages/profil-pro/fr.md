@@ -170,7 +170,6 @@ carousel:
       J'y explore les paysages, les ambiances et la lumière, avec une pratique entièrement autodidacte.  
 
       Cette curiosité pour la création visuelle s'est naturellement prolongée dans le dessin numérique, notamment avec la conception du logo d'Evalexa, et continue d'influencer la manière dont j'aborde l'identité graphique de mes projets.
-    href: "https://www.instagram.com/"
 ---
 
 Cette page est destinée à être partagée directement (CV, candidatures).

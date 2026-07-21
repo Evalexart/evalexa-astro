@@ -80,7 +80,6 @@ contact:
   items:
     - icon: "✉"
       label: "a.mattle@outlook.com"
-      href: "mailto:a.mattle@outlook.com"
     - icon: "☎"
       label: "06 09 56 29 33"
     - icon: "📍"
@@ -92,32 +91,90 @@ contact:
     - icon: "💻"
       label: "Remote possible"
 
-carouselSize: "medium"
+carouselSize: "large"
 carouselOrientation: "portrait"
+carouselImageRatio: "16/9"
 carousel:
-  - title: "ONES bot"
-    description: "Discord bot and SQL database for a team singing competition (200 participants, 2018): tracking singing and life points, inventory management, announcements and their layout."
-  - title: "Sky: Children of the Light bot"
-    description: "Moderation and animation for a community server: friendship-link channel moderation, automated prize draws, admin team announcements, isolation without critical permissions."
+  - title: "Nola-ONES"
+    image: "./Capture-ones.webp"
+    description: |
+      Discord bot and SQL database built in 2018 for ONES, a team singing competition with 200 participants over 3 months.
+
+      Each player had an inventory — chocolate, darts, cards, gold — spent to heal or trigger random attacks and actions.
+
+      The entire text-based role-play system had to run 24/7 without needing a game master constantly present.
+  - title: "Oréo"
+    image: "./Capture-sky.webp"
+    description: |
+      Moderation and animation bot built in 2020 for Sky: Children of the Light, a community server active for over 6 years.  
+      Oréo, still in service today, lets moderators isolate a member — removing roles, moving them to a private room, until manual release — without granting them critical permissions such as banning or kicking, along with several contests and mini-games (raffles, lottery) and scheduled automatic cleanup of certain channels each morning.
   - title: "French Garden alliance"
-    description: "Google Sheets tool for a 6-guild Guardian Tales alliance: member allocation by raid objective, progress tracking, announcements via Discord webhook."
-  - title: "Lightning nodes"
-    description: "Self-custody Bitcoin infrastructure: two Lightning Network nodes (Signet and Mainnet) on Oracle Cloud VMs, cold wallet on an amnesic Linux drive."
+    image: "./Capture-FG.webp"
+    description: |
+      Google Sheets tool built as captain of a 6-guild Guardian Tales alliance, to distribute members more fairly across raid objectives and optimize competitive scores.
+
+      It automatically calculated each player's potential — previously worked out by hand — to place them correctly. Attendance and progress tracking, with rankings sent automatically to Discord.
+
+      Result: our flagship guild climbed into the European top 10.
+  - title: "VMs & infrastructure"
+    image: "./Capture-vm.webp"
+    description: |
+      Self-hosted infrastructure on two Oracle Cloud VMs (Always Free), one per environment — production and test — kept strictly separate.  
+
+      Command-line and graphical administration, secure remote access via Tailscale. Backups via Oracle and rclone.  
+
+      A Cloudflared tunnel will soon connect this infrastructure to the website.
   - title: "Gabby"
-    description: "Custom application page — the very first of its kind, the reason I moved away from classic cover letters."
+    image: "./Capture-gabby.webp"
+    description: |
+      Application page (in French) built for Gabby, which develops software for the real estate sector.
+
+      Intro animation: a door and a real estate sign set the scene, the door opens on click to reveal the page.
+    href: "https://evalexa.fr/candidature-gabby/"
   - title: "DYB - Pain de Minuit"
-    description: "Custom application page."
+    image: "./Capture-dyb.webp"
+    description: |
+      Application page (in French) for DYB - Pain de Minuit, which brews beer from unsold stale bread.
+
+      The intro animation echoes this: a bottle cap pops off on click, bubbles rise, then the page appears.
+    href: "https://evalexa.fr/candidature-DYB/"
   - title: "SNCF"
-    description: "Custom application page."
+    image: "./Capture-sncf.webp"
+    description: |
+      Application page (in French) for SNCF.
+
+      The intro animation places the visitor inside a train, with a landscape scrolling past the window; a blind lowers on click to reveal the page.
+    href: "https://evalexa.fr/candidature-SNCF/"
   - title: "Décathlon"
-    description: "Custom application page."
+    image: "./Capture-decathlon.webp"
+    description: |
+      Application page (in French) for Décathlon.
+
+      The intro animation shows an open sports bag, with my skills and roles tucked inside like cards; a click gives access to the page.
+    href: "https://evalexa.fr/candidature-decathlon/"
   - title: "Chronodrive"
-    description: "Custom application page."
+    image: "./Capture-chronodrive.webp"
+    description: |
+      Application page (in French) for Chronodrive.
+
+      The intro animation floats a grocery basket containing my skills and roles; a click gives access to the page.
+    href: "https://evalexa.fr/candidature-chronodrive/"
   - title: "Evalexa"
-    description: "My personal, bilingual (FR/EN) website, built with Astro."
-  - title: "Watercolor paintings"
-    description: "A small selection of paintings."
-    href: "https://www.instagram.com/"
+    image: "../../../assets/images/logo/logo-full-watercolor.webp"
+    description: |
+      My personal, bilingual (FR/EN) website, built in HTML/CSS/JS with Astro to manage multilingual editorial content without building my own build tool.
+
+      It currently only contains this professional profile and my application pages, but will eventually host:
+      - my watercolor gallery
+      - my technical experiments
+      - various educational resources
+  - title: "Artistic creation"
+    image: "./aquarelle.webp"
+    description: |
+      Watercolor is one of my creative projects.
+      I explore landscapes, atmospheres and light, through an entirely self-taught practice.
+
+      This curiosity for visual creation naturally extended into digital drawing, notably with the design of the Evalexa logo, and continues to influence how I approach the visual identity of my projects.
 ---
 
 This page is meant to be shared directly (CV, applications).
