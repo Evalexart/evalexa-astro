@@ -73,7 +73,9 @@ accordion:
   - question: "Ma manière de travailler"
     answer: "Lors d'un ajout de fonctionnalité sur mon premier bot, une erreur dans une requête SQL a corrompu les inventaires de guilde en pleine nuit, pendant une session de test avec mon équipe. J'ai dû corriger en urgence et restaurer la base de données avant le réveil des membres. Depuis, je sépare systématiquement mes environnements de production et de test."
   - question: "Ma manière de candidater"
-    answer: "J'ai remplacé mes lettres de motivation classiques par des pages web de candidature, chacune reprenant mon identité graphique avec une introduction personnalisée à l'entreprise visée : SNCF, Décathlon, Chronodrive, Gabby, DYB - Pain de Minuit."
+    answer: "Comme beaucoup de candidats j'ai commencé mes recherches avec des candidatures classique en envoyant CV et lettre de motivation. Puis j'ai été confrontée à une annonce qui demandait un support de motivation et non explicitement une lettre. Il m'a semblé alors naturel de présenter ma candidature sous la forme d'une page web de motivation. En plus de demonter factuellement certaines de mes competences cela me permettait de continuer à apprendre par la pratique comme je l'ai toujours fais. Ayant trouvé l'experience bien plus enrichissante que la rédaction d'une lettre de motivation j'ai décidé d'en faire ma nouvelle methode de candidature. Je trouve cela bien moins impersonnel qu'une simple lettre, chacune de ces pages reprenant l'identité graphique de mon site personnel en construction avec une introduction personnalisée à l'entreprise visée."
+  - question: "Pourquoi une recherche sur Lille plutot que plus proche de chez moi"
+    answer: "La première raison à cela est la diversité des entreprises possibles, l'agglomération Lilloise est une zone riche en entreprise tech et en siege d'entreprise ayant des services informatique. La seconde est que je prefère privilégier des déplacements en transport en commun qui peuvent permettre un temps de révision ou de lecture et réponse à des mails contrairement à des trajets en voiture. De plus les établissements scolaire m'ayant acceptés se trouvent sur Lille et il me semble plus pertinent de mutualisé l'abonnement de train avec une destination commune entre mon domicile et le lieu de l'école et de l'entreprise. Je reste cependant ouverte à des propositions d'embauche sur d'autres zones géographique proches de chez moi dans la mesure où cela ne s'accompagne pas d'une hausse significative dans le coût du transport."
 
 contact:
   name: "Anaïs Mattle"
@@ -95,45 +97,79 @@ carouselSize: "large"
 carouselOrientation: "portrait"
 carouselImageRatio: "16/9"
 carousel:
-  - title: "Bot ONES"
+  - title: "Nola-ONES"
     image: "./Capture-ones.webp"
-    description: "Bot Discord et base SQL pour un concours de chant en équipe (200 participants, 2018) : suivi des points de chant et de vie, gestion d'inventaire, gestion des annonces et de leur mise en page."
-  - title: "Bot Sky : Enfant de la lumière"
+    description: |
+      Bot Discord et base SQL développés en 2018 pour ONES, un concours de chant en équipe réunissant 200 participants sur 3 mois.  
+      Chaque joueur disposait d'un inventaire — chocolat, fléchettes, cartes, or — consommé pour se soigner ou déclencher des attaque et actions aléatoires.  
+      L'ensemble des mécaniques de jeu de rôle textuel devait tourner 24h/24 sans nécessiter la présence constante d'un maître de jeu.
+  - title: "Oréo"
     image: "./Capture-sky.webp"
-    description: "Modération et animation d'un serveur communautaire : gestion du salon de liens d'amitié, tirages au sort automatisés, annonces par l'équipe d'admin, mise en isolement sans droits critiques."
+    description: |
+      Bot de modération et d'animation développé en 2020 pour Sky : Enfants de la Lumière, un serveur communautaire actif depuis plus de 6 ans.  
+      Oréo, toujours en service aujourd'hui, permet aux modérateurs d'isoler un membre — retrait des rôles, mise en salon privé, jusqu'à sortie manuelle — sans leur accorder de droits critiques comme le bannissement ou l'expulsion, ainsi que plusieurs concours et mini-jeux (tirages au sort, loto) et le nettoyage automatique programmé de certains salons chaque matin.
   - title: "Alliance French Garden"
     image: "./Capture-FG.webp"
-    description: "Outil Google Sheets pour une alliance de 6 guildes Guardian Tales : répartition des membres par objectif de raid, suivi de progression, annonces et classement des membres via webhook Discord."
-  - title: "Nœuds Lightning"
-    description: "Infrastructure Bitcoin self-custody : deux nœuds Lightning Network (Signet et Mainnet) sur VM Oracle Cloud, cold wallet sur clé Linux amnésique."
+    description: |
+      Outil Google Sheets développé en tant que capitaine d'une alliance de 6 guildes Guardian Tales, pour répartir les membres plus justement entre objectifs de raid et optimiser les scores compétitifs.  
+      Il calculait automatiquement le potentiel de chaque joueur — un calcul fait à la main auparavant — pour bien les positionner. Suivi de l'assiduité et de la progression, classement envoyé automatiquement sur Discord. Résultat : notre guilde phare est montée dans le top 10 européen.
+  - title: "VMs & infrastructure"
+    image: "./Capture-vm.webp"
+    description: |
+      Infrastructure auto-hébergée sur deux VM Oracle Cloud (Always Free), une par environnement — production et test — strictement séparées.  
+      Administration en ligne de commande et via accès graphique, accès distant sécurisé par Tailscale. Sauvegardes via Oracle et rclone.  
+      Un tunnel Cloudflared reliera bientôt cette infrastructure au site web.
   - title: "Gabby"
     image: "./Capture-gabby.webp"
-    description: "Ma première page de candidature personnalisée."
+    description: |
+      Page de candidature (en français) réalisée pour Gabby, qui développe un logiciel destiné au secteur de l'immobilier.  
+
+      Animation d'intro : une porte et un panneau immobilier plantent le décor, la porte s'ouvre au clic pour révéler la page
     href: "https://evalexa.fr/candidature-gabby/"
   - title: "DYB - Pain de Minuit"
     image: "./Capture-dyb.webp"
-    description: "Deuxième page de candidature personnalisée."
+    description: |
+      Page de candidature (en français) pour DYB - Pain de Minuit, qui brasse de la bière à partir de pain sec invendu.  
+
+      L'animation d'intro reprend ce principe : la capsule d'une bouteille saute au clic, les bulles remontent, puis la page apparaît.
     href: "https://evalexa.fr/candidature-DYB/"
   - title: "SNCF"
     image: "./Capture-sncf.webp"
-    description: "Troisième page de motivation personnalisée. Réalisée pour une candidature chez la SNCF."
+    description: |
+      Page de candidature (en français) pour la SNCF.  
+
+      L'animation d'intro place le visiteur à l'intérieur d'un train, avec un paysage qui défile derrière la fenêtre ; un store se baisse au clic pour révéler la page.
     href: "https://evalexa.fr/candidature-SNCF/"
   - title: "Décathlon"
     image: "./Capture-decathlon.webp"
-    description: "Quatrième page de candidature personnalisée."
+    description: |
+      Page de candidature (en français) pour Décathlon.  
+
+      L'animation d'intro affiche un sac de sport ouvert, avec mes compétences et missions rangées comme des fiches à l'intérieur ; un clic donne accès à la page.
     href: "https://evalexa.fr/candidature-decathlon/"
   - title: "Chronodrive"
     image: "./Capture-chronodrive.webp"
-    description: "Cinquième page de candidature personnalisée."
+    description: |
+      Page de candidature (en français) pour Chronodrive.  
+
+      L'animation d'intro fait flotter un panier de courses contenant mes compétences et missions ; un clic donne accès à la page."
     href: "https://evalexa.fr/candidature-chronodrive/"
   - title: "Evalexa"
     image: "../../../assets/images/logo/logo-full-watercolor.webp"
     description: |
-      Mon site personnel, bilingue FR/EN, développé avec Astro.
+      Mon site personnel, bilingue FR/EN, développé en HTML/CSS/JS avec Astro pour gérer un contenu éditorial multilingue sans construire mon propre outil de build.
 
-      Il ne contient actuellement que ce profil pro mais accueillera à therme ma galerie d'aquarelle, mes experimentations techniques, ainsi que des ressources pédagogiques diverses.
-  - title: "Aquarelles"
-    description: "Une sélection de peintures."
+      Il ne contient actuellement que ce profil pro et mes pages de candidatures mais accueillera à terme : 
+      - ma galerie d'aquarelle 
+      - mes expérimentations techniques  
+      - des ressources pédagogiques diverses
+  - title: "Création artistique"
+    image: "./aquarelle.webp"
+    description: |
+      L'aquarelle est l'un de mes projets créatif.  
+      J'y explore les paysages, les ambiances et la lumière, avec une pratique entièrement autodidacte.  
+
+      Cette curiosité pour la création visuelle s'est naturellement prolongée dans le dessin numérique, notamment avec la conception du logo d'Evalexa, et continue d'influencer la manière dont j'aborde l'identité graphique de mes projets.
     href: "https://www.instagram.com/"
 ---
 
