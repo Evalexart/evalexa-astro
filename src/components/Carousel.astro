@@ -52,7 +52,7 @@ const {
           const isExternal = card.href?.startsWith("http://") || card.href?.startsWith("https://");
           return (
             <Tag
-              class="carousel-card"
+              class:list={["carousel-card", { "is-active": i === 0 }]}
               data-carousel-card
               data-carousel-real-index={i}
               href={card.href}
@@ -71,7 +71,12 @@ const {
               {(card.kicker || card.title || card.description) && (
                 <div class="carousel-card-body">
                   {card.kicker && <p class="carousel-card-kicker"><MarkdownText tag="span" value={card.kicker} inline /></p>}
-                  {card.title && <h3 class="carousel-card-title"><MarkdownText tag="span" value={card.title} inline /></h3>}
+                  {card.title && (
+                    <h3 class="carousel-card-title">
+                      <MarkdownText tag="span" value={card.title} inline />
+                      {card.href && <span class="carousel-card-title-arrow" aria-hidden="true">→</span>}
+                    </h3>
+                  )}
                   {card.description && <MarkdownText class="carousel-card-description" value={card.description} />}
                 </div>
               )}
@@ -212,7 +217,15 @@ const {
 
     prevBtn?.addEventListener("click", prev);
     nextBtn?.addEventListener("click", next);
-    viewport.addEventListener("keydown", (event) => {
+
+    // Listened on the carousel root rather than just the viewport: the
+    // viewport is not an ancestor of the prev/next buttons, so a keydown
+    // fired while one of those buttons is focused (e.g. right after
+    // clicking it) would never have reached a listener placed on the
+    // viewport alone. The root is a common ancestor of the viewport and
+    // both buttons, so arrow-key navigation now works no matter which of
+    // the three currently has focus.
+    root.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") { event.preventDefault(); prev(); }
       if (event.key === "ArrowRight") { event.preventDefault(); next(); }
     });
@@ -227,7 +240,10 @@ const {
     }
 
     viewport.addEventListener("pointerdown", (event) => {
-      if (isAnimating) return;
+      // Mouse drag isn't a meaningful interaction here (arrows + keyboard
+      // already cover desktop), so it's only wired up for touch/pen —
+      // where swiping is the expected gesture — and left alone for mouse.
+      if (isAnimating || event.pointerType === "mouse") return;
       dragging = true;
       dragMoved = false;
       startX = event.clientX;
