@@ -180,4 +180,4 @@ carousel:
       Cette curiosité pour la création visuelle s'est naturellement prolongée dans le dessin numérique, notamment avec la conception du logo d'Evalexa, et continue d'influencer la manière dont j'aborde l'identité graphique de mes projets.
 ---
 
-Cette page est destinée à être partagée directement (CV, candidatures).
+Cette page est destinée à être partagée directement (CV, candidatures). Elle n'est donc pas accessible via la navigation du site, cela afin de ne pas exposer innutilement sur internet des documents et informations personnelles.
