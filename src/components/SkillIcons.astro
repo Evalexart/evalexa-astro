@@ -1,0 +1,273 @@
+---
+// Reusable, modular skill/tool card grid.
+//
+// size="small" reproduces the original profil-pro look: a compact
+// icon-only button grid with a single shared detail panel below it —
+// click an icon to show its description in the panel.
+//
+// size="medium"/"large" render full content cards instead (styled like
+// CardGrid.astro's legal-hub cards): each card shows its own image or
+// icon, title and description directly, and becomes a real link when
+// `href` is set. No shared panel is needed in this mode since the
+// description is already visible on the card.
+//
+// Every visual field is optional, same rule as <Carousel />: a card just
+// needs at least one of image / icon / title / description to render.
+//
+// Column balancing: the container's max-width is pinned to exactly
+// `columns * card size (+ gaps)`, using a computed column count. Because
+// it's still flexbox with `flex-wrap`, each wrapped line centers itself
+// independently — so a leftover last row (even a single card) is always
+// centered, never stranded on the left, for any item count.
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import { toolIcons } from "../lib/tool-icons";
+import { renderInlineMarkdown, renderMarkdown } from "../lib/markdown";
+import "../styles/components/skill-icons.css";
+
+interface SkillCardItem {
+  title?: string;
+  icon?: string;
+  image?: ImageMetadata;
+  description?: string;
+  href?: string;
+}
+
+interface Props {
+  items: SkillCardItem[];
+  introText?: string;
+  size?: "small" | "medium" | "large";
+  maxColumns?: number;
+  maxColumnsMobile?: number;
+}
+
+const {
+  items,
+  introText = "",
+  size = "small",
+  maxColumns = 6,
+  maxColumnsMobile = 3,
+} = Astro.props;
+
+const isCompact = size === "small";
+
+// "small" matches the original compact icon box. "medium"/"large" are
+// full content cards — "large" sized to match the legal-hub cards (see
+// card-grid.css: three ~300px columns in a 920px container).
+const cardSizeMap: Record<"small" | "medium" | "large", number> = {
+  small: 88,
+  medium: 220,
+  large: 300,
+};
+const cardSize = cardSizeMap[size] ?? cardSizeMap.small;
+
+// Card mode uses wider items, so fewer per row by default than the
+// compact icon grid — halve the caller's targets unless overridden.
+const effectiveMaxColumns = isCompact
+  ? maxColumns
+  : Math.max(2, Math.round(maxColumns / 2));
+const effectiveMaxColumnsMobile = isCompact
+  ? maxColumnsMobile
+  : Math.max(1, Math.round(maxColumnsMobile / 1.5));
+
+// Balances items across as few rows as the target max allows; the CSS
+// then constrains the row's max-width to exactly that many cards.
+function computeColumns(count: number, max: number): number {
+  if (count <= 0) return 1;
+  if (count <= max) return count;
+
+  const rows = Math.ceil(count / max);
+  return Math.ceil(count / rows);
+}
+
+const columns = computeColumns(items.length, effectiveMaxColumns);
+const columnsMobile = computeColumns(items.length, effectiveMaxColumnsMobile);
+
+const cardDetails = await Promise.all(
+  items.map(async (item) => ({
+    ...item,
+    descriptionHtml: item.description ? await renderMarkdown(item.description) : "",
+    titleHtml: item.title ? await renderInlineMarkdown(item.title) : "",
+  })),
+);
+---
+
+{items.length > 0 && (
+  <div class="skill-icons-block" data-skill-block>
+    <div
+      class:list={[
+        "skill-icons",
+        isCompact ? "skill-icons-compact" : "skill-icons-cards",
+      ]}
+      data-skill-grid
+      style={`--skill-card-size: ${cardSize}px; --skill-columns: ${columns}; --skill-columns-mobile: ${columnsMobile};`}
+    >
+      {cardDetails.map((item) => {
+        const icon = item.icon ? toolIcons[item.icon] : undefined;
+        const isExternal =
+          item.href?.startsWith("http://") || item.href?.startsWith("https://");
+
+        if (isCompact) {
+          return (
+            <button
+              type="button"
+              class="skill-icon-item"
+              data-skill-tool={item.title ?? ""}
+              data-skill-detail-html={item.descriptionHtml}
+            >
+              {icon?.glyph === "db" && (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <ellipse class="skill-glyph-db" cx="12" cy="6" rx="7" ry="2.6" />
+                  <path class="skill-glyph-db" d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" />
+                  <path class="skill-glyph-db" d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" />
+                </svg>
+              )}
+              {icon?.glyph === "cloud" && (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    class="skill-glyph-cloud"
+                    d="M7 18a4 4 0 0 1-.5-7.97A5 5 0 0 1 16.2 8.1 4.5 4.5 0 0 1 16.5 17H7Z"
+                  />
+                  <path class="skill-glyph-cloud" d="M9.5 21v-2M12 21v-2M14.5 21v-2" />
+                </svg>
+              )}
+              {icon?.glyph === "webdev" && (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <polyline class="skill-glyph-webdev" points="8 6 3 12 8 18" />
+                  <polyline class="skill-glyph-webdev" points="16 6 21 12 16 18" />
+                </svg>
+              )}
+              {icon?.glyph === "hosting" && (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect class="skill-glyph-hosting" x="4" y="4" width="16" height="6" rx="1.4" />
+                  <rect class="skill-glyph-hosting" x="4" y="14" width="16" height="6" rx="1.4" />
+                  <circle class="skill-glyph-hosting" cx="7.6" cy="7" r="0.55" />
+                  <circle class="skill-glyph-hosting" cx="7.6" cy="17" r="0.55" />
+                </svg>
+              )}
+              {item.image && (
+                <Image
+                  src={item.image}
+                  alt={item.title ?? ""}
+                  width={64}
+                  height={64}
+                  class="skill-icon-thumb"
+                />
+              )}
+              {!item.image && !icon?.custom && icon?.path && (
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d={icon.path} />
+                </svg>
+              )}
+              {item.titleHtml && <span class="skill-tool-name" set:html={item.titleHtml} />}
+            </button>
+          );
+        }
+
+        const Tag = item.href ? "a" : "div";
+
+        return (
+          <Tag
+            class="skill-card"
+            href={item.href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+          >
+            {item.image ? (
+              <div class="skill-card-image">
+                <Image src={item.image} alt={item.title ?? ""} width={480} />
+              </div>
+            ) : icon ? (
+              <div class="skill-card-icon">
+                {icon.glyph === "db" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <ellipse class="skill-glyph-db" cx="12" cy="6" rx="7" ry="2.6" />
+                    <path class="skill-glyph-db" d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" />
+                    <path class="skill-glyph-db" d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" />
+                  </svg>
+                )}
+                {icon.glyph === "cloud" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      class="skill-glyph-cloud"
+                      d="M7 18a4 4 0 0 1-.5-7.97A5 5 0 0 1 16.2 8.1 4.5 4.5 0 0 1 16.5 17H7Z"
+                    />
+                    <path class="skill-glyph-cloud" d="M9.5 21v-2M12 21v-2M14.5 21v-2" />
+                  </svg>
+                )}
+                {icon.glyph === "webdev" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <polyline class="skill-glyph-webdev" points="8 6 3 12 8 18" />
+                    <polyline class="skill-glyph-webdev" points="16 6 21 12 16 18" />
+                  </svg>
+                )}
+                {icon.glyph === "hosting" && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect class="skill-glyph-hosting" x="4" y="4" width="16" height="6" rx="1.4" />
+                    <rect class="skill-glyph-hosting" x="4" y="14" width="16" height="6" rx="1.4" />
+                    <circle class="skill-glyph-hosting" cx="7.6" cy="7" r="0.55" />
+                    <circle class="skill-glyph-hosting" cx="7.6" cy="17" r="0.55" />
+                  </svg>
+                )}
+                {!icon.custom && icon.path && (
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d={icon.path} />
+                  </svg>
+                )}
+              </div>
+            ) : null}
+
+            {item.titleHtml && (
+              <h3 class="skill-card-title">
+                <span set:html={item.titleHtml} />
+                {item.href && (
+                  <span class="skill-card-arrow" aria-hidden="true">→</span>
+                )}
+              </h3>
+            )}
+
+            {item.descriptionHtml && (
+              <div class="skill-card-description" set:html={item.descriptionHtml} />
+            )}
+          </Tag>
+        );
+      })}
+    </div>
+
+    {isCompact && (
+      <div class="skill-detail-panel" data-skill-panel data-skill-default={introText}>
+        {introText}
+      </div>
+    )}
+  </div>
+)}
+
+<script>
+  document.querySelectorAll("[data-skill-block]").forEach((block) => {
+    const grid = block.querySelector("[data-skill-grid]");
+    const panel = block.querySelector("[data-skill-panel]");
+    if (!grid || !panel) return;
+
+    const defaultText = panel.getAttribute("data-skill-default") ?? "";
+
+    grid.querySelectorAll("[data-skill-tool]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const isAlreadyActive = button.classList.contains("is-active");
+
+        grid.querySelectorAll(".skill-icon-item").forEach((el) =>
+          el.classList.remove("is-active"),
+        );
+
+        if (isAlreadyActive) {
+          panel.textContent = defaultText;
+          return;
+        }
+
+        button.classList.add("is-active");
+        const tool = button.getAttribute("data-skill-tool") ?? "";
+        const detailHtml = button.getAttribute("data-skill-detail-html") ?? "";
+        panel.innerHTML = `<strong>${tool}</strong>${detailHtml}`;
+      });
+    });
+  });
+</script>

@@ -71,15 +71,41 @@ const profilPro = defineCollection({
 
     photo: image().optional(),
 
+    // Modular skill/tool cards — mirrors the carousel's flexibility: each
+    // card just needs at least one of image/icon/title/description to
+    // render. `icon` is a key into src/lib/tool-icons.ts. `href` makes
+    // the card a real link (only meaningful in "medium"/"large" display
+    // mode — see skillsSize below).
     skills: z
       .array(
-        z.object({
-          tool: z.string(),
-          icon: z.string(),
-          detail: z.string(),
-        }),
+        z
+          .object({
+            title: z.string().optional(),
+            icon: z.string().optional(),
+            image: image().optional(),
+            description: z.string().optional(),
+            href: z.string().optional(),
+          })
+          .refine(
+            (card) => card.image || card.icon || card.title || card.description,
+            {
+              message:
+                "A skill card needs at least one of: image, icon, title, description.",
+            },
+          ),
       )
       .optional(),
+    // Editorial intro text shown by default in the skills detail panel
+    // (before any icon is clicked). Only used in "small" display mode —
+    // see skillsSize below. This is page-specific content, not a generic
+    // UI string, so it lives here rather than in ui.json.
+    skillsIntro: z.string().optional(),
+    // Display mode for the skills grid: "small" is the original compact
+    // icon-only look (with the shared detail panel above); "medium" and
+    // "large" render full content cards instead (image/icon + title +
+    // description shown directly, optionally a link via each card's
+    // href) — "large" is sized to match the legal-hub cards.
+    skillsSize: z.enum(["small", "medium", "large"]).optional(),
 
     alternanceProject: z.string().optional(),
 

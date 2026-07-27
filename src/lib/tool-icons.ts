@@ -27,13 +27,36 @@ const oracleCloudGlyph = {
   glyph: "cloud",
 };
 
+// "Développement web" covers HTML/CSS/JS/UX work together — not a single
+// brand, so a generic hand-drawn code-tag ("</>") glyph instead of a logo.
+const webDevGlyph = {
+  title: "Développement web",
+  custom: true,
+  glyph: "webdev",
+};
+
+// "Hébergement" (déploiement FTP + gestion de nom de domaine, hébergeur
+// OVH) isn't a brand skill either — hand-drawn server/DNS glyph instead.
+const hostingGlyph = {
+  title: "Hébergement",
+  custom: true,
+  glyph: "hosting",
+};
+
 export const toolIcons: Record<
   string,
-  { title: string; path?: string; custom?: boolean; glyph?: "db" | "cloud" }
+  {
+    title: string;
+    path?: string;
+    custom?: boolean;
+    glyph?: "db" | "cloud" | "webdev" | "hosting";
+  }
 > = {
   python: siPython,
   sql: { ...sqlGlyph, glyph: "db" },
   oraclecloud: oracleCloudGlyph,
+  webdev: webDevGlyph,
+  hosting: hostingGlyph,
   html5: siHtml5,
   css: siCss,
   javascript: siJavascript,
