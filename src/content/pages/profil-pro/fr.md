@@ -1,6 +1,6 @@
 ---
 title: "Anaïs Mattle — Profil professionnel"
-description: "Profil professionnel d'Anaïs Mattle — développeuse autodidacte en formation BTS SIO SLAM, recherche d'une alternance sur Lille."
+description: "Profil professionnel d'Anaïs Mattle — développeuse autodidacte en formation BTS SIO, recherche d'une alternance sur Lille."
 eyebrow: "Développeuse autodidacte"
 heading: "Anaïs Mattle"
 firstName: "ANAÏS"
@@ -47,7 +47,7 @@ skills:
     icon: "tailscale"
     description: "Réseau privé pour le partage de fichiers et les connexions SSH vers mes VM et entre mes appareils personnels."
 
-alternanceProject: "Je recherche une entreprise d'accueil pour une alternance en développement (BTS SIO SLAM) à partir de septembre 2026, sur la région lilloise. J'ai été acceptée par les deux écoles ci-dessous : il me reste à trouver l'entreprise qui m'accueillera."
+alternanceProject: "Je recherche une entreprise d'accueil pour une alternance en BTS SIO à partir de septembre 2026, sur la région lilloise. J'ai été acceptée par les deux écoles ci-dessous, qui proposent des rythmes différents : à l'entreprise de choisir celui qui lui convient le mieux."
 
 formation:
   - name: "My Digital School — Lille"
@@ -68,9 +68,9 @@ formation:
 accordion:
   - question: "Pourquoi le numérique — et pourquoi maintenant ?"
     answer: |
-      Mon premier projet remonte à 2018 : pour ONES, un concours de chant en équipe réunissant 200 participants sur Smule, j'ai développé un bot Discord en Python avec une base SQL pour suivre en direct les points et l'inventaire de chaque joueur. L'objectif était que les mécaniques de jeu de rôle textuel fonctionnent 24h/24 sans nécessiter la présence constante d'un maître de jeu. De là, chaque nouveau besoin m'a amenée à apprendre une nouvelle compétence : un bot de modération pour un serveur communautaire, des automatisations Google Sheets pour gérer une alliance de guildes, puis le développement web pour construire mes pages de candidature et mon site personnel.
+      Mon premier projet remonte à 2018 : pour ONES, un concours de chant en équipe réunissant 200 participants sur Smule, j'ai développé un bot Discord en Python avec une base SQL pour suivre en direct les points et l'inventaire de chaque joueur. L'objectif était que les mécaniques de jeu de rôle textuel fonctionnent 24h/24 sans nécessiter la présence constante d'un maître de jeu. De là, chaque nouveau besoin m'a amenée à apprendre une nouvelle compétence : un bot de modération pour un serveur communautaire, des automatisations Google Sheets pour gérer une alliance de guildes, l'administration de machines distantes puis le développement web pour construire mes pages de candidature et mon site personnel.
 
-      Cette pratique autodidacte m'a amenée à faire un bilan de compétences qui a confirmé cette orientation technique et m'a permis de la formaliser dans un cursus cohérent : le BTS SIO SLAM.
+      Cette pratique autodidacte m'a amenée à faire un bilan de compétences qui a confirmé cette orientation technique et m'a permis de la formaliser dans un cursus cohérent : le BTS SIO.
   - question: "Mon parcours avant le numérique"
     answer: |
       Avant de me tourner vers le numérique, j'ai occupé des missions très différentes : médiation animale, vente, service en restauration, animations auprès de publics variés — ainsi qu'un module professionnel commerce chez Vecteur Formation. Ces expériences m'ont surtout appris à écouter et comprendre un besoin, à adapter mon discours selon la personne en face de moi, et ont développé ma pédagogie.
