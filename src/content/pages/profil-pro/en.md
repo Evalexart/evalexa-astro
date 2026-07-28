@@ -45,7 +45,7 @@ skills:
     icon: "tailscale"
     description: "Private network for file sharing and SSH connections to my VMs and between my personal devices."
 
-alternanceProject: "I am looking for a development apprenticeship (BTS SIO SLAM) starting September 2026, in the Lille area. I have been accepted by both schools below: I now need to find the company that will host me."
+alternanceProject: "I am looking for a company to host me for a BTS SIO apprenticeship starting September 2026, in the Lille area. I have been accepted by both schools below, which offer different rhythms: the company is free to choose whichever suits them best."
 
 formation:
   - name: "My Digital School — Lille"
@@ -70,22 +70,6 @@ accordion:
     answer: "While adding a feature to my first bot, an error in an SQL query corrupted the guild inventories in the middle of the night, during a test session with my team. I had to fix it urgently and restore the database before the members woke up. Since then, I have always kept my production and test environments separate."
   - question: "How I apply"
     answer: "I replaced my classic cover letters with web application pages, each carrying my visual identity with an introduction tailored to the company: SNCF, Décathlon, Chronodrive, Gabby, DYB - Pain de Minuit."
-
-contact:
-  name: "Anaïs Mattle"
-  items:
-    - icon: "✉"
-      label: "a.mattle@outlook.com"
-    - icon: "☎"
-      label: "06 09 56 29 33"
-    - icon: "📍"
-      label: "62500 Saint-Omer, France"
-    - icon: "🚆"
-      label: "Lille / Calais rail line"
-    - icon: "🚗"
-      label: "Driving licence — personal vehicle"
-    - icon: "💻"
-      label: "Remote possible"
 
 carouselSize: "large"
 carouselOrientation: "portrait"
@@ -171,6 +155,22 @@ carousel:
       I explore landscapes, atmospheres and light, through an entirely self-taught practice.
 
       This curiosity for visual creation naturally extended into digital drawing, notably with the design of the Evalexa logo, and continues to influence how I approach the visual identity of my projects.
+
+contact:
+  name: "Anaïs Mattle"
+  items:
+    - icon: "✉"
+      label: "a.mattle@outlook.com"
+    - icon: "☎"
+      label: "06 09 56 29 33"
+    - icon: "📍"
+      label: "62500 Saint-Omer, France"
+    - icon: "🚆"
+      label: "Lille / Calais rail line"
+    - icon: "🚗"
+      label: "Driving licence — personal vehicle"
+    - icon: "💻"
+      label: "Remote possible"
 ---
 
 This page is meant to be shared directly (CV, applications).

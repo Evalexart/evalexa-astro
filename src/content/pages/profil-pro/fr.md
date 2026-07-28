@@ -106,22 +106,6 @@ accordion:
 
       C'est le prolongement naturel de ce que j'ai déjà pratiqué en autodidacte : bêta-test sur Sky: Children of the Light, mise en place d'environnements de test séparés de la production, ou encore automatisations Google Sheets pour la gestion d'une alliance de guildes. Je ne ferme pas la porte à des missions orientées réseau ou infrastructure, un domaine où j'ai une première expérience pratique via l'hébergement cloud de mes VM et de mon site personnel. Je suis ouverte aussi bien à une petite structure qu'à une plus grande équipe, en présentiel ou en distanciel partiel, et disponible pour une immersion avant la prise de poste.
 
-contact:
-  name: "Anaïs Mattle"
-  items:
-    - icon: "✉"
-      label: "a.mattle@outlook.com"
-    - icon: "☎"
-      label: "06 09 56 29 33"
-    - icon: "📍"
-      label: "62500 Saint-Omer"
-    - icon: "🚆"
-      label: "Ligne SNCF Lille / Calais"
-    - icon: "🚗"
-      label: "Permis B — véhicule personnel"
-    - icon: "💻"
-      label: "Distanciel possible"
-
 carouselSize: "large"
 carouselOrientation: "portrait"
 carouselImageRatio: "16/9"
@@ -199,6 +183,22 @@ carousel:
       J'y explore les paysages, les ambiances et la lumière, avec une pratique entièrement autodidacte.  
 
       Cette curiosité pour la création visuelle s'est naturellement prolongée dans le dessin numérique, notamment avec la conception du logo d'Evalexa, et continue d'influencer la manière dont j'aborde l'identité graphique de mes projets.
+
+contact:
+  name: "Anaïs Mattle"
+  items:
+    - icon: "✉"
+      label: "a.mattle@outlook.com"
+    - icon: "☎"
+      label: "06 09 56 29 33"
+    - icon: "📍"
+      label: "62500 Saint-Omer"
+    - icon: "🚆"
+      label: "Ligne SNCF Lille / Calais"
+    - icon: "🚗"
+      label: "Permis B — véhicule personnel"
+    - icon: "💻"
+      label: "Distanciel possible"
 ---
 
 Cette page est destinée à être partagée directement (CV, candidatures). Elle n'est donc pas accessible via la navigation du site, cela afin de ne pas exposer innutilement sur internet des documents et informations personnelles.
