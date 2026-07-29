@@ -1,14 +1,14 @@
 ---
 title: "Anaïs Mattle — Profil professionnel"
 description: "Profil professionnel d'Anaïs Mattle — développeuse autodidacte en formation BTS SIO, recherche d'une alternance sur Lille."
-eyebrow: "Développeuse autodidacte"
+eyebrow: "Profil Professionnel"
 heading: "Anaïs Mattle"
 firstName: "ANAÏS"
 lastName: "MATTLE"
 intro: |
   A la recherche d'une entreprise d'accueil sur Lille  
-  dans le cadre d'un BTS SIO en alternance."
-quote: "« Chaque projet a commencé par un besoin concret — jamais par l'envie d'apprendre un outil pour lui-même. »"
+  dans le cadre d'un BTS SIO en alternance.
+quote: "« Chacun de mes projets a commencé par un besoin concret — jamais par l'envie d'apprendre un outil pour lui-même. »"
 cvHref: "/assets/cv.pdf"
 
 photo: "./photo.webp"
@@ -24,7 +24,7 @@ skills:
     description: "Écriture de requêtes SQL : création de tables, lecture et écriture de données (SQLite et PostgreSQL)."
   - title: "Web"
     icon: "webdev"
-    description: "Conception de la structure, du design et de l'expérience utilisateur du site : navigation bilingue, thèmes clair/sombre, carrousel, accordéon, mise en page responsive."
+    description: "Conception de la structure (HTML/CSS), du design et de l'expérience utilisateur (JavaScript) du site : navigation bilingue, thèmes clair/sombre, carrousel, accordéon, mise en page responsive."
   - title: "Hébergement"
     icon: "hosting"
     description: "Déploiement du site via FTP, gestion du nom de domaine."
@@ -64,47 +64,6 @@ formation:
         href: "https://www.gastonberger.fr/"
       - label: "Voir le planning d'alternance"
         href: "/assets/planning-gb.pdf"
-
-accordion:
-  - question: "Pourquoi le numérique — et pourquoi maintenant ?"
-    answer: |
-      Mon premier projet remonte à 2018 : pour ONES, un concours de chant en équipe réunissant 200 participants sur Smule, j'ai développé un bot Discord en Python avec une base SQL pour suivre en direct les points et l'inventaire de chaque joueur. L'objectif était que les mécaniques de jeu de rôle textuel fonctionnent 24h/24 sans nécessiter la présence constante d'un maître de jeu. De là, chaque nouveau besoin m'a amenée à apprendre une nouvelle compétence : un bot de modération pour un serveur communautaire, des automatisations Google Sheets pour gérer une alliance de guildes, l'administration de machines distantes puis le développement web pour construire mes pages de candidature et mon site personnel.
-
-      Cette pratique autodidacte m'a amenée à faire un bilan de compétences qui a confirmé cette orientation technique et m'a permis de la formaliser dans un cursus cohérent : le BTS SIO.
-  - question: "Mon parcours avant le numérique"
-    answer: |
-      Avant de me tourner vers le numérique, j'ai occupé des missions très différentes : médiation animale, vente, service en restauration, animations auprès de publics variés — ainsi qu'un module professionnel commerce chez Vecteur Formation. Ces expériences m'ont surtout appris à écouter et comprendre un besoin, à adapter mon discours selon la personne en face de moi, et ont développé ma pédagogie.
-
-      C'est aussi aux Anges Gardins, où j'animais des ateliers cuisine, jardinage et nature, que j'ai eu mon premier contact concret avec l'automatisation : la gestion et l'automatisation d'un fichier de suivi de stock, bien avant mes projets numériques personnels.
-
-      Ce sont des compétences que je retrouve directement dans mes projets numériques : comprendre ce que demande réellement un utilisateur ou une communauté avant de coder une solution, expliquer un outil à quelqu'un qui ne le maîtrise pas, ou encore documenter une démarche pour qu'elle reste compréhensible par d'autres.
-  - question: "Mes pratiques artistiques"
-    answer: |
-      Mon bac littéraire, option cinéma-audiovisuel, ainsi que ma pratique de l'aquarelle, ont développé mon sens de la composition. Cela m'aide aujourd'hui à comprendre le chemin que le regard emprunte sur un site ou une interface, et à penser la mise en page en conséquence.
-
-      Le chant lyrique, pratiqué plusieurs années au conservatoire, m'a apporté une aisance à la prise de parole en public ainsi qu'une attention au timbre et à l'intonation — une écoute et un usage du non-verbal que je mobilise naturellement dans mes échanges. La pratique en groupe (chorale, ensembles) m'a aussi habituée à un travail d'équipe centré sur l'équilibre collectif plutôt que sur la mise en avant personnelle.
-  - question: "Ma manière de travailler"
-    answer: |
-      Tout commence par un besoin ou une idée à réaliser. J'identifie les outils nécessaires et j'apprends, autant par la documentation, par l'expérimentation que par mes propres erreurs.
-
-      Lors d'un ajout de fonctionnalité sur mon premier bot, une erreur dans une requête SQL a corrompu les inventaires de guilde en pleine nuit pendant une session de test avec mon équipe. J'ai dû corriger en urgence et restaurer la base de données avant le réveil des membres. Depuis, je sépare systématiquement mes environnements de production et de test.
-
-      Que ce soit pour mes bots Discord, le tableau pour l'alliance de guilde ou plus récemment dans la construction de mon site, j'ai toujours eu à cœur de construire des choses compréhensibles et d'écouter les retours ou les demandes d'évolution.
-  - question: "Ma manière de candidater"
-    answer: |
-      Comme beaucoup de candidats, j'ai commencé mes recherches avec des candidatures classiques en envoyant CV et lettre de motivation. Puis j'ai été confrontée à une annonce qui demandait un support de motivation et non explicitement une lettre. Il m'a semblé alors naturel de présenter ma candidature sous la forme d'une page web de motivation. En plus de démontrer factuellement certaines de mes compétences, cela me permettait de continuer à apprendre par la pratique comme je l'ai toujours fait.
-
-      Ayant trouvé l'expérience bien plus enrichissante que la rédaction d'une lettre de motivation, j'ai décidé d'en faire ma nouvelle méthode de candidature. Je trouve cela bien moins impersonnel qu'une simple lettre, chacune de ces pages reprenant l'identité graphique de mon site personnel avec une introduction personnalisée à l'entreprise visée.
-  - question: "Pourquoi une recherche sur Lille plutot que plus proche de chez moi"
-    answer: |
-      La première raison est la diversité des entreprises possibles : l'agglomération lilloise est une zone riche en entreprises tech et en sièges d'entreprises ayant des services informatiques. La seconde est que je préfère privilégier des déplacements en transport en commun, qui permettent parfois un temps de révision ou de lecture et réponse à des mails, contrairement aux trajets en voiture. De plus, les établissements scolaires qui m'ont acceptée se trouvent à Lille, ce qui me permet de mutualiser un seul abonnement de train entre mon domicile, l'école et l'entreprise.
-
-      Je reste néanmoins ouverte à des propositions dans d'autres zones géographiques proches de chez moi.
-  - question: "Les missions que je recherche"
-    answer: |
-      Je vise une alternance orientée test fonctionnel, qualité logicielle et développement d'outils. Concrètement : vérification de parcours utilisateur, recherche et reproduction d'anomalies, diagnostic d'incidents applicatifs, suivi de tickets techniques, ainsi que le développement et l'amélioration continue d'outils internes ou d'automatisations.
-
-      C'est le prolongement naturel de ce que j'ai déjà pratiqué en autodidacte : bêta-test sur Sky: Children of the Light, mise en place d'environnements de test séparés de la production, ou encore automatisations Google Sheets pour la gestion d'une alliance de guildes. Je ne ferme pas la porte à des missions orientées réseau ou infrastructure, un domaine où j'ai une première expérience pratique via l'hébergement cloud de mes VM et de mon site personnel. Je suis ouverte aussi bien à une petite structure qu'à une plus grande équipe, en présentiel ou en distanciel partiel, et disponible pour une immersion avant la prise de poste.
 
 carouselSize: "large"
 carouselOrientation: "portrait"
@@ -165,7 +124,7 @@ carousel:
     description: |
       Page de candidature (en français) pour Chronodrive.  
 
-      L'animation d'intro fait flotter un panier de courses contenant mes compétences et missions ; un clic donne accès à la page."
+      L'animation d'intro fait flotter un panier de courses contenant mes compétences et missions ; un clic donne accès à la page.
     href: "https://evalexa.fr/candidature-chronodrive/"
   - title: "Evalexa"
     image: "../../../assets/images/logo/logo-full-watercolor.webp"
@@ -184,13 +143,58 @@ carousel:
 
       Cette curiosité pour la création visuelle s'est naturellement prolongée dans le dessin numérique, notamment avec la conception du logo d'Evalexa, et continue d'influencer la manière dont j'aborde l'identité graphique de mes projets.
 
+accordion:
+  - question: "Pourquoi le numérique — et pourquoi maintenant ?"
+    answer: |
+      Mon premier projet remonte à 2018 : pour ONES, un concours de chant en équipe réunissant 200 participants sur Smule, j'ai développé un bot Discord en Python avec une base SQL pour suivre en direct les points et l'inventaire de chaque joueur. L'objectif était que les mécaniques de jeu de rôle textuel fonctionnent 24h/24 sans nécessiter la présence constante d'un maître de jeu. De là, chaque nouveau besoin m'a amenée à apprendre une nouvelle compétence : un bot de modération pour un serveur communautaire, des automatisations Google Sheets pour gérer une alliance de guildes, l'administration de machines distantes puis le développement web pour construire mes pages de candidature et mon site personnel.
+
+      Cette pratique autodidacte m'a amenée à faire un bilan de compétences qui a confirmé cette orientation technique et m'a permis de la formaliser dans un cursus cohérent : le BTS SIO.
+  - question: "Mon parcours avant le numérique"
+    answer: |
+      Avant de me tourner vers le numérique, j'ai occupé des missions très différentes : médiation animale, vente, service en restauration, animations auprès de publics variés — ainsi qu'un module professionnel commerce chez Vecteur Formation. Ces expériences m'ont surtout appris à écouter et comprendre un besoin, à adapter mon discours selon la personne en face de moi, et ont développé ma pédagogie.
+
+      C'est aussi aux Anges Gardins, où j'animais des ateliers cuisine, jardinage et nature, que j'ai eu mon premier contact concret avec l'automatisation : la gestion et l'automatisation d'un fichier de suivi de stock, bien avant mes projets numériques personnels.
+
+      Ce sont des compétences que je retrouve directement dans mes projets numériques : comprendre ce que demande réellement un utilisateur ou une communauté avant de coder une solution, expliquer un outil à quelqu'un qui ne le maîtrise pas, ou encore documenter une démarche pour qu'elle reste compréhensible par d'autres.
+  - question: "Mes pratiques artistiques"
+    answer: |
+      Mon bac littéraire, option cinéma-audiovisuel, ainsi que ma pratique de l'aquarelle, ont développé mon sens de la composition. Cela m'aide aujourd'hui à comprendre le chemin que le regard emprunte sur un site ou une interface, et à penser la mise en page en conséquence.
+
+      Le chant lyrique, pratiqué plusieurs années au conservatoire, m'a apporté une aisance à la prise de parole en public ainsi qu'une attention au timbre et à l'intonation — une écoute et un usage du non-verbal que je mobilise naturellement dans mes échanges. La pratique en groupe (chorale, ensembles) m'a aussi habituée à un travail d'équipe centré sur l'équilibre collectif plutôt que sur la mise en avant personnelle.
+  - question: "Ma manière de travailler"
+    answer: |
+      Tout commence par un besoin ou une idée à réaliser. J'identifie les outils nécessaires et j'apprends, autant par la documentation, par l'expérimentation que par mes propres erreurs.
+
+      Lors d'un ajout de fonctionnalité sur mon premier bot, une erreur dans une requête SQL a corrompu les inventaires de guilde en pleine nuit pendant une session de test avec mon équipe. J'ai dû corriger en urgence et restaurer la base de données avant le réveil des membres. Depuis, je sépare systématiquement mes environnements de production et de test.
+
+      Que ce soit pour mes bots Discord, le tableau pour l'alliance de guilde ou plus récemment dans la construction de mon site, j'ai toujours eu à cœur de construire des choses compréhensibles et d'écouter les retours ou les demandes d'évolution.
+  - question: "Ma manière de candidater"
+    answer: |
+      Comme beaucoup de candidats, j'ai commencé mes recherches avec des candidatures classiques en envoyant CV et lettre de motivation. Puis j'ai été confrontée à une annonce qui demandait un support de motivation et non explicitement une lettre. Il m'a semblé alors naturel de présenter ma candidature sous la forme d'une page web de motivation. En plus de démontrer factuellement certaines de mes compétences, cela me permettait de continuer à apprendre par la pratique comme je l'ai toujours fait.
+
+      Ayant trouvé l'expérience bien plus enrichissante que la rédaction d'une lettre de motivation, j'ai décidé d'en faire ma nouvelle méthode de candidature. Je trouve cela bien moins impersonnel qu'une simple lettre, chacune de ces pages reprenant l'identité graphique de mon site personnel avec une introduction personnalisée à l'entreprise visée.
+  - question: "Pourquoi une recherche sur Lille plutot que plus proche de chez moi"
+    answer: |
+      La première raison est la diversité des entreprises possibles : l'agglomération lilloise est une zone riche en entreprises tech et en sièges d'entreprises ayant des services informatiques. La seconde est que je préfère privilégier des déplacements en transport en commun, qui permettent parfois un temps de révision ou de lecture et réponse à des mails, contrairement aux trajets en voiture. De plus, les établissements scolaires qui m'ont acceptée se trouvent à Lille, ce qui me permet de mutualiser un seul abonnement de train entre mon domicile, l'école et l'entreprise.
+
+      Je reste néanmoins ouverte à des propositions dans d'autres zones géographiques proches de chez moi.
+  - question: "Les missions que je recherche"
+    answer: |
+      Je vise une alternance orientée test fonctionnel, qualité logicielle et développement d'outils. Concrètement : vérification de parcours utilisateur, recherche et reproduction d'anomalies, diagnostic d'incidents applicatifs, suivi de tickets techniques, ainsi que le développement et l'amélioration continue d'outils internes ou d'automatisations.
+
+      C'est le prolongement naturel de ce que j'ai déjà pratiqué en autodidacte : bêta-test sur Sky: Children of the Light, mise en place d'environnements de test séparés de la production, ou encore automatisations Google Sheets pour la gestion d'une alliance de guildes. 
+
+      Je ne ferme pas la porte à des missions orientées réseau ou infrastructure, un domaine où j'ai une première expérience pratique via l'hébergement cloud de mes VM et de mon site personnel. Je suis ouverte aussi bien à une petite structure qu'à une plus grande équipe, en présentiel ou en distanciel.
+
 contact:
   name: "Anaïs Mattle"
   items:
+    - note: "Je suis disponnible immédiatement, n'hésitez pas à me contacter via les canaux ci-dessus."
     - icon: "✉"
       label: "a.mattle@outlook.com"
     - icon: "☎"
       label: "06 09 56 29 33"
+    - note: "Une courte immersion dans mes zones de mobilité est également possible, si les delais avant le début de formation le permettent."
     - icon: "📍"
       label: "62500 Saint-Omer"
     - icon: "🚆"
@@ -199,6 +203,9 @@ contact:
       label: "Permis B — véhicule personnel"
     - icon: "💻"
       label: "Distanciel possible"
+    - note: "Pour aller plus loin vous pouvez consultez mon github :"
+    - icon: "🔗"
+      label: "https://github.com/Evalexart"
 ---
 
-Cette page est destinée à être partagée directement (CV, candidatures). Elle n'est donc pas accessible via la navigation du site, cela afin de ne pas exposer innutilement sur internet des documents et informations personnelles.
+Cette page est destinée à être partagée directement (CV, candidatures). Elle n'est donc pas accessible via la navigation du site, cela afin de ne pas exposer inutilement sur internet des documents et informations personnelles.

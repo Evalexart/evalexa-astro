@@ -133,12 +133,26 @@ const profilPro = defineCollection({
     contact: z
       .object({
         name: z.string().optional(),
+        // Each entry in `items` is either:
+        //  - a classic contact item (icon + label, optionally linked via
+        //    href), rendered inside the 2-column grid, or
+        //  - a free-standing note (just `note`), rendered as a full-width
+        //    line that breaks out of the 2-column grid. Notes can be
+        //    placed anywhere in the array — before, between, or after the
+        //    regular items — since position in the array is what decides
+        //    where the line appears on the page.
         items: z.array(
-          z.object({
-            icon: z.string().optional(),
-            label: z.string(),
-            href: z.string().optional(),
-          }),
+          z
+            .object({
+              icon: z.string().optional(),
+              label: z.string().optional(),
+              href: z.string().optional(),
+              note: z.string().optional(),
+            })
+            .refine((item) => item.note || item.label, {
+              message:
+                "A contact entry needs either a `label` (regular item) or a `note` (full-width line).",
+            }),
         ),
       })
       .optional(),

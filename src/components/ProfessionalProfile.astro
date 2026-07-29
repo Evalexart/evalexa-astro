@@ -96,6 +96,20 @@ const carouselLabels = ui[lang].carousel;
     </div>
   )}
 
+  {carousel.length > 0 && (
+    <div class="profil-carousel">
+      <h2 class="profil-section-title">{t.carouselTitle}</h2>
+      <Carousel
+        items={carousel}
+        size={carouselSize}
+        orientation={carouselOrientation}
+        imageRatio={carouselImageRatio}
+        prevLabel={carouselLabels.previous}
+        nextLabel={carouselLabels.next}
+      />
+    </div>
+  )}
+
   {formation.length > 0 && (
     <div class="profil-page profil-formation">
       <h2 class="profil-section-title">{t.formationTitle}</h2>
@@ -136,34 +150,26 @@ const carouselLabels = ui[lang].carousel;
     </div>
   )}
 
-  {carousel.length > 0 && (
-    <div class="profil-carousel">
-      <h2 class="profil-section-title">{t.carouselTitle}</h2>
-      <Carousel
-        items={carousel}
-        size={carouselSize}
-        orientation={carouselOrientation}
-        imageRatio={carouselImageRatio}
-        prevLabel={carouselLabels.previous}
-        nextLabel={carouselLabels.next}
-      />
-    </div>
-  )}
-
   {contact && (
     <div class="profil-contact">
       <div class="profil-contact-inner">
         <MarkdownText class="profil-contact-sign" value={contact.name} inline />
         <div class="profil-contact-grid">
           {contact.items.map((item) => (
-            <div class="profil-contact-item">
-              <span class="profil-contact-icon">{item.icon}</span>
-              {item.href ? (
-                <a href={item.href}><MarkdownText tag="span" value={item.label} inline /></a>
-              ) : (
-                <MarkdownText tag="span" value={item.label} inline />
-              )}
-            </div>
+            item.note ? (
+              <div class="profil-contact-note">
+                <MarkdownText tag="span" value={item.note} inline />
+              </div>
+            ) : (
+              <div class="profil-contact-item">
+                <span class="profil-contact-icon">{item.icon}</span>
+                {item.href ? (
+                  <a href={item.href}><MarkdownText tag="span" value={item.label} inline /></a>
+                ) : (
+                  <MarkdownText tag="span" value={item.label} inline />
+                )}
+              </div>
+            )
           ))}
         </div>
       </div>
