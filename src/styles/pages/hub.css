@@ -1,5 +1,7 @@
-/* Hub page: imports shared CSS first, then only hub-specific layout helpers. */
-@import url("../main.css");
+/* Hub page: page-specific styles only — the shared foundation (tokens,
+   reset, header, footer, etc.) already comes from main.css via
+   BaseLayout.astro, so this file no longer re-imports it. Only the pieces
+   this page actually needs on top of that: hero + panel blocks. */
 @import url("../components/hero.css");
 @import url("../layout/panels.css");
 

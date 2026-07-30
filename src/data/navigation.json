@@ -136,9 +136,9 @@
         "fr": "/fr/legal/",
         "en": "/en/legal/"
       },
-      "enabled": false,
+      "enabled": true,
       "showInHeader": false,
-      "showInFooter": false
+      "showInFooter": true
     },
     {
       "id": "legal-notice",
@@ -152,7 +152,7 @@
       },
       "enabled": false,
       "showInHeader": false,
-      "showInFooter": true
+      "showInFooter": false
     },
     {
       "id": "privacy",

@@ -15,6 +15,9 @@ const { lang, pageId, contentId, frHref, enHref } = Astro.props;
 const page = await getEntry("pages", contentId);
 if (!page) throw new Error(`Content page not found: ${contentId}`);
 const sections = page.data.legalSections ?? [];
+
+const hubHref = lang === "fr" ? "/fr/legal/" : "/en/legal/";
+const backLabel = lang === "fr" ? "Retour aux documents légaux" : "Back to legal documents";
 ---
 
 <BaseLayout
@@ -53,5 +56,9 @@ const sections = page.data.legalSections ?? [];
         ))}
       </div>
     </div>
+
+    <p class="center" style="margin-top: 1.6rem;">
+      <a class="button" href={hubHref}>← {backLabel}</a>
+    </p>
   </section>
 </BaseLayout>
