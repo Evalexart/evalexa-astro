@@ -24,7 +24,7 @@ skills:
     description: "Writing SQL queries: table creation, reading and writing data (SQLite and PostgreSQL)."
   - title: "Web"
     icon: "webdev"
-    description: "Designing the site's structure, design, and user experience: bilingual navigation, light/dark themes, carousel, accordion, responsive layout."
+    description: "Designing the site's structure (HTML/CSS), design, and user experience (JavaScript): bilingual navigation, light/dark themes, carousel, accordion, responsive layout."
   - title: "Hosting"
     icon: "hosting"
     description: "Site deployment via FTP, domain name management."
@@ -104,7 +104,9 @@ accordion:
     answer: |
       I am aiming for a work-study program oriented towards functional testing, software quality, and tool development. In concrete terms: verification of user journeys, research and reproduction of anomalies, diagnosis of application incidents, tracking of technical tickets, as well as the development and continuous improvement of internal tools or automations.
 
-      This is the natural extension of what I have already practiced self-taught: beta testing on Sky: Children of the Light, setting up test environments separated from production, or Google Sheets automations for managing a guild alliance. I am not closing the door to missions oriented towards networks or infrastructure, an area where I have an initial practical experience via the cloud hosting of my VMs and my personal site. I am open to both a small structure and a larger team, in person or partially remote, and available for an immersion before taking up the post.
+      This is the natural extension of what I have already practiced self-taught: beta testing on Sky: Children of the Light, setting up test environments separated from production, or Google Sheets automations for managing a guild alliance.
+
+      I am not closing the door to missions oriented towards networks or infrastructure, an area where I have an initial practical experience via the cloud hosting of my VMs and my personal site. I am open to both a small structure and a larger team, in person or partially remote.
 
 carouselSize: "large"
 carouselOrientation: "portrait"
@@ -119,7 +121,7 @@ carousel:
   - title: "Oréo"
     image: "./Capture-sky.webp"
     description: |
-      Moderation and animation bot developed in 2020 for Sky: Children of the Light, a community server active for over 6 years.  
+      Moderation and animation bot developed in 2020 for Sky : Enfants de la Lumière, a community server active for over 6 years.  
       Oréo, still in service today, allows moderators to isolate a member — role removal, move to private channel, up to manual kick — without granting them critical rights like ban or kick, as well as several contests and mini-games (draws, lottery) and automatic scheduled cleaning of certain channels every morning.
   - title: "French Garden Alliance"
     image: "./Capture-FG.webp"
@@ -187,10 +189,12 @@ carousel:
 contact:
   name: "Anaïs Mattle"
   items:
+    - note: "I am available immediately, feel free to contact me via the channels above."
     - icon: "✉"
       label: "a.mattle@outlook.com"
     - icon: "☎"
       label: "06 09 56 29 33"
+    - note: "A short immersion within my mobility area is also possible, if timing before the start of training allows."
     - icon: "📍"
       label: "62500 Saint-Omer"
     - icon: "🚆"
@@ -199,6 +203,9 @@ contact:
       label: "B License — personal vehicle"
     - icon: "💻"
       label: "Remote possible"
+    - note: "To go further you can check out my github:"
+    - icon: "🔗"
+      label: "https://github.com/Evalexart"
 ---
 
 This page is intended to be shared directly (CV, applications). It is therefore not accessible via the site's navigation, to avoid unnecessarily exposing personal documents and information on the internet.

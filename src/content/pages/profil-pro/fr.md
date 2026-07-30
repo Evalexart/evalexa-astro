@@ -6,7 +6,7 @@ heading: "Anaïs Mattle"
 firstName: "ANAÏS"
 lastName: "MATTLE"
 intro: |
-  A la recherche d'une entreprise d'accueil sur Lille  
+  À la recherche d'une entreprise d'accueil sur Lille  
   dans le cadre d'un BTS SIO en alternance.
 quote: "« Chacun de mes projets a commencé par un besoin concret — jamais par l'envie d'apprendre un outil pour lui-même. »"
 cvHref: "/assets/cv.pdf"
@@ -73,7 +73,7 @@ carousel:
     image: "./Capture-ones.webp"
     description: |
       Bot Discord et base SQL développés en 2018 pour ONES, un concours de chant en équipe réunissant 200 participants sur 3 mois.  
-      Chaque joueur disposait d'un inventaire — chocolat, fléchettes, cartes, or — consommé pour se soigner ou déclencher des attaque et actions aléatoires.  
+      Chaque joueur disposait d'un inventaire — chocolat, fléchettes, cartes, or — consommé pour se soigner ou déclencher des attaques et actions aléatoires.  
       L'ensemble des mécaniques de jeu de rôle textuel devait tourner 24h/24 sans nécessiter la présence constante d'un maître de jeu.
   - title: "Oréo"
     image: "./Capture-sky.webp"
@@ -173,7 +173,7 @@ accordion:
       Comme beaucoup de candidats, j'ai commencé mes recherches avec des candidatures classiques en envoyant CV et lettre de motivation. Puis j'ai été confrontée à une annonce qui demandait un support de motivation et non explicitement une lettre. Il m'a semblé alors naturel de présenter ma candidature sous la forme d'une page web de motivation. En plus de démontrer factuellement certaines de mes compétences, cela me permettait de continuer à apprendre par la pratique comme je l'ai toujours fait.
 
       Ayant trouvé l'expérience bien plus enrichissante que la rédaction d'une lettre de motivation, j'ai décidé d'en faire ma nouvelle méthode de candidature. Je trouve cela bien moins impersonnel qu'une simple lettre, chacune de ces pages reprenant l'identité graphique de mon site personnel avec une introduction personnalisée à l'entreprise visée.
-  - question: "Pourquoi une recherche sur Lille plutot que plus proche de chez moi"
+  - question: "Pourquoi une recherche sur Lille plutôt que plus proche de chez moi"
     answer: |
       La première raison est la diversité des entreprises possibles : l'agglomération lilloise est une zone riche en entreprises tech et en sièges d'entreprises ayant des services informatiques. La seconde est que je préfère privilégier des déplacements en transport en commun, qui permettent parfois un temps de révision ou de lecture et réponse à des mails, contrairement aux trajets en voiture. De plus, les établissements scolaires qui m'ont acceptée se trouvent à Lille, ce qui me permet de mutualiser un seul abonnement de train entre mon domicile, l'école et l'entreprise.
 
@@ -189,12 +189,12 @@ accordion:
 contact:
   name: "Anaïs Mattle"
   items:
-    - note: "Je suis disponnible immédiatement, n'hésitez pas à me contacter via les canaux ci-dessus."
+    - note: "Disponible dès maintenant pour tout échange ou entretien, n'hésitez pas à me contacter via les canaux ci-dessous."
     - icon: "✉"
       label: "a.mattle@outlook.com"
     - icon: "☎"
       label: "06 09 56 29 33"
-    - note: "Une courte immersion dans mes zones de mobilité est également possible, si les delais avant le début de formation le permettent."
+    - note: "Une courte immersion dans mes zones de mobilité est également possible, si les délais avant le début de formation le permettent."
     - icon: "📍"
       label: "62500 Saint-Omer"
     - icon: "🚆"
@@ -203,7 +203,7 @@ contact:
       label: "Permis B — véhicule personnel"
     - icon: "💻"
       label: "Distanciel possible"
-    - note: "Pour aller plus loin vous pouvez consultez mon github :"
+    - note: "Pour aller plus loin vous pouvez consulter mon github :"
     - icon: "🔗"
       label: "https://github.com/Evalexart"
 ---
