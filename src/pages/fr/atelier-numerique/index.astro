@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import statusData from "../../../../public/status/manual.json";
 
 const labels = {
   ok: "OK",
@@ -8,9 +9,6 @@ const labels = {
   down: "Hors ligne",
   unknown: "Inconnu",
 };
-
-const response = await fetch(new URL("/status/manual.json", Astro.url));
-const statusData = await response.json();
 
 const groups = [...statusData.groups].sort((a, b) => a.order - b.order);
 ---
@@ -21,7 +19,7 @@ const groups = [...statusData.groups].sort((a, b) => a.order - b.order);
   pageId="atelier-numerique"
   title="Atelier numérique — Evalexa"
   description="Services, outils et expérimentations techniques."
-  frHref="/fr/atelier-numerique/"
+  frHref="/fr/atelier-numérique/"
   enHref="/en/digital-workshop/"
 >
   <section class="hero hero-compact">
