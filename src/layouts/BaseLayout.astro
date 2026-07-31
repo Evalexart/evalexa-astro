@@ -12,6 +12,7 @@ const {
   description = "Site principal du projet Evalexa.",
   frHref = "/fr/",
   enHref = "/en/",
+  noIndex = false,
 } = Astro.props;
 
 const t = ui[lang] ?? ui.fr;
@@ -25,6 +26,7 @@ const t = ui[lang] ?? ui.fr;
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
