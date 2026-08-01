@@ -169,6 +169,13 @@ carousel:
 
       The intro animation floats a shopping basket containing my skills and missions; a click grants access to the page.
     href: "https://evalexa.fr/candidature-chronodrive/"
+  - title: "Inserm"
+    image: "./Capture-inserm.webp"
+    description: |
+      Application page (in French) for Inserm.  
+
+      The intro animation floats a research folder with dividers matching my skills and missions; a click grants access to the page.
+    href: "https://evalexa.fr/candidature-chronodrive/"
   - title: "Evalexa"
     image: "../../../assets/images/logo/logo-full-watercolor.webp"
     description: |

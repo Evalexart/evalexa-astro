@@ -13,9 +13,20 @@ const {
   frHref = "/fr/",
   enHref = "/en/",
   noIndex = false,
+  ogImage,
 } = Astro.props;
 
 const t = ui[lang] ?? ui.fr;
+
+// `ogImage` can be an absolute URL or a path relative to the site root
+// (e.g. the string returned by astro:assets' getImage()). Either way it
+// is resolved against the production domain so social previews always
+// get a fully-qualified URL, even from a local/dev build. When no
+// `ogImage` is passed, no image-related meta tags are emitted at all —
+// existing pages are unaffected.
+const resolvedOgImage = ogImage
+  ? new URL(ogImage, "https://evalexa.fr").toString()
+  : undefined;
 ---
 
 <!doctype html>
@@ -27,6 +38,17 @@ const t = ui[lang] ?? ui.fr;
     <title>{title}</title>
     <meta name="description" content={description} />
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    {resolvedOgImage && (
+      <>
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={resolvedOgImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={resolvedOgImage} />
+      </>
+    )}
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

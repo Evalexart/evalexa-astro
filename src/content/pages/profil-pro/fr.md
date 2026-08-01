@@ -126,6 +126,13 @@ carousel:
 
       L'animation d'intro fait flotter un panier de courses contenant mes compétences et missions ; un clic donne accès à la page.
     href: "https://evalexa.fr/candidature-chronodrive/"
+  - title: "Inserm"
+    image: "./Capture-inserm.webp"
+    description: |
+      Page de candidature (en français) pour l'Inserm.  
+
+      L'animation d'intro fait flotter un dossier de recherche avec les intercalaires correspondant à mes compétences et missions ; un clic donne accès à la page.
+    href: "https://evalexa.fr/candidature-inserm/"
   - title: "Evalexa"
     image: "../../../assets/images/logo/logo-full-watercolor.webp"
     description: |
