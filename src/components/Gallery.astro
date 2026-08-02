@@ -1,0 +1,240 @@
+---
+// Faceted gallery grid for the `oeuvres` collection. Facet values (which
+// media, orientations, series, tags actually show as chips) are derived
+// from the `items` passed in, so a filter group only ever offers values
+// that exist among the current entries — it grows on its own as more
+// artworks are added, instead of needing to be kept in sync by hand.
+//
+// Filtering itself runs entirely client-side (toggle `is-hidden`), since
+// the artwork count is expected to stay small enough that a full
+// client-side list is simpler and faster than a query-driven rebuild.
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import { renderMarkdown } from "../lib/markdown";
+import "../styles/components/gallery.css";
+
+interface GalleryItem {
+  slug: string;
+  title?: string;
+  date?: string;
+  description?: string;
+  image?: ImageMetadata;
+  dimensions?: string;
+  orientation?: "portrait" | "landscape" | "square";
+  medium?: string;
+  series?: string;
+  theme?: string[];
+  style?: string[];
+}
+
+interface Props {
+  items: GalleryItem[];
+  untitledLabel: string;
+  mediumLabel: string;
+  formatLabel: string;
+  seriesLabel: string;
+  tagLabel: string;
+  allLabel: string;
+  orientationLabels: { portrait: string; landscape: string; square: string };
+  countTemplate: string; // must contain "{count}"
+  emptyLabel: string;
+  placeholderLabel: string;
+}
+
+const {
+  items,
+  untitledLabel,
+  mediumLabel,
+  formatLabel,
+  seriesLabel,
+  tagLabel,
+  allLabel,
+  orientationLabels,
+  countTemplate,
+  emptyLabel,
+  placeholderLabel,
+} = Astro.props;
+
+function unique(values: (string | undefined)[]): string[] {
+  return Array.from(new Set(values.filter((v): v is string => Boolean(v))));
+}
+
+const mediums = unique(items.map((item) => item.medium));
+const orientations = unique(items.map((item) => item.orientation)) as Array<
+  "portrait" | "landscape" | "square"
+>;
+const seriesList = unique(items.map((item) => item.series));
+const tags = unique(items.flatMap((item) => [...(item.theme ?? []), ...(item.style ?? [])]));
+
+const cardDetails = await Promise.all(
+  items.map(async (item) => ({
+    ...item,
+    descriptionHtml: item.description ? await renderMarkdown(item.description) : "",
+    tags: unique([...(item.theme ?? []), ...(item.style ?? [])]),
+  })),
+);
+---
+
+{items.length > 0 && (
+  <div class="gallery-block" data-gallery-block>
+    <div class="gallery-filters" data-gallery-filters>
+      {mediums.length > 0 && (
+        <div class="gallery-filter-group" data-gallery-group="medium">
+          <span class="gallery-filter-label">{mediumLabel}</span>
+          <button type="button" class="gallery-chip" aria-pressed="true" data-gallery-filter data-gallery-group-key="medium" data-gallery-value="">{allLabel}</button>
+          {mediums.map((medium) => (
+            <button type="button" class="gallery-chip" aria-pressed="false" data-gallery-filter data-gallery-group-key="medium" data-gallery-value={medium}>{medium}</button>
+          ))}
+        </div>
+      )}
+
+      {orientations.length > 0 && (
+        <div class="gallery-filter-group" data-gallery-group="orientation">
+          <span class="gallery-filter-label">{formatLabel}</span>
+          <button type="button" class="gallery-chip" aria-pressed="true" data-gallery-filter data-gallery-group-key="orientation" data-gallery-value="">{allLabel}</button>
+          {orientations.map((orientation) => (
+            <button type="button" class="gallery-chip" aria-pressed="false" data-gallery-filter data-gallery-group-key="orientation" data-gallery-value={orientation}>{orientationLabels[orientation]}</button>
+          ))}
+        </div>
+      )}
+
+      {seriesList.length > 0 && (
+        <div class="gallery-filter-group" data-gallery-group="series">
+          <span class="gallery-filter-label">{seriesLabel}</span>
+          <button type="button" class="gallery-chip" aria-pressed="true" data-gallery-filter data-gallery-group-key="series" data-gallery-value="">{allLabel}</button>
+          {seriesList.map((series) => (
+            <button type="button" class="gallery-chip" aria-pressed="false" data-gallery-filter data-gallery-group-key="series" data-gallery-value={series}>{series}</button>
+          ))}
+        </div>
+      )}
+
+      {tags.length > 0 && (
+        <div class="gallery-filter-group" data-gallery-group="tag">
+          <span class="gallery-filter-label">{tagLabel}</span>
+          <button type="button" class="gallery-chip" aria-pressed="true" data-gallery-filter data-gallery-group-key="tag" data-gallery-value="">{allLabel}</button>
+          {tags.map((tag) => (
+            <button type="button" class="gallery-chip" aria-pressed="false" data-gallery-filter data-gallery-group-key="tag" data-gallery-value={tag}>{tag}</button>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <p class="gallery-count" data-gallery-count data-gallery-count-template={countTemplate}></p>
+
+    <div class="gallery-grid" data-gallery-grid>
+      {cardDetails.map((item) => (
+        <article
+          class="gallery-card"
+          data-gallery-card
+          data-medium={item.medium ?? ""}
+          data-orientation={item.orientation ?? ""}
+          data-series={item.series ?? ""}
+          data-tags={item.tags.join("|")}
+        >
+          <div class:list={["gallery-card-visual", { "is-placeholder": !item.image }]} style={item.orientation === "square" ? "--gallery-card-ratio: 1 / 1;" : item.orientation === "portrait" ? "--gallery-card-ratio: 3 / 4;" : "--gallery-card-ratio: 4 / 3;"}>
+            {item.image ? (
+              <Image src={item.image} alt={item.title ?? untitledLabel} width={480} />
+            ) : (
+              <span>{placeholderLabel}</span>
+            )}
+          </div>
+
+          <div class="gallery-card-body">
+            <h3 class="gallery-card-title">{item.title ?? untitledLabel}</h3>
+
+            <div class="gallery-card-meta">
+              {item.medium && <span>{item.medium}</span>}
+              {item.dimensions && <span>{item.dimensions}</span>}
+              {item.date}
+            </div>
+
+            {item.descriptionHtml && (
+              <div class="gallery-card-description" set:html={item.descriptionHtml} />
+            )}
+
+            {item.tags.length > 0 && (
+              <div class="gallery-card-tags">
+                {item.tags.map((tag) => (
+                  <span class="gallery-card-tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="gallery-empty" data-gallery-empty hidden>{emptyLabel}</p>
+  </div>
+)}
+
+<script>
+  function initGallery(block: HTMLElement) {
+    const grid = block.querySelector<HTMLElement>("[data-gallery-grid]");
+    const countEl = block.querySelector<HTMLElement>("[data-gallery-count]");
+    const emptyEl = block.querySelector<HTMLElement>("[data-gallery-empty]");
+    const cards = Array.from(block.querySelectorAll<HTMLElement>("[data-gallery-card]"));
+    const groups = Array.from(block.querySelectorAll<HTMLElement>("[data-gallery-group]"));
+
+    if (!grid || cards.length === 0) return;
+
+    const active: Record<string, string> = {};
+
+    function applyFilters() {
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const matches = Object.entries(active).every(([key, value]) => {
+          if (!value) return true;
+          if (key === "tag") {
+            return (card.dataset.tags ?? "").split("|").includes(value);
+          }
+          return card.dataset[key] === value;
+        });
+
+        card.classList.toggle("is-hidden", !matches);
+        if (matches) visibleCount += 1;
+      });
+
+      if (countEl) {
+        const template = countEl.getAttribute("data-gallery-count-template") ?? "{count}";
+        countEl.textContent = template.replace("{count}", String(visibleCount));
+      }
+
+      if (emptyEl) emptyEl.hidden = visibleCount !== 0;
+    }
+
+    groups.forEach((group) => {
+      const key = group.dataset.galleryGroup as string;
+      const buttons = Array.from(group.querySelectorAll<HTMLElement>("[data-gallery-filter]"));
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const value = button.getAttribute("data-gallery-value") ?? "";
+          active[key] = value;
+
+          buttons.forEach((btn) => btn.setAttribute("aria-pressed", String(btn === button)));
+          applyFilters();
+        });
+      });
+    });
+
+    // Lets another page (the Series hub) deep-link into a pre-filtered
+    // view, e.g. gallery/?series=Paysages, without the gallery needing
+    // to know anything about where the link came from.
+    const params = new URLSearchParams(window.location.search);
+    const presetSeries = params.get("series");
+    if (presetSeries) {
+      const seriesGroup = block.querySelector<HTMLElement>('[data-gallery-group="series"]');
+      const match = seriesGroup?.querySelector<HTMLElement>(
+        `[data-gallery-value="${CSS.escape(presetSeries)}"]`,
+      );
+      match?.click();
+      return;
+    }
+
+    applyFilters();
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-gallery-block]").forEach(initGallery);
+</script>

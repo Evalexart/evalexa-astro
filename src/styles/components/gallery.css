@@ -1,0 +1,241 @@
+/* Gallery component: faceted filter bar (médium / format / série / tag)
+   above a card grid of artworks. Filtering happens client-side by
+   toggling a `is-hidden` class based on data-* attributes set per card —
+   no reload, no query — except on load, where a `series` URL param (used
+   by the Series hub page to link into a pre-filtered view) is read once
+   to preset the "series" facet. */
+
+.gallery-filters {
+  display: grid;
+  gap: 0.9rem;
+  margin-bottom: 1.8rem;
+}
+
+.gallery-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.gallery-filter-label {
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-right: 0.3rem;
+}
+
+.gallery-chip {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg-elevated) 80%, transparent);
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    color 0.18s ease,
+    background 0.18s ease;
+}
+
+.gallery-chip:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 40%, var(--border));
+}
+
+.gallery-chip[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 16%, var(--bg-elevated));
+}
+
+.gallery-count {
+  color: var(--text-soft);
+  font-size: 0.86rem;
+  margin: 0 0 1.2rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  gap: 1.2rem;
+}
+
+.gallery-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: color-mix(in srgb, var(--accent-2) 36%, var(--border));
+}
+
+.gallery-card.is-hidden {
+  display: none;
+}
+
+.gallery-card-visual {
+  aspect-ratio: var(--gallery-card-ratio, 4 / 5);
+  width: 100%;
+  overflow: hidden;
+}
+
+.gallery-card-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder used while no photo is attached yet: a soft watercolor-wash
+   gradient (same three-stop palette as the site's card top-wash) instead
+   of a broken image or a flat gray box, so unfinished entries still look
+   intentional rather than like a missing asset. */
+.gallery-card-visual.is-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--wash-left) 30%, var(--bg-elevated)),
+    color-mix(in srgb, var(--wash-mid) 24%, var(--bg-elevated)) 55%,
+    color-mix(in srgb, var(--wash-right) 26%, var(--bg-elevated))
+  );
+}
+
+.gallery-card-visual.is-placeholder span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+  text-align: center;
+  padding: 0 0.8rem;
+}
+
+.gallery-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.1rem 1.2rem 1.3rem;
+}
+
+.gallery-card-title {
+  margin: 0;
+  font-size: 1.02rem;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.gallery-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.7rem;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+}
+
+.gallery-card-description {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.gallery-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+
+.gallery-card-tag {
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  color: var(--text-soft);
+  font-size: 0.72rem;
+  padding: 0.16rem 0.55rem;
+}
+
+.gallery-empty {
+  text-align: center;
+  color: var(--text-soft);
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+@media (max-width: 560px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Series hub: same visual language as the gallery cards, one card per
+   series, linking into the gallery pre-filtered to that series. */
+
+.gallery-series-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  gap: 1.2rem;
+}
+
+.gallery-series-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.gallery-series-card:hover,
+.gallery-series-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: color-mix(in srgb, var(--accent-2) 36%, var(--border));
+}
+
+.gallery-series-card-body {
+  padding: 1.1rem 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gallery-series-card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.gallery-series-card-count {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.84rem;
+}

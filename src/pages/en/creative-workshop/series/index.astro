@@ -1,0 +1,79 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import "../../../../styles/components/gallery.css";
+
+const lang = "en";
+const entries = await getCollection(
+  "oeuvres",
+  (entry) => entry.id.endsWith(`/${lang}`) && !entry.data.draft,
+);
+
+const seriesMap = new Map<string, { count: number; image?: (typeof entries)[number]["data"]["image"] }>();
+
+entries.forEach((entry) => {
+  const series = entry.data.series;
+  if (!series) return;
+
+  const existing = seriesMap.get(series);
+  if (existing) {
+    existing.count += 1;
+  } else {
+    seriesMap.set(series, { count: 1, image: entry.data.image });
+  }
+});
+
+const seriesList = Array.from(seriesMap.entries());
+---
+
+<BaseLayout
+  lang={lang}
+  area="creative"
+  pageId="series"
+  title="Series — Visual art — Evalexa"
+  description="Artworks grouped by period, theme, constraint or project."
+  frHref="/fr/atelier-creatif/series/"
+  enHref="/en/creative-workshop/series/"
+>
+  <section class="hero hero-compact">
+    <div class="container hero-inner narrow center">
+      <p class="eyebrow">Visual art</p>
+      <h1 class="hero-wordmark">Series</h1>
+      <p class="hero-text">
+        Artworks grouped by period, theme, constraint or project.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="showcase-container">
+      {seriesList.length > 0 ? (
+        <div class="gallery-series-grid">
+          {seriesList.map(([series, info]) => (
+            <a
+              class="gallery-series-card"
+              href={`/en/creative-workshop/gallery/?series=${encodeURIComponent(series)}`}
+            >
+              <div class:list={["gallery-card-visual", { "is-placeholder": !info.image }]}>
+                {info.image ? (
+                  <Image src={info.image} alt={series} width={480} />
+                ) : (
+                  <span>{series}</span>
+                )}
+              </div>
+              <div class="gallery-series-card-body">
+                <h2 class="gallery-series-card-title">{series}</h2>
+                <p class="gallery-series-card-count">
+                  {info.count} artwork{info.count > 1 ? "s" : ""}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="gallery-empty">No series yet.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

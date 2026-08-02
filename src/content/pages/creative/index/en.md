@@ -13,22 +13,22 @@ sections:
       - kicker: "Visual art"
         title: "Gallery"
         description: "Browse artworks in a filterable grid."
-        href: "/en/creative/visual-art/gallery/"
+        href: "/en/creative-workshop/gallery/"
 
       - kicker: "Visual art"
         title: "Series"
         description: "Explore artworks grouped by period, theme, constraint or project."
-        href: "/en/creative/visual-art/series/"
+        href: "/en/creative-workshop/series/"
 
       - kicker: "Visual art"
         title: "Creative path"
         description: "Follow how the visual work evolves over time."
-        href: "/en/creative/visual-art/path/"
+        href: "/en/creative-workshop/path/"
 
       - kicker: "Visual art"
         title: "Approaches"
         description: "Find creative methods, constraints, choices and intentions."
-        href: "/en/creative/visual-art/approaches/"
+        href: "/en/creative-workshop/approaches/"
 
       - kicker: "Resources"
         title: "Creative resources"
@@ -47,12 +47,12 @@ sections:
       - kicker: "Music"
         title: "Interpretations"
         description: "Find published vocal covers and interpretations."
-        href: "/en/creative/music/interpretations/"
+        href: "/en/creative-workshop/music/interpretations/"
 
       - kicker: "Music"
         title: "Vocal path"
         description: "Follow the evolution of the vocal work."
-        href: "/en/creative/music/vocal-path/"
+        href: "/en/creative-workshop/music/vocal-path/"
 
       - kicker: "Resources"
         title: "Music resources"

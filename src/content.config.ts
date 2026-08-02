@@ -71,11 +71,6 @@ const profilPro = defineCollection({
 
     photo: image().optional(),
 
-    // Modular skill/tool cards — mirrors the carousel's flexibility: each
-    // card just needs at least one of image/icon/title/description to
-    // render. `icon` is a key into src/lib/tool-icons.ts. `href` makes
-    // the card a real link (only meaningful in "medium"/"large" display
-    // mode — see skillsSize below).
     skills: z
       .array(
         z
@@ -95,16 +90,7 @@ const profilPro = defineCollection({
           ),
       )
       .optional(),
-    // Editorial intro text shown by default in the skills detail panel
-    // (before any icon is clicked). Only used in "small" display mode —
-    // see skillsSize below. This is page-specific content, not a generic
-    // UI string, so it lives here rather than in ui.json.
     skillsIntro: z.string().optional(),
-    // Display mode for the skills grid: "small" is the original compact
-    // icon-only look (with the shared detail panel above); "medium" and
-    // "large" render full content cards instead (image/icon + title +
-    // description shown directly, optionally a link via each card's
-    // href) — "large" is sized to match the legal-hub cards.
     skillsSize: z.enum(["small", "medium", "large"]).optional(),
 
     alternanceProject: z.string().optional(),
@@ -133,14 +119,6 @@ const profilPro = defineCollection({
     contact: z
       .object({
         name: z.string().optional(),
-        // Each entry in `items` is either:
-        //  - a classic contact item (icon + label, optionally linked via
-        //    href), rendered inside the 2-column grid, or
-        //  - a free-standing note (just `note`), rendered as a full-width
-        //    line that breaks out of the 2-column grid. Notes can be
-        //    placed anywhere in the array — before, between, or after the
-        //    regular items — since position in the array is what decides
-        //    where the line appears on the page.
         items: z.array(
           z
             .object({
@@ -162,10 +140,6 @@ const profilPro = defineCollection({
         z
           .object({
             image: image().optional(),
-            // CSS aspect-ratio value for this card's image only, e.g.
-            // "4/5", "1/1", "16/9". Overrides carouselImageRatio below for
-            // this one card. Keeps the image framing stable no matter how
-            // much text sits underneath it.
             imageRatio: z.string().optional(),
             title: z.string().optional(),
             description: z.string().optional(),
@@ -182,10 +156,6 @@ const profilPro = defineCollection({
       .optional(),
     carouselSize: z.enum(["small", "medium", "large"]).optional(),
     carouselOrientation: z.enum(["portrait", "square", "landscape"]).optional(),
-    // Default CSS aspect-ratio value for every image in this carousel, e.g.
-    // "4/5", "1/1", "16/9". Falls back to the ratio implied by
-    // carouselOrientation when omitted. Can be overridden per-card via
-    // imageRatio above.
     carouselImageRatio: z.string().optional(),
   }),
 });
@@ -203,14 +173,54 @@ const journal = defineCollection({
   }),
 });
 
+// Each artwork lives at src/content/oeuvres/<slug>/fr.md + en.md, mirroring
+// the profil-pro / pages pattern (one markdown file per language, same
+// slug). Every descriptive field is optional except the piece's own
+// presentation text, since real inventory data will be filled in
+// progressively and unevenly (some works are untitled, undated, or have
+// only partial material notes).
+//
+// `orientation` is a distinct, deliberately-chosen field rather than
+// something computed from `dimensions` — dimensions stays a free-form
+// display string (so it can read "24 x 32 cm", "A4", "21 x 29,7 cm"...)
+// while orientation is the one used for the gallery's "Format" filter,
+// since it's the only version of "shape" that's guaranteed comparable
+// across every entry regardless of how dimensions were recorded.
 const oeuvres = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
     base: "./src/content/oeuvres",
   }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
+  schema: ({ image }) => z.object({
+    title: z.string().optional(),
+    date: z.string().optional(),
+    description: z.string().optional(),
+    image: image().optional(),
+
+    dimensions: z.string().optional(),
+    orientation: z.enum(["portrait", "landscape", "square"]).optional(),
+
+    // Main sorting axis in the gallery filters (e.g. "Aquarelle",
+    // "Graphite").
+    medium: z.string().optional(),
+    series: z.string().optional(),
+
+    // Free-form tags; theme and style are kept as two separate fields
+    // since they answer different questions ("what is it of" vs. "how is
+    // it made"), but the gallery's single "Tag" filter reads from both
+    // combined.
+    theme: z.array(z.string()).optional(),
+    style: z.array(z.string()).optional(),
+
+    materials: z
+      .object({
+        paper: z.string().optional(),
+        tools: z.array(z.string()).optional(),
+        pigments: z.array(z.string()).optional(),
+        other: z.array(z.string()).optional(),
+      })
+      .optional(),
+
     draft: z.boolean().default(false),
   }),
 });

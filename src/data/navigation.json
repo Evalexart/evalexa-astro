@@ -59,12 +59,12 @@
     {
       "id": "creative",
       "label": {
-        "fr": "Créatif",
-        "en": "Creative"
+        "fr": "Atelier créatif",
+        "en": "Creative workshop"
       },
       "routes": {
-        "fr": "/fr/creatif/",
-        "en": "/en/creative/"
+        "fr": "/fr/atelier-creatif/",
+        "en": "/en/creative-workshop/"
       },
       "enabled": false,
       "showInHeader": true,

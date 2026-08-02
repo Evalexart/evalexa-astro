@@ -13,22 +13,22 @@ sections:
       - kicker: "Arts graphiques"
         title: "Galerie"
         description: "Parcourir les œuvres en grille filtrable."
-        href: "/fr/creatif/arts-graphiques/galerie/"
+        href: "/fr/atelier-creatif/galerie/"
 
       - kicker: "Arts graphiques"
         title: "Séries"
         description: "Explorer les œuvres regroupées par période, thème, contrainte ou projet."
-        href: "/fr/creatif/arts-graphiques/series/"
+        href: "/fr/atelier-creatif/series/"
 
       - kicker: "Arts graphiques"
         title: "Parcours"
         description: "Suivre l’évolution des créations dans le temps."
-        href: "/fr/creatif/arts-graphiques/parcours/"
+        href: "/fr/atelier-creatif/parcours/"
 
       - kicker: "Arts graphiques"
         title: "Démarches"
         description: "Retrouver les manières de créer, les contraintes, les choix et les intentions."
-        href: "/fr/creatif/arts-graphiques/demarches/"
+        href: "/fr/atelier-creatif/demarches/"
 
       - kicker: "Ressources"
         title: "Ressources créatives"
@@ -47,12 +47,12 @@ sections:
       - kicker: "Musique"
         title: "Interprétations"
         description: "Retrouver les reprises et interprétations vocales publiées."
-        href: "/fr/creatif/musique/interpretations/"
+        href: "/fr/atelier-creatif/musique/interpretations/"
 
       - kicker: "Musique"
         title: "Parcours vocal"
         description: "Suivre l’évolution du travail de la voix."
-        href: "/fr/creatif/musique/parcours-vocal/"
+        href: "/fr/atelier-creatif/musique/parcours-vocal/"
 
       - kicker: "Ressources"
         title: "Ressources musique"
