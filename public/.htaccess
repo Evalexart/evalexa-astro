@@ -1,0 +1,3 @@
+# Redirections ponctuelles — pages candidature sans navigation
+RedirectMatch 301 ^/profil/?$ /fr/profil-pro/
+RedirectMatch 301 ^/profile/?$ /en/professional-profile/
