@@ -160,74 +160,7 @@ const profilPro = defineCollection({
   }),
 });
 
-const journal = defineCollection({
-  loader: glob({
-    pattern: "**/*.{md,mdx}",
-    base: "./src/content/journal",
-  }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date().optional(),
-    draft: z.boolean().default(false),
-  }),
-});
-
-// Each artwork lives at src/content/oeuvres/<slug>/fr.md + en.md, mirroring
-// the profil-pro / pages pattern (one markdown file per language, same
-// slug). Every descriptive field is optional except the piece's own
-// presentation text, since real inventory data will be filled in
-// progressively and unevenly (some works are untitled, undated, or have
-// only partial material notes).
-//
-// `orientation` is a distinct, deliberately-chosen field rather than
-// something computed from `dimensions` — dimensions stays a free-form
-// display string (so it can read "24 x 32 cm", "A4", "21 x 29,7 cm"...)
-// while orientation is the one used for the gallery's "Format" filter,
-// since it's the only version of "shape" that's guaranteed comparable
-// across every entry regardless of how dimensions were recorded.
-const oeuvres = defineCollection({
-  loader: glob({
-    pattern: "**/*.{md,mdx}",
-    base: "./src/content/oeuvres",
-  }),
-  schema: ({ image }) => z.object({
-    title: z.string().optional(),
-    date: z.string().optional(),
-    description: z.string().optional(),
-    image: image().optional(),
-
-    dimensions: z.string().optional(),
-    orientation: z.enum(["portrait", "landscape", "square"]).optional(),
-
-    // Main sorting axis in the gallery filters (e.g. "Aquarelle",
-    // "Graphite").
-    medium: z.string().optional(),
-    series: z.string().optional(),
-
-    // Free-form tags; theme and style are kept as two separate fields
-    // since they answer different questions ("what is it of" vs. "how is
-    // it made"), but the gallery's single "Tag" filter reads from both
-    // combined.
-    theme: z.array(z.string()).optional(),
-    style: z.array(z.string()).optional(),
-
-    materials: z
-      .object({
-        paper: z.string().optional(),
-        tools: z.array(z.string()).optional(),
-        pigments: z.array(z.string()).optional(),
-        other: z.array(z.string()).optional(),
-      })
-      .optional(),
-
-    draft: z.boolean().default(false),
-  }),
-});
-
 export const collections = {
   pages,
   profilPro,
-  journal,
-  oeuvres,
 };

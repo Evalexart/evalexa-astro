@@ -15,118 +15,6 @@
       "showInFooter": true
     },
     {
-      "id": "about",
-      "label": {
-        "fr": "À propos",
-        "en": "About"
-      },
-      "routes": {
-        "fr": "/fr/a-propos/",
-        "en": "/en/about/"
-      },
-      "enabled": false,
-      "showInHeader": false,
-      "showInFooter": false
-    },
-    {
-      "id": "faq",
-      "label": {
-        "fr": "FAQ",
-        "en": "FAQ"
-      },
-      "routes": {
-        "fr": "/fr/faq/",
-        "en": "/en/faq/"
-      },
-      "enabled": false,
-      "showInHeader": false,
-      "showInFooter": false
-    },
-    {
-      "id": "contact",
-      "label": {
-        "fr": "Contact",
-        "en": "Contact"
-      },
-      "routes": {
-        "fr": "/fr/contact/",
-        "en": "/en/contact/"
-      },
-      "enabled": false,
-      "showInHeader": false,
-      "showInFooter": false
-    },
-    {
-      "id": "creative",
-      "label": {
-        "fr": "Atelier créatif",
-        "en": "Creative workshop"
-      },
-      "routes": {
-        "fr": "/fr/atelier-creatif/",
-        "en": "/en/creative-workshop/"
-      },
-      "enabled": false,
-      "showInHeader": true,
-      "showInFooter": false
-    },
-    {
-      "id": "network",
-      "label": {
-        "fr": "Réseau",
-        "en": "Network"
-      },
-      "routes": {
-        "fr": "/fr/reseau/",
-        "en": "/en/network/"
-      },
-      "enabled": false,
-      "showInHeader": false,
-      "showInFooter": false
-    },
-    {
-      "id": "journal",
-      "label": {
-        "fr": "Journal",
-        "en": "Journal"
-      },
-      "routes": {
-        "fr": "/fr/journal/",
-        "en": "/en/journal/"
-      },
-      "enabled": false,
-      "showInHeader": false,
-      "showInFooter": false
-    },
-    {
-      "id": "resources",
-      "label": {
-        "fr": "Ressources",
-        "en": "Resources"
-      },
-      "routes": {
-        "fr": "/fr/ressources/",
-        "en": "/en/resources/"
-      },
-      "enabled": false,
-      "showInHeader": false,
-      "showInFooter": false
-    },
-    {
-      "id": "support",
-      "label": {
-        "fr": "Soutenir",
-        "en": "Support"
-      },
-      "routes": {
-        "fr": "/fr/soutenir/",
-        "en": "/en/support/"
-      },
-      "enabled": false,
-      "showInHeader": false,
-      "showInFooter": false
-    },
-    {
       "id": "legal",
       "label": {
         "fr": "Légal",
@@ -209,20 +97,6 @@
       "enabled": false,
       "showInHeader": false,
       "showInFooter": true
-    },
-    {
-      "id": "network-nodes",
-      "label": {
-        "fr": "Connexion aux nœuds",
-        "en": "Node connections"
-      },
-      "routes": {
-        "fr": "/fr/reseau/noeuds/",
-        "en": "/en/network/nodes/"
-      },
-      "enabled": false,
-      "showInHeader": false,
-      "showInFooter": false
     }
   ]
 }
