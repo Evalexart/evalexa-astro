@@ -6,7 +6,7 @@ description: |
   lors d'une promenade. Le travail s'est concentré sur la superposition de
   glacis pour obtenir la profondeur des feuillages sans perdre la lumière
   au centre de la composition.
-
+image: "./image.jpg"
 dimensions: "24 × 32 cm"
 orientation: "landscape"
 

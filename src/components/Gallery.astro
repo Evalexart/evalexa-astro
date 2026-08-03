@@ -5,11 +5,18 @@
 // that exist among the current entries — it grows on its own as more
 // artworks are added, instead of needing to be kept in sync by hand.
 //
-// Filtering itself runs entirely client-side (toggle `is-hidden`), since
-// the artwork count is expected to stay small enough that a full
-// client-side list is simpler and faster than a query-driven rebuild.
+// The grid itself only ever shows artwork thumbnails — no title, no
+// meta, no description, no tags. Clicking a card opens a full-screen
+// lightbox with the enlarged image; the artwork's full information stays
+// folded behind an "Infos" toggle inside that lightbox, so browsing the
+// grid stays purely visual and the details are only ever a click away.
+//
+// Filtering runs entirely client-side (toggle `is-hidden`), with
+// multiple values selectable per facet (OR within a group, AND across
+// groups) — each facet is a <details> dropdown of checkboxes rather than
+// a flat row of always-visible toggle chips.
 import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import { renderMarkdown } from "../lib/markdown";
 import "../styles/components/gallery.css";
 
@@ -34,11 +41,15 @@ interface Props {
   formatLabel: string;
   seriesLabel: string;
   tagLabel: string;
-  allLabel: string;
   orientationLabels: { portrait: string; landscape: string; square: string };
   countTemplate: string; // must contain "{count}"
   emptyLabel: string;
   placeholderLabel: string;
+  resetLabel: string;
+  closeLabel: string;
+  prevLabel: string;
+  nextLabel: string;
+  infoLabel: string;
 }
 
 const {
@@ -48,11 +59,15 @@ const {
   formatLabel,
   seriesLabel,
   tagLabel,
-  allLabel,
   orientationLabels,
   countTemplate,
   emptyLabel,
   placeholderLabel,
+  resetLabel,
+  closeLabel,
+  prevLabel,
+  nextLabel,
+  infoLabel,
 } = Astro.props;
 
 function unique(values: (string | undefined)[]): string[] {
@@ -71,100 +86,171 @@ const cardDetails = await Promise.all(
     ...item,
     descriptionHtml: item.description ? await renderMarkdown(item.description) : "",
     tags: unique([...(item.theme ?? []), ...(item.style ?? [])]),
+    largeSrc: item.image ? (await getImage({ src: item.image, width: 1600 })).src : null,
   })),
 );
+
+// Full artwork data for the lightbox, keyed by the same index as the
+// grid cards below — the grid itself never renders any of this text.
+const lightboxItems = cardDetails.map((item) => ({
+  title: item.title ?? untitledLabel,
+  date: item.date ?? "",
+  medium: item.medium ?? "",
+  dimensions: item.dimensions ?? "",
+  series: item.series ?? "",
+  tags: item.tags,
+  descriptionHtml: item.descriptionHtml,
+  largeSrc: item.largeSrc,
+  alt: item.title ?? untitledLabel,
+}));
+
+// Escaping "<" prevents a stray "</script" inside any field (e.g. HTML
+// from a description) from prematurely closing this data script tag.
+const lightboxJson = JSON.stringify(lightboxItems).replace(/</g, "\\u003c");
 ---
 
 {items.length > 0 && (
   <div class="gallery-block" data-gallery-block>
     <div class="gallery-filters" data-gallery-filters>
       {mediums.length > 0 && (
-        <div class="gallery-filter-group" data-gallery-group="medium">
-          <span class="gallery-filter-label">{mediumLabel}</span>
-          <button type="button" class="gallery-chip" aria-pressed="true" data-gallery-filter data-gallery-group-key="medium" data-gallery-value="">{allLabel}</button>
-          {mediums.map((medium) => (
-            <button type="button" class="gallery-chip" aria-pressed="false" data-gallery-filter data-gallery-group-key="medium" data-gallery-value={medium}>{medium}</button>
-          ))}
-        </div>
+        <details class="gallery-dropdown" data-gallery-group="medium">
+          <summary class="gallery-dropdown-summary">
+            <span>{mediumLabel}</span>
+            <span class="gallery-dropdown-count" data-gallery-group-count hidden>0</span>
+            <span class="gallery-dropdown-caret" aria-hidden="true">▾</span>
+          </summary>
+          <div class="gallery-dropdown-panel">
+            {mediums.map((medium) => (
+              <label class="gallery-checkbox">
+                <input type="checkbox" data-gallery-filter value={medium} />
+                <span>{medium}</span>
+              </label>
+            ))}
+          </div>
+        </details>
       )}
 
       {orientations.length > 0 && (
-        <div class="gallery-filter-group" data-gallery-group="orientation">
-          <span class="gallery-filter-label">{formatLabel}</span>
-          <button type="button" class="gallery-chip" aria-pressed="true" data-gallery-filter data-gallery-group-key="orientation" data-gallery-value="">{allLabel}</button>
-          {orientations.map((orientation) => (
-            <button type="button" class="gallery-chip" aria-pressed="false" data-gallery-filter data-gallery-group-key="orientation" data-gallery-value={orientation}>{orientationLabels[orientation]}</button>
-          ))}
-        </div>
+        <details class="gallery-dropdown" data-gallery-group="orientation">
+          <summary class="gallery-dropdown-summary">
+            <span>{formatLabel}</span>
+            <span class="gallery-dropdown-count" data-gallery-group-count hidden>0</span>
+            <span class="gallery-dropdown-caret" aria-hidden="true">▾</span>
+          </summary>
+          <div class="gallery-dropdown-panel">
+            {orientations.map((orientation) => (
+              <label class="gallery-checkbox">
+                <input type="checkbox" data-gallery-filter value={orientation} />
+                <span>{orientationLabels[orientation]}</span>
+              </label>
+            ))}
+          </div>
+        </details>
       )}
 
       {seriesList.length > 0 && (
-        <div class="gallery-filter-group" data-gallery-group="series">
-          <span class="gallery-filter-label">{seriesLabel}</span>
-          <button type="button" class="gallery-chip" aria-pressed="true" data-gallery-filter data-gallery-group-key="series" data-gallery-value="">{allLabel}</button>
-          {seriesList.map((series) => (
-            <button type="button" class="gallery-chip" aria-pressed="false" data-gallery-filter data-gallery-group-key="series" data-gallery-value={series}>{series}</button>
-          ))}
-        </div>
+        <details class="gallery-dropdown" data-gallery-group="series">
+          <summary class="gallery-dropdown-summary">
+            <span>{seriesLabel}</span>
+            <span class="gallery-dropdown-count" data-gallery-group-count hidden>0</span>
+            <span class="gallery-dropdown-caret" aria-hidden="true">▾</span>
+          </summary>
+          <div class="gallery-dropdown-panel">
+            {seriesList.map((series) => (
+              <label class="gallery-checkbox">
+                <input type="checkbox" data-gallery-filter value={series} />
+                <span>{series}</span>
+              </label>
+            ))}
+          </div>
+        </details>
       )}
 
       {tags.length > 0 && (
-        <div class="gallery-filter-group" data-gallery-group="tag">
-          <span class="gallery-filter-label">{tagLabel}</span>
-          <button type="button" class="gallery-chip" aria-pressed="true" data-gallery-filter data-gallery-group-key="tag" data-gallery-value="">{allLabel}</button>
-          {tags.map((tag) => (
-            <button type="button" class="gallery-chip" aria-pressed="false" data-gallery-filter data-gallery-group-key="tag" data-gallery-value={tag}>{tag}</button>
-          ))}
-        </div>
+        <details class="gallery-dropdown" data-gallery-group="tag">
+          <summary class="gallery-dropdown-summary">
+            <span>{tagLabel}</span>
+            <span class="gallery-dropdown-count" data-gallery-group-count hidden>0</span>
+            <span class="gallery-dropdown-caret" aria-hidden="true">▾</span>
+          </summary>
+          <div class="gallery-dropdown-panel">
+            {tags.map((tag) => (
+              <label class="gallery-checkbox">
+                <input type="checkbox" data-gallery-filter value={tag} />
+                <span>{tag}</span>
+              </label>
+            ))}
+          </div>
+        </details>
       )}
+
+      <button type="button" class="gallery-reset" data-gallery-reset hidden>{resetLabel}</button>
     </div>
 
     <p class="gallery-count" data-gallery-count data-gallery-count-template={countTemplate}></p>
 
     <div class="gallery-grid" data-gallery-grid>
-      {cardDetails.map((item) => (
-        <article
+      {cardDetails.map((item, index) => (
+        <button
+          type="button"
           class="gallery-card"
           data-gallery-card
+          data-gallery-index={index}
           data-medium={item.medium ?? ""}
           data-orientation={item.orientation ?? ""}
           data-series={item.series ?? ""}
           data-tags={item.tags.join("|")}
+          aria-label={item.title ?? untitledLabel}
         >
-          <div class:list={["gallery-card-visual", { "is-placeholder": !item.image }]} style={item.orientation === "square" ? "--gallery-card-ratio: 1 / 1;" : item.orientation === "portrait" ? "--gallery-card-ratio: 3 / 4;" : "--gallery-card-ratio: 4 / 3;"}>
+          <div
+            class:list={["gallery-card-visual", { "is-placeholder": !item.image }]}
+            style={item.orientation === "square" ? "--gallery-card-ratio: 1 / 1;" : item.orientation === "portrait" ? "--gallery-card-ratio: 3 / 4;" : "--gallery-card-ratio: 4 / 3;"}
+          >
             {item.image ? (
               <Image src={item.image} alt={item.title ?? untitledLabel} width={480} />
             ) : (
               <span>{placeholderLabel}</span>
             )}
           </div>
-
-          <div class="gallery-card-body">
-            <h3 class="gallery-card-title">{item.title ?? untitledLabel}</h3>
-
-            <div class="gallery-card-meta">
-              {item.medium && <span>{item.medium}</span>}
-              {item.dimensions && <span>{item.dimensions}</span>}
-              {item.date}
-            </div>
-
-            {item.descriptionHtml && (
-              <div class="gallery-card-description" set:html={item.descriptionHtml} />
-            )}
-
-            {item.tags.length > 0 && (
-              <div class="gallery-card-tags">
-                {item.tags.map((tag) => (
-                  <span class="gallery-card-tag">{tag}</span>
-                ))}
-              </div>
-            )}
-          </div>
-        </article>
+        </button>
       ))}
     </div>
 
     <p class="gallery-empty" data-gallery-empty hidden>{emptyLabel}</p>
+
+    <div class="gallery-lightbox" data-gallery-lightbox hidden>
+      <div class="gallery-lightbox-backdrop" data-gallery-lightbox-close></div>
+      <div class="gallery-lightbox-inner" role="dialog" aria-modal="true">
+        <button type="button" class="gallery-lightbox-close" data-gallery-lightbox-close aria-label={closeLabel}>×</button>
+
+        <button type="button" class="gallery-lightbox-nav gallery-lightbox-prev" data-gallery-lightbox-prev aria-label={prevLabel}>‹</button>
+
+        <div class="gallery-lightbox-stage">
+          <img class="gallery-lightbox-image" data-gallery-lightbox-image alt="" />
+          <span class="gallery-lightbox-placeholder" data-gallery-lightbox-placeholder hidden>{placeholderLabel}</span>
+
+          <button
+            type="button"
+            class="gallery-lightbox-info-toggle"
+            data-gallery-lightbox-info-toggle
+            aria-expanded="false"
+          >
+            {infoLabel}
+          </button>
+
+          <div class="gallery-lightbox-info" data-gallery-lightbox-info hidden>
+            <h3 data-gallery-lightbox-title></h3>
+            <p class="gallery-lightbox-meta" data-gallery-lightbox-meta></p>
+            <div class="gallery-lightbox-description" data-gallery-lightbox-description></div>
+            <div class="gallery-lightbox-tags" data-gallery-lightbox-tags></div>
+          </div>
+        </div>
+
+        <button type="button" class="gallery-lightbox-nav gallery-lightbox-next" data-gallery-lightbox-next aria-label={nextLabel}>›</button>
+      </div>
+    </div>
+
+    <script type="application/json" data-gallery-data set:html={lightboxJson} />
   </div>
 )}
 
@@ -174,22 +260,45 @@ const cardDetails = await Promise.all(
     const countEl = block.querySelector<HTMLElement>("[data-gallery-count]");
     const emptyEl = block.querySelector<HTMLElement>("[data-gallery-empty]");
     const cards = Array.from(block.querySelectorAll<HTMLElement>("[data-gallery-card]"));
-    const groups = Array.from(block.querySelectorAll<HTMLElement>("[data-gallery-group]"));
+    const dropdowns = Array.from(block.querySelectorAll<HTMLDetailsElement>("[data-gallery-group]"));
+    const resetButton = block.querySelector<HTMLElement>("[data-gallery-reset]");
+    const dataScript = block.querySelector<HTMLScriptElement>("[data-gallery-data]");
 
-    if (!grid || cards.length === 0) return;
+    if (!grid || cards.length === 0 || !dataScript) return;
 
-    const active: Record<string, string> = {};
+    let items: Array<{
+      title: string;
+      date: string;
+      medium: string;
+      dimensions: string;
+      series: string;
+      tags: string[];
+      descriptionHtml: string;
+      largeSrc: string | null;
+      alt: string;
+    }> = [];
+
+    try {
+      items = JSON.parse(dataScript.textContent ?? "[]");
+    } catch {
+      items = [];
+    }
+
+    // ---- Filtering: multiple values selectable per facet (OR within a
+    // group), every active group must match (AND across groups). ----
+    const active: Record<string, Set<string>> = {};
 
     function applyFilters() {
       let visibleCount = 0;
 
       cards.forEach((card) => {
-        const matches = Object.entries(active).every(([key, value]) => {
-          if (!value) return true;
+        const matches = Object.entries(active).every(([key, values]) => {
+          if (values.size === 0) return true;
           if (key === "tag") {
-            return (card.dataset.tags ?? "").split("|").includes(value);
+            const cardTags = (card.dataset.tags ?? "").split("|");
+            return cardTags.some((tag) => values.has(tag));
           }
-          return card.dataset[key] === value;
+          return values.has(card.dataset[key] ?? "");
         });
 
         card.classList.toggle("is-hidden", !matches);
@@ -202,21 +311,62 @@ const cardDetails = await Promise.all(
       }
 
       if (emptyEl) emptyEl.hidden = visibleCount !== 0;
+
+      dropdowns.forEach((dropdown) => {
+        const key = dropdown.dataset.galleryGroup as string;
+        const count = active[key]?.size ?? 0;
+        const badge = dropdown.querySelector<HTMLElement>("[data-gallery-group-count]");
+        if (badge) {
+          badge.hidden = count === 0;
+          badge.textContent = String(count);
+        }
+      });
+
+      if (resetButton) {
+        const anyActive = Object.values(active).some((set) => set.size > 0);
+        resetButton.hidden = !anyActive;
+      }
     }
 
-    groups.forEach((group) => {
-      const key = group.dataset.galleryGroup as string;
-      const buttons = Array.from(group.querySelectorAll<HTMLElement>("[data-gallery-filter]"));
+    dropdowns.forEach((dropdown) => {
+      const key = dropdown.dataset.galleryGroup as string;
+      active[key] = new Set();
 
-      buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const value = button.getAttribute("data-gallery-value") ?? "";
-          active[key] = value;
-
-          buttons.forEach((btn) => btn.setAttribute("aria-pressed", String(btn === button)));
+      dropdown.querySelectorAll<HTMLInputElement>("[data-gallery-filter]").forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+          if (checkbox.checked) active[key].add(checkbox.value);
+          else active[key].delete(checkbox.value);
           applyFilters();
         });
       });
+
+      // Native <details> doesn't close other panels on its own — keep
+      // only one dropdown open at a time.
+      dropdown.addEventListener("toggle", () => {
+        if (dropdown.open) {
+          dropdowns.forEach((other) => {
+            if (other !== dropdown) other.open = false;
+          });
+        }
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      dropdowns.forEach((dropdown) => {
+        if (dropdown.open && !dropdown.contains(target)) dropdown.open = false;
+      });
+    });
+
+    resetButton?.addEventListener("click", () => {
+      dropdowns.forEach((dropdown) => {
+        const key = dropdown.dataset.galleryGroup as string;
+        active[key].clear();
+        dropdown.querySelectorAll<HTMLInputElement>("[data-gallery-filter]").forEach((checkbox) => {
+          checkbox.checked = false;
+        });
+      });
+      applyFilters();
     });
 
     // Lets another page (the Series hub) deep-link into a pre-filtered
@@ -225,15 +375,132 @@ const cardDetails = await Promise.all(
     const params = new URLSearchParams(window.location.search);
     const presetSeries = params.get("series");
     if (presetSeries) {
-      const seriesGroup = block.querySelector<HTMLElement>('[data-gallery-group="series"]');
-      const match = seriesGroup?.querySelector<HTMLElement>(
-        `[data-gallery-value="${CSS.escape(presetSeries)}"]`,
+      const seriesDropdown = block.querySelector<HTMLDetailsElement>('[data-gallery-group="series"]');
+      const match = seriesDropdown?.querySelector<HTMLInputElement>(
+        `[data-gallery-filter][value="${CSS.escape(presetSeries)}"]`,
       );
-      match?.click();
-      return;
+      if (match) {
+        match.checked = true;
+        active.series?.add(presetSeries);
+      }
     }
 
     applyFilters();
+
+    // ---- Lightbox: enlarged image + collapsed "info" panel, with
+    // previous/next navigation restricted to the currently visible
+    // (filtered) artworks. ----
+    const lightbox = block.querySelector<HTMLElement>("[data-gallery-lightbox]");
+    const lightboxImage = lightbox?.querySelector<HTMLImageElement>("[data-gallery-lightbox-image]");
+    const lightboxPlaceholder = lightbox?.querySelector<HTMLElement>("[data-gallery-lightbox-placeholder]");
+    const lightboxTitle = lightbox?.querySelector<HTMLElement>("[data-gallery-lightbox-title]");
+    const lightboxMeta = lightbox?.querySelector<HTMLElement>("[data-gallery-lightbox-meta]");
+    const lightboxDescription = lightbox?.querySelector<HTMLElement>("[data-gallery-lightbox-description]");
+    const lightboxTags = lightbox?.querySelector<HTMLElement>("[data-gallery-lightbox-tags]");
+    const infoPanel = lightbox?.querySelector<HTMLElement>("[data-gallery-lightbox-info]");
+    const infoToggle = lightbox?.querySelector<HTMLElement>("[data-gallery-lightbox-info-toggle]");
+    const prevBtn = lightbox?.querySelector<HTMLElement>("[data-gallery-lightbox-prev]");
+    const nextBtn = lightbox?.querySelector<HTMLElement>("[data-gallery-lightbox-next]");
+    const closeBtns = lightbox?.querySelectorAll<HTMLElement>("[data-gallery-lightbox-close]");
+
+    if (!lightbox || !lightboxImage) return;
+
+    let sequence: number[] = [];
+    let position = 0;
+    let lastFocused: HTMLElement | null = null;
+
+    function visibleIndices(): number[] {
+      return cards
+        .filter((card) => !card.classList.contains("is-hidden"))
+        .map((card) => Number(card.dataset.galleryIndex));
+    }
+
+    function renderItem(index: number) {
+      const item = items[index];
+      if (!item || !lightboxImage) return;
+
+      if (item.largeSrc) {
+        lightboxImage.src = item.largeSrc;
+        lightboxImage.alt = item.alt ?? "";
+        lightboxImage.hidden = false;
+        if (lightboxPlaceholder) lightboxPlaceholder.hidden = true;
+      } else {
+        lightboxImage.removeAttribute("src");
+        lightboxImage.hidden = true;
+        if (lightboxPlaceholder) lightboxPlaceholder.hidden = false;
+      }
+
+      if (lightboxTitle) lightboxTitle.textContent = item.title;
+      if (lightboxMeta) {
+        lightboxMeta.textContent = [item.date, item.medium, item.dimensions, item.series]
+          .filter(Boolean)
+          .join(" · ");
+      }
+      if (lightboxDescription) lightboxDescription.innerHTML = item.descriptionHtml;
+      if (lightboxTags) {
+        lightboxTags.innerHTML = "";
+        item.tags.forEach((tag) => {
+          const span = document.createElement("span");
+          span.textContent = tag;
+          lightboxTags.append(span);
+        });
+      }
+
+      if (infoPanel) infoPanel.hidden = true;
+      infoToggle?.setAttribute("aria-expanded", "false");
+
+      const hasMultiple = sequence.length > 1;
+      if (prevBtn) prevBtn.hidden = !hasMultiple;
+      if (nextBtn) nextBtn.hidden = !hasMultiple;
+    }
+
+    function openLightbox(index: number, trigger: HTMLElement) {
+      sequence = visibleIndices();
+      if (sequence.length === 0) sequence = items.map((_, i) => i);
+      position = Math.max(0, sequence.indexOf(index));
+
+      lastFocused = trigger;
+      lightbox!.hidden = false;
+      document.body.style.overflow = "hidden";
+      renderItem(sequence[position]);
+      closeBtns?.[0]?.focus();
+    }
+
+    function closeLightbox() {
+      lightbox!.hidden = true;
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    }
+
+    function step(delta: number) {
+      if (sequence.length === 0) return;
+      position = (position + delta + sequence.length) % sequence.length;
+      renderItem(sequence[position]);
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        openLightbox(Number(card.dataset.galleryIndex), card);
+      });
+    });
+
+    closeBtns?.forEach((btn) => btn.addEventListener("click", closeLightbox));
+    prevBtn?.addEventListener("click", () => step(-1));
+    nextBtn?.addEventListener("click", () => step(1));
+
+    infoToggle?.addEventListener("click", () => {
+      if (!infoPanel) return;
+      const isOpen = !infoPanel.hidden;
+      infoPanel.hidden = isOpen;
+      infoToggle.setAttribute("aria-expanded", String(!isOpen));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (lightbox.hidden) return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") step(-1);
+      if (event.key === "ArrowRight") step(1);
+    });
   }
 
   document.querySelectorAll<HTMLElement>("[data-gallery-block]").forEach(initGallery);
