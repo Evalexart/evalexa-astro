@@ -1,43 +1,56 @@
-# Astro Starter Kit: Minimal
+# Evalexa
 
-```sh
-npm create astro@latest -- --template minimal
+Site personnel bilingue (FR/EN).
+
+🔗 [evalexa.fr](https://evalexa.fr)
+
+---
+
+## À propos
+
+Evalexa est un site vitrine personnel, développé avec [Astro](https://astro.build).
+
+Le site est encore en construction. Il contient pour l'instant mon profil professionnel — dans le cadre d'une recherche d'alternance BTS SIO — ainsi que les pages légales du site. À terme, il accueillera également une vitrine des mes projets créatifs et numériques, ainsi que du contenu pédagogique lié à mes différentes activités.
+
+## Fonctionnalités
+
+- 🌍 Navigation bilingue FR/EN (FR comme version de référence)
+- 🌓 Thème clair/sombre (préférence système + choix manuel mémorisé)
+- 👤 Profil professionnel : compétences, formation, parcours, réalisations
+- ⚖️ Pages légales (mentions légales, confidentialité, CGU, cookies)
+
+## Stack technique
+
+| Domaine | Choix |
+|---|---|
+| Framework | [Astro 7](https://astro.build) (rendu statique) |
+| Contenu | Markdown via Astro Content Collections |
+| Style | CSS natif, architecture par composants |
+| Interactions | JavaScript vanilla |
+| Icônes | [simple-icons](https://simpleicons.org) + glyphes SVG maison |
+
+## Structure du projet
+
+```
+src/
+├── components/     # Composants Astro réutilisables (Header, Carousel, CardGrid…)
+├── content/        # Contenu éditorial (Markdown, FR/EN)
+├── data/           # Navigation et textes d'interface (JSON)
+├── layouts/        # Layout de base
+├── lib/            # Utilitaires (rendu markdown, icônes…)
+├── pages/          # Routes du site (fr/, en/)
+├── scripts/        # Scripts client (thème, langue)
+└── styles/         # CSS organisé en core / layout / components / pages
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Déploiement
 
-## 🚀 Project Structure
+Le site est hébergé chez OVH et déployé manuellement via SFTP. Astro générant des bundles CSS avec hashing, toute modification de style nécessite un rebuild complet et un remplacement intégral du dossier `dist/` côté serveur.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Contact
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+📧 [contact@evalexa.fr](mailto:contact@evalexa.fr)
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Licence
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Projet personnel — tous droits réservés.
