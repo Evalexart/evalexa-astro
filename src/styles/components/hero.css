@@ -20,12 +20,6 @@
   margin-bottom: 1rem;
 }
 
-.hero-subtitle {
-  margin: 1rem auto 0;
-  font-size: clamp(1.06rem, 2vw, 1.26rem);
-  color: var(--accent-strong);
-}
-
 .hero-text {
   width: min(100%, 44rem);
   margin: 1.25rem auto 0;
@@ -73,68 +67,6 @@
   transition: none;
 }
 
-.hero-logo-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: min(100%, 900px);
-  margin: 0 auto;
-}
-
-.hero-logo-full {
-  display: block;
-  width: min(100%, 820px);
-  height: auto;
-  max-height: 230px;
-  object-fit: contain;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.hero-logo-dark {
-  display: none;
-}
-
-html[data-theme="dark"] .hero-logo-light {
-  display: none;
-}
-
-html[data-theme="dark"] .hero-logo-dark {
-  display: block;
-}
-
-html[data-theme="light"] .hero-logo-light {
-  display: block;
-}
-
-html[data-theme="light"] .hero-logo-dark {
-  display: none;
-}
-
-.hero .page-hero-logo-wrap {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  min-height: 72px;
-  margin: 0 auto 1.2rem;
-  overflow: visible;
-}
-
-.hero .page-hero-logo {
-  position: relative;
-  z-index: 2;
-  display: block;
-  width: min(42vw, 145px);
-  height: auto;
-  max-height: none;
-  object-fit: contain;
-  object-position: center;
-}
-
 .hero .hero-wordmark {
   position: relative;
   z-index: 1;
@@ -145,13 +77,4 @@ html[data-theme="light"] .hero-logo-dark {
   font-size: clamp(2.5rem, 6vw, 4.8rem);
   line-height: 1.05;
   letter-spacing: -0.035em;
-}
-
-/* Mobile adjustments. */
-
-@media (max-width: 640px) {
-  .hero-logo-full {
-    width: min(100%, 620px);
-    max-height: 180px;
-  }
 }

@@ -13,13 +13,6 @@
       "menuOpen": "Ouvrir le menu",
       "menuClose": "Fermer le menu"
     },
-    "cardRail": {
-      "previous": "Faire défiler les cartes vers la gauche",
-      "next": "Faire défiler les cartes vers la droite"
-    },
-    "legal": {
-      "backToHub": "Retour aux documents légaux"
-    },
     "profilePro": {
       "skillsTitle": "Compétences",
       "formationTitle": "Formation",
@@ -45,13 +38,6 @@
       "themeToLight": "Switch to light theme",
       "menuOpen": "Open menu",
       "menuClose": "Close menu"
-    },
-    "cardRail": {
-      "previous": "Scroll cards to the left",
-      "next": "Scroll cards to the right"
-    },
-    "legal": {
-      "backToHub": "Back to legal documents"
     },
     "profilePro": {
       "skillsTitle": "Skills",

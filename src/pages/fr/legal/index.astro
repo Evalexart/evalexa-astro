@@ -3,7 +3,6 @@ import { getEntry } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import MarkdownText from "../../../components/MarkdownText.astro";
 import CardGrid from "../../../components/CardGrid.astro";
-import "../../../styles/components/card-grid.css";
 
 const page = await getEntry("pages", "legal/index/fr");
 if (!page) throw new Error("Content page not found: legal/index/fr");

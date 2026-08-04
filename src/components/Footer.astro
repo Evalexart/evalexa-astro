@@ -15,8 +15,6 @@ const footerIds = [
   "privacy",
   "cgv",
   "cgu",
-  "network",
-  "network-nodes",
 ];
 
 const footerItems = footerIds
@@ -47,7 +45,7 @@ const footerItems = footerIds
     <div class="footer-links">
       {
         footerItems.map((item) => (
-          <a href={item.routes[lang]} data-visible="true">
+          <a href={item.routes[lang]}>
             {item.label[lang]}
           </a>
         ))
