@@ -51,14 +51,14 @@ alternanceProject: "I am looking for a host company for a work-study BTS SIO pro
 
 formation:
   - name: "My Digital School — Lille"
-    schedule: "3 days in company / 2 days at school"
+    schedule: "Alternating 3/2 split"
     links:
       - label: "School website"
         href: "https://www.mydigitalschool.com/ecole-multimedia-lille"
       - label: "View work-study schedule"
         href: "/assets/planning-mds.pdf"
   - name: "Lycée Gaston Berger — Lille"
-    schedule: "1 week in company / 1 week at school"
+    schedule: "1 week on / 1 week off"
     links:
       - label: "School website"
         href: "https://www.gastonberger.fr/"
@@ -195,24 +195,43 @@ carousel:
 
 contact:
   name: "Anaïs Mattle"
-  items:
-    - note: "I am available immediately, feel free to contact me via the channels above."
-    - icon: "✉"
-      label: "a.mattle@outlook.com"
-    - icon: "☎"
-      label: "06 09 56 29 33"
-    - note: "A short immersion within my mobility area is also possible, if timing before the start of training allows."
-    - icon: "📍"
-      label: "62500 Saint-Omer"
-    - icon: "🚆"
-      label: "SNCF Line Lille / Calais"
-    - icon: "🚗"
-      label: "B License — personal vehicle"
-    - icon: "💻"
-      label: "Remote possible"
-    - note: "To go further you can check out my github:"
-    - icon: "🔗"
-      label: "https://github.com/Evalexart"
+  blocks:
+    - type: text
+      width: full
+      content: "I am available immediately, feel free to contact me via the channels above."
+    - type: text
+      icon: "✉"
+      content: "a.mattle@outlook.com"
+    - type: text
+      icon: "☎"
+      content: "06 09 56 29 33"
+
+    - type: separator
+
+    - type: text
+      width: full
+      content: "A short immersion within my mobility area is also possible, if timing before the start of training allows."
+    - type: text
+      icon: "📍"
+      content: "62500 Saint-Omer"
+    - type: text
+      icon: "🚆"
+      content: "SNCF Line Lille / Calais"
+    - type: text
+      icon: "🚗"
+      content: "B License — personal vehicle"
+    - type: text
+      icon: "💻"
+      content: "Remote possible"
+
+    - type: separator
+
+    - type: text
+      width: full
+      content: "To go further you can check out my github:"
+    - type: text
+      icon: "🔗"
+      content: "https://github.com/Evalexart"
 ---
 
 This page is intended to be shared directly (CV, applications). It is therefore not accessible via the site's navigation, to avoid unnecessarily exposing personal documents and information on the internet.

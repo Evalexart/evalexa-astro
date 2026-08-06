@@ -1,0 +1,113 @@
+---
+// Carte contact générique et neutre : n'affiche que ce qu'on lui donne
+// via `blocks`, dans l'ordre donné. Ni le profil pro ni les candidatures
+// n'ont de logique spéciale câblée ici — c'est à l'appelant de construire
+// la liste de blocs (voir ProfessionalProfile.astro pour la conversion
+// depuis l'ancien format `contact.items`, et CandidatureLayout.astro pour
+// le chargement depuis le markdown partagé contact.md).
+//
+// Trois types de blocs :
+//  - "text"      : icône optionnelle + texte markdown en ligne (contact,
+//                  notes...). `width` "half" (défaut) ou "full".
+//  - "separator" : simple barre de séparation, toujours pleine largeur.
+//  - "card"      : bloc encadré, markdown multi-lignes, avec un `href`
+//                  optionnel qui rend toute la carte cliquable — sinon
+//                  les liens se mettent directement dans le markdown du
+//                  contenu. `width` "half" (défaut) ou "full". Quand
+//                  `href` est fourni, une flèche est ajoutée : → pour un
+//                  lien interne au site (evalexa.fr ou chemin relatif),
+//                  ↗ pour un lien externe.
+import MarkdownText from "./MarkdownText.astro";
+import "../styles/components/contact-card.css";
+
+interface TextBlock {
+  type: "text";
+  content: string;
+  icon?: string;
+  width?: "full" | "half";
+}
+
+interface SeparatorBlock {
+  type: "separator";
+}
+
+interface CardBlock {
+  type: "card";
+  content: string;
+  href?: string;
+  width?: "full" | "half";
+}
+
+type ContactBlock = TextBlock | SeparatorBlock | CardBlock;
+
+interface Props {
+  name?: string;
+  blocks: ContactBlock[];
+}
+
+const { name, blocks } = Astro.props;
+
+// Un lien est considéré interne s'il est relatif (commence par "/" ou
+// "#") ou s'il pointe vers evalexa.fr — externe dans tous les autres cas
+// (autre domaine, mailto:, tel:...).
+function isExternalHref(href: string): boolean {
+  if (href.startsWith("/") || href.startsWith("#")) return false;
+
+  try {
+    const url = new URL(href);
+    return url.hostname !== "evalexa.fr" && !url.hostname.endsWith(".evalexa.fr");
+  } catch {
+    return false;
+  }
+}
+---
+
+<div class="contact-card">
+  {name && <MarkdownText class="contact-card-sign" value={name} inline />}
+
+  <div class="contact-card-grid">
+    {blocks.map((block) => {
+      if (block.type === "separator") {
+        return <div class="contact-card-separator" role="separator" />;
+      }
+
+      const width = block.width ?? "half";
+
+      if (block.type === "card") {
+        if (!block.href) {
+          return (
+            <div class:list={["contact-card-card", `contact-card-block--${width}`]}>
+              <MarkdownText value={block.content} />
+            </div>
+          );
+        }
+
+        const external = isExternalHref(block.href);
+
+        return (
+          <a
+            class:list={["contact-card-card", `contact-card-block--${width}`]}
+            href={block.href}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
+          >
+            <MarkdownText value={block.content} />
+            <span
+              class:list={["contact-card-arrow", external && "contact-card-arrow--external"]}
+              aria-hidden="true"
+            >
+              {external ? "↗" : "→"}
+            </span>
+          </a>
+        );
+      }
+
+      return (
+        <div class:list={["contact-card-text", `contact-card-block--${width}`]}>
+          {block.icon && <span class="contact-card-icon">{block.icon}</span>}
+          <MarkdownText tag="span" value={block.content} inline />
+        </div>
+      );
+    })}
+  </div>
+</div>

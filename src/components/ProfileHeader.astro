@@ -1,0 +1,71 @@
+---
+// Header réutilisable : photo ronde + prénom/nom + bloc libellé/détail +
+// lien CV optionnel. Utilisé par ProfessionalProfile.astro (profil-pro)
+// et par CandidatureLayout.astro (pages de candidature) — même apparence
+// exacte des deux côtés, seul le contenu (eyebrow/intro) change, fourni
+// par chaque page via son propre markdown.
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import MarkdownText from "./MarkdownText.astro";
+import "../styles/components/profile-header.css";
+
+interface Props {
+  firstName?: string;
+  lastName?: string;
+  heading?: string;
+  photo?: ImageMetadata;
+  eyebrow?: string;
+  intro?: string;
+  cvHref?: string;
+  cvLabel?: string;
+}
+
+const {
+  firstName,
+  lastName,
+  heading,
+  photo,
+  eyebrow,
+  intro,
+  cvHref,
+  cvLabel = "Télécharger mon CV",
+} = Astro.props;
+---
+
+<header class="profil-header profile-on-wash">
+  <div class="profil-header-inner">
+    <div class="profil-name">
+      <h1>
+        {firstName && lastName ? (
+          <>
+            <span class="prenom">{firstName}</span>
+            <span class="nom">{lastName}</span>
+          </>
+        ) : (
+          <span class="nom"><MarkdownText tag="span" value={heading} inline /></span>
+        )}
+      </h1>
+    </div>
+
+    {photo && (
+      <div class="profil-photo">
+        <Image
+          src={photo}
+          alt={heading ?? `${firstName ?? ""} ${lastName ?? ""}`.trim()}
+          width={180}
+          loading="eager"
+        />
+      </div>
+    )}
+
+    <div class="profil-tag">
+      {eyebrow && <MarkdownText tag="p" class="eyebrow" value={eyebrow} inline />}
+      {intro && <MarkdownText class="profil-tag-detail" value={intro} />}
+      {cvHref && (
+        <a class="profil-cv-link" href={cvHref} target="_blank" rel="noopener">
+          {cvLabel}
+        </a>
+      )}
+    </div>
+  </div>
+</header>

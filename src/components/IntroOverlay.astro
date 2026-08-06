@@ -1,0 +1,52 @@
+---
+// Overlay plein écran affiché à l'ouverture d'une page de candidature :
+// une image (thème visuel propre à chaque candidature, toujours nommée
+// intro.webp), un titre, un texte d'invite. Le mécanisme (fermeture au
+// clic/Entrée, fondu) est générique ; seule l'image change d'une page à
+// l'autre, avec son propre texte alternatif fourni via le markdown.
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import "../styles/components/intro-overlay.css";
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  title: string;
+  prompt?: string;
+}
+
+const { image, alt, title, prompt = "Cliquez pour ouvrir la page" } = Astro.props;
+---
+
+<div
+  class="pack-overlay"
+  role="button"
+  tabindex="0"
+  aria-label="Ouvrir la page de motivation"
+  data-intro-overlay
+>
+  <div class="pack-entry">
+    <h2>{title}</h2>
+    <Image src={image} alt={alt} width={820} />
+    <p>{prompt}</p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-intro-overlay]").forEach((overlay) => {
+    function open() {
+      overlay.classList.add("pack-open");
+      setTimeout(() => {
+        overlay.style.display = "none";
+      }, 800);
+    }
+
+    overlay.addEventListener("click", open);
+    overlay.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        open();
+      }
+    });
+  });
+</script>

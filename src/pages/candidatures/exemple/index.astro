@@ -1,0 +1,32 @@
+---
+import { getEntry, render } from "astro:content";
+import CandidatureLayout from "../../../layouts/CandidatureLayout.astro";
+
+const entry = await getEntry("candidatures", "exemple/fr");
+
+if (!entry) {
+  throw new Error("Content page not found: candidatures/exemple/fr");
+}
+
+const { Content } = await render(entry);
+---
+
+<CandidatureLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow={entry.data.eyebrow}
+  heading={entry.data.heading}
+  firstName={entry.data.firstName}
+  lastName={entry.data.lastName}
+  intro={entry.data.intro}
+  quote={entry.data.quote}
+  introImage={entry.data.introImage}
+  introAlt={entry.data.introAlt}
+  introTitle={entry.data.introTitle}
+  introPrompt={entry.data.introPrompt}
+  accordionGroups={entry.data.accordionGroups}
+  contactBlocks={entry.data.contactBlocks}
+  cvHref={entry.data.cvHref}
+>
+  <Content />
+</CandidatureLayout>

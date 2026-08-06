@@ -1,0 +1,41 @@
+---
+// Accordéon organisé en groupes labellisés (ex: "Parcours & expériences",
+// "Chez [Entreprise]"). Le profil pro n'a qu'un seul groupe implicite
+// (voir ProfessionalProfile.astro, qui enveloppe son tableau `accordion`
+// existant dans un groupe unique) ; les pages de candidature en utilisent
+// plusieurs, définis directement dans `accordionGroups` côté markdown.
+import MarkdownText from "./MarkdownText.astro";
+import "../styles/components/accordion.css";
+
+interface AccordionItem {
+  question: string;
+  answer: string;
+}
+
+interface AccordionGroup {
+  label: string;
+  items: AccordionItem[];
+}
+
+interface Props {
+  groups: AccordionGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+{groups.map((group) => (
+  <>
+    <p class="accordion-label">{group.label}</p>
+    <div class="accordion">
+      {group.items.map((entry) => (
+        <details class="accordion-item">
+          <summary><MarkdownText tag="span" value={entry.question} inline /></summary>
+          <div class="accordion-body">
+            <MarkdownText value={entry.answer} />
+          </div>
+        </details>
+      ))}
+    </div>
+  </>
+))}

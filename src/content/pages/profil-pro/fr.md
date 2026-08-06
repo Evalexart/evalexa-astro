@@ -51,14 +51,14 @@ alternanceProject: "Je recherche une entreprise d'accueil pour une alternance en
 
 formation:
   - name: "My Digital School — Lille"
-    schedule: "3 jours entreprise / 2 jours école"
+    schedule: "3j / 2j alternés"
     links:
       - label: "Site de l'école"
         href: "https://www.mydigitalschool.com/ecole-multimedia-lille"
       - label: "Voir le planning d'alternance"
         href: "/assets/planning-mds.pdf"
   - name: "Lycée Gaston Berger — Lille"
-    schedule: "1 semaine entreprise / 1 semaine école"
+    schedule: "1 semaine sur 2"
     links:
       - label: "Site de l'école"
         href: "https://www.gastonberger.fr/"
@@ -195,24 +195,43 @@ accordion:
 
 contact:
   name: "Anaïs Mattle"
-  items:
-    - note: "Disponible dès maintenant pour tout échange ou entretien, n'hésitez pas à me contacter via les canaux ci-dessous."
-    - icon: "✉"
-      label: "a.mattle@outlook.com"
-    - icon: "☎"
-      label: "06 09 56 29 33"
-    - note: "Une courte immersion dans mes zones de mobilité est également possible, si les délais avant le début de formation le permettent."
-    - icon: "📍"
-      label: "62500 Saint-Omer"
-    - icon: "🚆"
-      label: "Ligne SNCF Lille / Calais"
-    - icon: "🚗"
-      label: "Permis B — véhicule personnel"
-    - icon: "💻"
-      label: "Distanciel possible"
-    - note: "Pour aller plus loin vous pouvez consulter mon github :"
-    - icon: "🔗"
-      label: "https://github.com/Evalexart"
+  blocks:
+    - type: text
+      width: full
+      content: "Disponible dès maintenant pour tout échange ou entretien, n'hésitez pas à me contacter via les canaux ci-dessous."
+    - type: text
+      icon: "✉"
+      content: "a.mattle@outlook.com"
+    - type: text
+      icon: "☎"
+      content: "06 09 56 29 33"
+
+    - type: separator
+
+    - type: text
+      width: full
+      content: "Une courte immersion est également possible, si les délais avant le début de formation le permettent."
+    - type: text
+      icon: "📍"
+      content: "62500 Saint-Omer"
+    - type: text
+      icon: "🚆"
+      content: "Ligne SNCF Lille / Calais"
+    - type: text
+      icon: "🚗"
+      content: "Permis B — véhicule personnel"
+    - type: text
+      icon: "💻"
+      content: "Distanciel possible"
+    
+    - type: separator
+
+    - type: text
+      width: full
+      content: "Pour aller plus loin vous pouvez consulter mon github :"
+    - type: text
+      icon: "🔗"
+      content: "https://github.com/Evalexart"
 ---
 
 Cette page est destinée à être partagée directement (CV, candidatures). Elle n'est donc pas accessible via la navigation du site, cela afin de ne pas exposer inutilement sur internet des documents et informations personnelles.

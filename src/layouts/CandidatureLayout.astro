@@ -1,0 +1,160 @@
+---
+// Layout des pages de candidature : entièrement autonome, volontairement
+// sans <Header>/<Footer> du site (pas de nav, pas de sélecteur de langue —
+// ces pages ne sont accessibles que par lien direct et existent en
+// français uniquement). Le thème visuel (couleurs, wash de fond) reste
+// strictement celui du site : seuls les tokens de base sont importés
+// (tokens/reset/base/typography/motion), pas main.css dans son ensemble.
+//
+// Photo et CV : partagés avec le profil pro plutôt que redemandés à
+// chaque candidature. Bloc contact : lu par défaut depuis
+// src/content/candidatures/contact.md (collection candidatureContact),
+// sauf si la page fournit son propre `contactBlocks` (voir
+// content.config.ts) — dans ce cas il remplace entièrement le bloc
+// partagé.
+import type { ImageMetadata } from "astro";
+import { getEntry } from "astro:content";
+import ProfileHeader from "../components/ProfileHeader.astro";
+import IntroOverlay from "../components/IntroOverlay.astro";
+import AccordionGroups from "../components/AccordionGroups.astro";
+import ContactCard from "../components/ContactCard.astro";
+import BrowserThemeNotice from "../components/BrowserThemeNotice.astro";
+import MarkdownText from "../components/MarkdownText.astro";
+import photo from "../content/pages/profil-pro/photo.webp";
+import "../styles/core/tokens.css";
+import "../styles/core/reset.css";
+import "../styles/core/base.css";
+import "../styles/core/typography.css";
+import "../styles/core/motion.css";
+import "../styles/components/buttons.css";
+import "../styles/pages/candidature.css";
+
+interface AccordionGroup {
+  label: string;
+  items: { question: string; answer: string }[];
+}
+
+interface ContactBlock {
+  type: "text" | "separator" | "card";
+  content?: string;
+  icon?: string;
+  href?: string;
+  width?: "full" | "half";
+}
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow?: string;
+  heading?: string;
+  firstName?: string;
+  lastName?: string;
+  intro?: string;
+  quote?: string;
+  introImage: ImageMetadata;
+  introAlt: string;
+  introTitle: string;
+  introPrompt?: string;
+  accordionGroups: AccordionGroup[];
+  contactBlocks?: ContactBlock[];
+  cvHref?: string;
+}
+
+const {
+  title,
+  description,
+  eyebrow,
+  heading,
+  firstName,
+  lastName,
+  intro,
+  quote,
+  introImage,
+  introAlt,
+  introTitle,
+  introPrompt,
+  accordionGroups,
+  contactBlocks,
+  cvHref = "/assets/cv.pdf",
+} = Astro.props;
+
+// `contactBlocks`, s'il est fourni par la page, remplace entièrement le
+// bloc partagé — pas de fusion des deux.
+let contactName: string | undefined;
+let resolvedContactBlocks: ContactBlock[];
+
+if (contactBlocks) {
+  resolvedContactBlocks = contactBlocks;
+} else {
+  const contactEntry = await getEntry("candidatureContact", "contact");
+
+  if (!contactEntry) {
+    throw new Error("Content page not found: candidatures/contact");
+  }
+
+  contactName = contactEntry.data.name;
+  resolvedContactBlocks = contactEntry.data.blocks;
+}
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <script is:inline>
+      // Thème sombre par défaut, valable pour la session uniquement (pas
+      // de localStorage ici — voir BrowserThemeNotice.astro).
+      document.documentElement.setAttribute("data-theme", "dark");
+    </script>
+  </head>
+
+  <body data-page="candidature" class="profile-on-wash">
+    <IntroOverlay image={introImage} alt={introAlt} title={introTitle} prompt={introPrompt} />
+
+    <BrowserThemeNotice />
+
+    <main class="candidature-page">
+      <ProfileHeader
+        firstName={firstName}
+        lastName={lastName}
+        heading={heading}
+        photo={photo}
+        eyebrow={eyebrow}
+        intro={intro}
+        cvHref={cvHref}
+        cvLabel="Télécharger mon CV"
+      />
+
+      <div class="intro">
+        <slot />
+      </div>
+
+      {quote && <MarkdownText tag="p" class="profil-quote" value={quote} inline />}
+
+      <div class="candidature-accordions">
+        <AccordionGroups groups={accordionGroups} />
+      </div>
+
+      <div class="candidature-contact">
+        <ContactCard name={contactName} blocks={resolvedContactBlocks} />
+      </div>
+
+      <p class="candidature-cta">
+        <a class="button" href="https://evalexa.fr/fr/profil-pro/" target="_blank" rel="noopener">
+          Aller au profil professionnel ⟶
+        </a>
+      </p>
+    </main>
+  </body>
+</html>

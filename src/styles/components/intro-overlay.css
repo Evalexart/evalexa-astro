@@ -1,0 +1,121 @@
+/* IntroOverlay component: overlay plein écran d'entrée sur les pages de
+   candidature. Réutilise directement les tokens de fond du site
+   (--page-overlay / --page-image / --bg), déjà cohérents avec le thème
+   clair/sombre global — pas besoin de redéfinir de variables locales. */
+
+.pack-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  cursor: pointer;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.1), transparent 52%),
+    var(--page-overlay),
+    var(--page-image) center/cover no-repeat,
+    var(--bg);
+  transition:
+    opacity 0.75s ease,
+    visibility 0.75s ease;
+}
+
+.pack-overlay.pack-open {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pack-entry {
+  width: min(92vw, 920px);
+  text-align: center;
+  transform: translateY(0) scale(1);
+  transition: transform 0.75s ease;
+}
+
+.pack-overlay.pack-open .pack-entry {
+  transform: translateY(-10px) scale(1.035);
+}
+
+.pack-entry h2 {
+  margin-bottom: 0.9rem;
+  color: var(--text);
+  font-size: clamp(1.35rem, 3vw, 2.2rem);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+}
+
+.pack-entry img {
+  display: block;
+  width: min(88vw, 820px);
+  max-height: 68vh;
+  object-fit: contain;
+  margin: 0 auto;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  animation: pack-float 6s ease-in-out infinite;
+  transition: filter 0.4s ease;
+  will-change: transform, filter;
+}
+
+.pack-entry img:hover {
+  filter:
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 0 18px rgba(255, 255, 255, 0.26))
+    drop-shadow(0 0 34px color-mix(in srgb, var(--accent) 60%, transparent));
+}
+
+@keyframes pack-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.pack-entry p {
+  margin-top: 0.9rem;
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pack-overlay:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -8px;
+}
+
+@media (max-width: 560px) {
+  .pack-overlay {
+    padding: 1rem;
+  }
+  .pack-entry img {
+    max-height: 60vh;
+  }
+  .pack-entry p {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .pack-entry {
+    width: min(94vw, 760px);
+  }
+  .pack-entry h2 {
+    margin-bottom: 0.4rem;
+    font-size: 1.15rem;
+  }
+  .pack-entry img {
+    max-height: 66vh;
+  }
+  .pack-entry p {
+    margin-top: 0.4rem;
+    font-size: 0.72rem;
+  }
+}

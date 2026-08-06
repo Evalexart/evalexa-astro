@@ -1,0 +1,46 @@
+/* Page-specific layout for /candidatures/*/ — les composants
+   (ProfileHeader, AccordionGroups, ContactCard, IntroOverlay,
+   BrowserThemeNotice) importent chacun leur propre CSS ; ce fichier ne
+   gère que l'agencement propre à cette page (largeurs, marges). */
+
+.candidature-page {
+  padding-bottom: 3.5rem;
+}
+
+.intro {
+  max-width: 700px;
+  margin: 2.5rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.intro p {
+  font-size: 0.96rem;
+  line-height: 1.82;
+  color: var(--text);
+  text-align: justify;
+}
+
+.candidature-accordions {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.candidature-contact {
+  max-width: 700px;
+  margin: 3rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.candidature-cta {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .intro,
+  .candidature-accordions,
+  .candidature-contact {
+    padding: 0 1rem;
+  }
+}

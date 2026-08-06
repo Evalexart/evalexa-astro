@@ -1,0 +1,32 @@
+---
+// Bandeau d'avertissement (rendu des couleurs forcé par certains
+// navigateurs) + bouton de bascule clair/sombre valable pour la session
+// uniquement (pas de localStorage, pas de lien avec le thème du reste du
+// site) — comportement volontairement identique à ce qui existait déjà
+// sur les pages de candidature, pour ne pas avoir à gérer une animation
+// d'overlay différente selon le thème.
+import "../styles/components/browser-theme-notice.css";
+---
+
+<div class="browser-notice">
+  <span class="browser-notice-text">
+    Certains navigateurs forcent leurs propres couleurs et peuvent ignorer
+    celles de la page. Si le rendu vous semble incorrect, n'hésitez pas à
+    basculer entre les deux thèmes.
+  </span>
+  <button type="button" class="browser-notice-btn" data-theme-toggle-session>
+    ☀️ Thème clair
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle-session]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const html = document.documentElement;
+      const isDark = html.getAttribute("data-theme") !== "light";
+      const next = isDark ? "light" : "dark";
+      html.setAttribute("data-theme", next);
+      button.textContent = next === "light" ? "🌙 Thème sombre" : "☀️ Thème clair";
+    });
+  });
+</script>
