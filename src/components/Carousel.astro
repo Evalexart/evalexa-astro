@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import MarkdownText from "./MarkdownText.astro";
+import { isOutboundHref } from "../lib/links";
 import "../styles/components/carousel.css";
 
 interface CarouselCard {
@@ -49,15 +50,20 @@ const {
       <div class="carousel-track" data-carousel-track>
         {items.map((card, i) => {
           const Tag = card.href ? "a" : "div";
-          const isExternal = card.href?.startsWith("http://") || card.href?.startsWith("https://");
+          // A link only opens in a new tab when it actually leads away
+          // from the current page (external site or downloadable
+          // document) — see isOutboundHref(). A link to another page of
+          // the same site (e.g. a candidature page) stays in the same
+          // tab, same as any other internal navigation.
+          const outbound = isOutboundHref(card.href);
           return (
             <Tag
               class:list={["carousel-card", { "is-active": i === 0 }]}
               data-carousel-card
               data-carousel-real-index={i}
               href={card.href}
-              target={isExternal ? "_blank" : undefined}
-              rel={isExternal ? "noopener noreferrer" : undefined}
+              target={outbound ? "_blank" : undefined}
+              rel={outbound ? "noopener noreferrer" : undefined}
               draggable="false"
             >
               {card.image && (
@@ -74,7 +80,11 @@ const {
                   {card.title && (
                     <h3 class="carousel-card-title">
                       <MarkdownText tag="span" value={card.title} inline />
-                      {card.href && <span class="carousel-card-title-arrow" aria-hidden="true">→</span>}
+                      {card.href && (
+                        <span class="carousel-card-title-arrow" aria-hidden="true">
+                          {outbound ? "↗" : "→"}
+                        </span>
+                      )}
                     </h3>
                   )}
                   {card.description && <MarkdownText class="carousel-card-description" value={card.description} />}

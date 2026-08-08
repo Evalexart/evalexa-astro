@@ -17,6 +17,10 @@
 //                  `href` est fourni, une flèche est ajoutée : → pour un
 //                  lien interne au site (evalexa.fr ou chemin relatif),
 //                  ↗ pour un lien externe.
+//
+// Les liens externes / vers des documents à l'intérieur du markdown
+// (texte, cartes) s'ouvrent automatiquement dans un nouvel onglet — voir
+// src/lib/markdown.ts, qui gère ce comportement pour tout le site.
 import MarkdownText from "./MarkdownText.astro";
 import "../styles/components/contact-card.css";
 
